@@ -1,3 +1,189 @@
-main{
-    
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Lexend:wght@100..900&display=swap');
+
+:root {
+    --main-background-color: #F5F7FA;
+    --header-background-color: #007BFF;
+    --header-text-color: #FFFFFF;
+    --button-background-color: #007BFF;
+    --button-text-color: #FFFFFF;
+    --content-background-color: #FFFFFF;
+    --text-color: #333333;
+    --link-color: #007BFF;
+}
+
+body {
+    font-family: Lexend, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--main-background-color);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+
+header {
+    background-color: var(--header-background-color);
+    color: var(--header-text-color);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    flex-grow: 1;
+    text-align: center;
+    /* Apply your logo background image here */
+    background-image: url(images/logo.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.white-logo {
+    background-image: url(images/logo_white.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.menu-toggle {
+    cursor: pointer;
+    /* display: none; */
+}
+
+.menu {
+    display: flex;
+}
+
+.menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.menu ul li {
+    margin-left: 20px;
+}
+
+.content {
+    padding: 20px;
+    text-align: center;
+    background-color: var(--content-background-color);
+    color: var(--text-color);
+}
+
+.centered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.get-started-btn {
+    background-color: var(--button-background-color);
+    color: var(--button-text-color);
+    padding: 30px 100px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: large;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.get-started-btn:hover {
+    background-color: #0056b3;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+button {
+    background-color: var(--button-background-color);
+    color: var(--button-text-color);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: large;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: Lexend, sans-serif;   
+    transition: all 0.3s ease;
+    width: fit-content;
+}
+
+button:hover {
+    background-color: #0056b3;
+    color: #fff;
+}
+
+button:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
+
+button:active {
+    transform: scale(0.95); 
+}
+
+.img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+input[type="text"], input[type="email"], input[type="password"] {
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    font-family: Lexend;
+}
+
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
+    outline: none;
+    border-color: var(--button-background-color);
+}   
+
+textarea {
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    font-family: Lexend;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--button-background-color);
+}
+
+
+
+.title {
+    font-family: Lexend, serif;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.submit-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .menu {
+        /* display: none; */
+    }
+    .menu-toggle {
+        display: block;
+    }
 }

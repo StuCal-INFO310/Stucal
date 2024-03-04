@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Website</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    
+</head>
+<body>
+    <header>
+        <div class="white-logo" style="width: 100px; height: 50px;"></div>
+        <div class="menu-toggle" onclick="toggleMenu()"><span class="material-symbols-outlined">
+            menu
+            </span></div>
+        <nav class="menu">
+            <ul>
+                <li><a href="#">Login</a></li>
+                <li><a href="#">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="content">
+        <div class="centered">
+            <div class="logo" style="height: 300px; width: 600px;"></div>
+            <button class="get-started-btn" onclick="window.location = 'upload.html'">Get Started!</button>
+            <p style="width: 70%;">We are a group of students from the University of Otago. This site helps students upload their eVision timetable to Google Calendar.</p>
+            <div class="img-container">
+                <div class="img-container" style="height: 200px; width: 200px; border: 2px solid #007BFF; margin: 10px; border-radius: 10px;">Convert eVision to GCal</div>
+                <div class="img-container" style="height: 200px; width: 200px; border: 2px solid #007BFF; margin: 10px; border-radius: 10px;">Rate your Lecturers</div>
+                <div class="img-container" style="height: 200px; width: 200px; border: 2px solid #007BFF; margin: 10px; border-radius: 10px;">Adaptive Calendar</div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="centered">
+            <p>&copy; 2024 StuCal</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
