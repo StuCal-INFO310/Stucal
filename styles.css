@@ -207,3 +207,13 @@ textarea:focus {
         display: block;
     }
 }
+.user-form {
+    max-width: 400px; /* Adjust as needed */
+    margin: auto; /* Center the form horizontally */
+}
+
+.user-form label {
+    display: inline-block;
+    width: 120px; /* Adjust as needed */
+}
+

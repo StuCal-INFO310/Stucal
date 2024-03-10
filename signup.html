@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload from eVision</title>
+    <title>Your Website</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
-</head>
 
+</head>
 <body>
     <header>
         <div class="white-logo" style="width: 100px; height: 50px;"></div>
@@ -23,24 +23,27 @@
             </ul>
         </nav>
     </header>
-    <div class = "content">
-            <div class = "centered">
-               <h1>Create new user </h1>
-<!-- Add in text boxes for Email -->
-<!-- Constraints for email must include an @ -->
-<!-- Add in text boxes for Given name -->
-<!-- Add in text boxes for Surname -->
-                <h3>User name</h3>
-                <textarea> </textarea>
 
-                <h3>Password</h3>
-                <!-- Password constraints -->
-                <textarea></textarea>
-                
-                <button class = "submit-btn" >Create Account</button>
+    <div class = "content">
+        <div class = "centered">
+               <h1>Create new user </h1>
+               <form class = "user-form">
+                    <label> Given Name:</label><input type ="text">
+                    <br>
+                    <label> Surname:</label><input type  = "text">
+                    <br>
+                    <label> Email Address:</label><input type = "email" required>
+                    <br>
+                    <label> UserName:</label><input type = "text" required>
+                    <br>
+                    <label> Password: </label><input type = "password" required>
+                    <br>
+                    <button type = "submit">Create Account</button>
                  <p>Already have an account? Click login (sends the user to the login html) </p>
+               </form>  
             </div>
     </div>
+
     <footer>
         <div class="centered">
             <p>&copy; 2024 StuCal</p>
