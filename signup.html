@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Website</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+</head>
+<body>
+    <header>
+        <div class="white-logo" style="width: 100px; height: 50px;"></div>
+        <div class="menu-toggle" onclick="toggleMenu()"><span class="material-symbols-outlined">
+            menu
+            </span></div>
+        <nav class="menu">
+            <ul>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="signup.html">Sign Up</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class = "content">
+        <div class = "centered">
+               <h1>Create new user </h1>
+               
+               <form class = "user-form">
+                    <label> Given Name:</label><input type ="text">
+                    <br>
+                    <label> Surname:</label><input type  = "text">
+                    <br>
+                    <label> Email:</label><input type = "email" required>
+                    <br>
+                    <label> UserName:</label><input type = "text" required>
+                    <br>
+                    <label> Password: </label><input type = "password" required>
+                    <br>
+                    <button type = "submit">Create Account</button>
+                 <p>Already have an account? Click <a href="login.html">login</a> </p>
+
+               </form>  
+            </div>
+    </div>
+
+    <footer>
+        <div class="centered">
+            <p>&copy; 2024 StuCal</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>                
+</body>
+</html>

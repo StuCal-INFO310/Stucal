@@ -149,6 +149,28 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
     border-color: var(--button-background-color);
 }   
 
+input[type=button], input[type=submit], input[type=reset] {
+    background-color: var(--button-background-color);
+    border: none;
+    color: var(--button-text-color);
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+input[type=text]:focus, input[type=password]:focus {
+    border: 3px solid #555;
+  }
+
+input[type=text], input[type=password] {
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+  }
+
+
 textarea {
     padding: 10px;
     margin-bottom: 20px;
@@ -162,8 +184,6 @@ textarea:focus {
     outline: none;
     border-color: var(--button-background-color);
 }
-
-
 
 .title {
     font-family: Lexend, serif;
@@ -187,3 +207,28 @@ textarea:focus {
         display: block;
     }
 }
+
+.user-form {
+    max-width: 400px; /* Adjust as needed */
+    margin: auto; /* Center the form horizontally */
+}
+
+.user-form label {
+    display: inline-block;
+    width: 120px; /* Adjust as needed */
+}
+
+.user-form label[for="email"] {
+    display: inline-block;
+    width: 500px; /* Adjust width as needed */
+    font-weight: bold;
+}
+
+.user-form input[type="email"] {
+    width: calc(100% - 150px); /* Adjust width as needed */
+    padding: 12px;
+    margin-bottom: 10px;
+    
+}
+ 
+

@@ -23,24 +23,27 @@
             </ul>
         </nav>
     </header>
+
     <div class="content">
-        <div class="centered">
-            <div class="logo" style="height: 300px; width: 600px;"></div>
-            <button class="get-started-btn" onclick="window.location = 'upload.html'">Get Started!</button>
-            <p style="width: 70%;">We are a group of students from the University of Otago. This site helps students upload their eVision timetable to Google Calendar.</p>
-            <div class="img-container">
-                <div class="img-container" style="height: 200px; width: 200px; border: 2px solid #007BFF; margin: 10px; border-radius: 10px;">Convert your timetable to Calendar Invites!</div>
-                <div class="img-container" style="height: 200px; width: 200px; border: 2px solid #007BFF; margin: 10px; border-radius: 10px;">Rate your Lecturers!</div>
-                <div class="img-container" style="height: 200px; width: 200px; border: 2px solid #007BFF; margin: 10px; border-radius: 10px;">Adaptive Calendar</div>
-            </div>
-        </div>
+        <h1>Sign in Here!</h1>
+        <form>
+
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" placeholder="Username:">
+            <br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Password:">
+            <br>
+            <input type="submit" value="Log In">
+        <p>Don't have an existing account? Click <a href="signup.html">Create Account</a> </p>
+    
+        </form>
     </div>
+
     <footer>
         <div class="centered">
             <p>&copy; 2024 StuCal</p>
         </div>
     </footer>
-
-    <script src="script.js"></script>
 </body>
 </html>
