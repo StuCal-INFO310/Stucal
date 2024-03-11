@@ -3,15 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Website</title>
+    <title>StuCal</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined&display=block" />
+    <style>
+        .faq-container {
+            margin-top: 20px;
+            width: 80%;
+            margin: auto;
+        }
+
+        .faq-question {
+            cursor: pointer;
+            background-color: #f0f0f0;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            position: relative;
+            transition: background-color 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+        }
+
+        .faq-question:hover {
+            background-color: #e0e0e0;
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+            background-color: #f9f9f9;
+            z-index: -1;
+            border-radius: 0 0 5px 5px;
+        }
+
+
+        .faq-answer.open {
+            display: block;
+            z-index: 1;
+       
+        }
+
+        .faq-arrow {
+            position: absolute;
+            /* top: 20px; */
+            right: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-question.open .faq-arrow {
+            transform: rotate(180deg);
+        }
+
+        .faq-question.open {
+            background-color: #e0e0e0;
+            margin: 0;
+            border-radius: 5px 5px 0 0;
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="white-logo" style="width: 100px; height: 50px;"></div>
-        <div class="menu-toggle" onclick="toggleMenu()"><span class="material-symbols-outlined">
+        <div class="menu-toggle" onclick="toggleMenu()"><span class="material-icons-outlined">
             menu
             </span></div>
         <nav class="menu">
@@ -24,8 +86,24 @@
         </nav>
     </header>
 
-    <div>
-    
+    <div class="faq-container">
+        <div class="faq-question" onclick="toggleAnswer(1)">
+            What is StuCal?
+            <span class="faq-arrow material-icons-outlined">expand_more</span>
+        </div>
+        <div class="faq-answer" id="answer1">StuCal is a student calendar application designed to help students organize their schedules, assignments, and tasks efficiently.</div>
+
+        <div class="faq-question" onclick="toggleAnswer(2)">
+            Is StuCal associated with the University of Otago?
+            <span class="faq-arrow material-icons-outlined">expand_more</span>
+        </div>
+        <div class="faq-answer" id="answer2">No. While we offer features for the students at Otago we are not directly associated with them.</div>
+
+        <div class="faq-question" onclick="toggleAnswer(3)">
+            How is the data stored?
+            <span class="faq-arrow material-icons-outlined">expand_more</span>
+        </div>
+        <div class="faq-answer" id="answer3">All data is stored securly with encryption for sensitive information. All data inputted into StuCal is kept on a secure databse.</div>
     </div>
     
     <footer>
@@ -33,5 +111,23 @@
             <p>&copy; 2024 StuCal</p>
         </div>
     </footer>
+
+    <script>
+        function toggleMenu() {
+            // Function to toggle the menu
+        }
+
+        function toggleAnswer(id) {
+            var answer = document.getElementById('answer' + id);
+            var question = document.querySelectorAll('.faq-question')[id - 1];
+            if (answer.classList.contains('open')) {
+                answer.classList.remove('open');
+                question.classList.remove('open');
+            } else {
+                answer.classList.add('open');
+                question.classList.add('open');
+            }
+        }
+    </script>
 </body>
 </html>
