@@ -207,6 +207,7 @@ textarea:focus {
         display: block;
     }
 }
+
 .user-form {
     max-width: 400px; /* Adjust as needed */
     margin: auto; /* Center the form horizontally */
@@ -216,4 +217,18 @@ textarea:focus {
     display: inline-block;
     width: 120px; /* Adjust as needed */
 }
+
+.user-form label[for="email"] {
+    display: inline-block;
+    width: 500px; /* Adjust width as needed */
+    font-weight: bold;
+}
+
+.user-form input[type="email"] {
+    width: calc(100% - 150px); /* Adjust width as needed */
+    padding: 12px;
+    margin-bottom: 10px;
+    
+}
+ 
 
