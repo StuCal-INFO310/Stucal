@@ -12,8 +12,8 @@ function extractData(inputText) {
         const index = inputText.indexOf(match[1]);
         // push an object with the date and the index to the dates array
         dates.push({ date: convertDate(match[1]), index });
-        
-        
+
+
 
     }
     console.log(dates);
@@ -47,9 +47,9 @@ function extractData(inputText) {
         if (indexes.length > 0) {
             currIndex = Math.max(...indexes);
         }
-        
 
-       
+
+
 
         // date = the date that has index as currIndex;
         const date = dates.find(dateObj => dateObj.index === currIndex)?.date;
@@ -129,16 +129,69 @@ function extractRoomsFromTextBlocks(inputText, index) {
 }
 
 function trimTimetableText(text) {
-   
+
 }
 
-function upload(){
+async function delay(ms) {
+    return new Promise(resolve => {
+        setTimeout(resolve, ms);
+    });
+}
+
+async function upload() {
     // get text from #input-texxt
     const data = document.getElementById('input-text').value;
+
+    // show a really cool loading animation scanning over the text for 2seconds
+    document.querySelector('.loading').style.display = 'flex';
+    await delay(500);
+    document.querySelector('.loading').style.display = 'none';
+
 
     // call extractData function
     const result = extractData(data);
     console.log(result);
+    // make a table of result
+    const table = document.querySelector('.table');
+    table.innerHTML = '';
+    const thead = document.createElement('thead');
+    const tbody = document.createElement('tbody');
+    const tr = document.createElement('tr');
+    const headers = ['Date', 'Start Time', 'End Time', 'Type', 'Title', 'Paper', 'Room'];
+    headers.forEach(header => {
+        const th = document.createElement('th');
+        th.textContent = header;
+        tr.appendChild(th);
+    });
+    thead.appendChild(tr);
+    table.appendChild(thead);
+    result.forEach(item => {
+        const tr = document.createElement('tr');
+        for (const key in item) {
+            const td = document.createElement('td');
+            td.textContent = item[key];
+            tr.appendChild(td);
+        }
+        tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+
+    // download the json
+    const downloadButton = document.createElement('a');
+    downloadButton.href = `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(result, null, 2))}`;
+    downloadButton.download = 'timetable.json';
+    // click the download button
+    downloadButton.click();
+    // remove the download button
+    downloadButton.remove();
+
+    // show show table button
+    document.getElementById('show-table').style.display = 'block';
+    
+
+
+
+
 }
 
 
@@ -184,15 +237,15 @@ const events = {};
 
 let currentKey = '';
 text.split('\n').forEach(line => {
-  const trimmedLine = line.trim();
-  if (trimmedLine.length === 0) return;
-  
-  if (/^\w+day$/.test(trimmedLine)) {
-    currentKey = trimmedLine;
-    events[currentKey] = [];
-  } else {
-    events[currentKey].push(trimmedLine);
-  }
+    const trimmedLine = line.trim();
+    if (trimmedLine.length === 0) return;
+
+    if (/^\w+day$/.test(trimmedLine)) {
+        currentKey = trimmedLine;
+        events[currentKey] = [];
+    } else {
+        events[currentKey].push(trimmedLine);
+    }
 });
 
 console.log(events);
