@@ -41,20 +41,37 @@ function extractData(inputText) {
 
 
         let currIndex = itemIndex;
-        for (let i = 0; i < dates.length; i++) {
-            currIndex = itemIndex;
-            while (dates[i].index === currIndex && currIndex > 0) {
-                currIndex = currIndex - 1;
-            }
+
+        // filter all date indexes to be below the current index and then get the max index
+        const indexes = dates.filter(dateObj => dateObj.index < currIndex).map(dateObj => dateObj.index);
+        if (indexes.length > 0) {
+            currIndex = Math.max(...indexes);
         }
+        
+
+       
 
         // date = the date that has index as currIndex;
         const date = dates.find(dateObj => dateObj.index === currIndex)?.date;
 
         data.push({ date, start_time, end_time, type, title, paper, room });
+
+        //corrupt the wholeItem to avoid duplicate
+        inputText = inputText.replace(wholeItem, '');
+
+        // adjust the indexes of the dates array
+        dates.forEach(dateObj => {
+            if (dateObj.index > currIndex) {
+                dateObj.index -= wholeItem.length;
+            }
+        });
+
+
     }
 
-    return data;
+    // remove any items that have empty date
+    return data.filter(item => item.date);
+
 }
 
 
@@ -123,3 +140,59 @@ function upload(){
     const result = extractData(data);
     console.log(result);
 }
+
+
+const text = `Tuesday
+12 March 2024	09:00-10:00 Tutorial - Financial Decision Making
+BSNS114
+OBSLG05
+11:00-13:00 Computer Lab - Computational Problem Solving
+COSC326
+OWG06
+12:00-14:00 Lecture - Financial Decision Making
+BSNS114
+AUDIT
+14:00-15:00 Lecture - Consumer Behaviour
+MART210
+CAST1
+Wednesday
+13 March 2024	09:00-10:00 Tutorial - Consumer Behaviour
+MART210
+T103
+14:00-15:00 Lecture - Consumer Behaviour
+MART210
+ARCH4
+14:00-16:00 Lecture - Software Project Management
+INFO310
+T204
+Thursday
+14 March 2024	10:00-11:00 Tutorial - Computational Problem Solving
+COSC326
+T204
+11:00-12:00 Computer Lab - Software Project Management
+INFO310
+CNCAL
+12:00-13:00 Lecture - Financial Decision Making
+BSNS114
+AUDIT
+Friday
+15 March 2024	11:00-13:00 Computer Lab - Computational Problem Solving
+COSC326
+OWG06`;
+
+const events = {};
+
+let currentKey = '';
+text.split('\n').forEach(line => {
+  const trimmedLine = line.trim();
+  if (trimmedLine.length === 0) return;
+  
+  if (/^\w+day$/.test(trimmedLine)) {
+    currentKey = trimmedLine;
+    events[currentKey] = [];
+  } else {
+    events[currentKey].push(trimmedLine);
+  }
+});
+
+console.log(events);
