@@ -1,6 +1,7 @@
 package dao;
 
 import domain.User;
+
 /*Yuki Yoshiyasu */ 
 public interface UserDAO{
 
