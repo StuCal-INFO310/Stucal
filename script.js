@@ -22,6 +22,7 @@ function extractData(inputText) {
     const typeAndTitles = extractTitleFromTextBlocks(inputText);
     const papers = inputText.match(paperPattern) || [];
     const rooms = extractRoomsFromTextBlocks(inputText);
+    console.log(rooms);
 
     const data = [];
 
