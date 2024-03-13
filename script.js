@@ -29,7 +29,7 @@ function extractData(inputText) {
         const start_time = times[i] ? times[i].split("-")[0] : '';
         const end_time = times[i] ? times[i].split("-")[1] : '';
         const type = typeAndTitles[i] ? typeAndTitles[i].split("-")[0].trim() : '';
-        const title = typeAndTitles[i] ? typeAndTitles[i].split("-")[1].trim() : '';
+        const title = typeAndTitles[i] ? typeAndTitles[i].split(" - ")[1].trim() : '';
         const paper = papers[i] || '';
         const room = rooms[i] || '';
 
