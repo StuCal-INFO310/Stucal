@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="178px" preserveAspectRatio="none" style="width:783px;height:178px;background:#FFFFFF;" version="1.1" viewBox="0 0 783 178" width="783px" zoomAndPan="magnify"><defs/><g><!--MD5=[e6f955026f95a25accb184d80cb741ec]
+class student--><rect codeLine="32" fill="#FEFECE" height="147.5995" id="student" rx="2.5" ry="2.5" style="stroke:#A80036;stroke-width:1.5;" width="169" x="7" y="15.5"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="71" x="56" y="33.6481">Student User</text><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="175" y1="43.9001" y2="43.9001"/><ellipse cx="18" cy="54.9001" fill="#000000" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="139" x="29" y="60.119">student_id: Integer(11) «PK»</text><line style="stroke:#A80036;stroke-width:1.0;" x1="8" x2="175" y1="69.1" y2="69.1"/><ellipse cx="18" cy="80.1" fill="#000000" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="107" x="29" y="85.3189">surname: varchar(50)</text><ellipse cx="18" cy="97.2999" fill="#000000" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="128" x="29" y="102.5188">other_names: varchar(50)</text><ellipse cx="18" cy="114.4998" fill="#000000" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="95" x="29" y="119.7187">email: varchar(255)</text><ellipse cx="18" cy="131.6997" fill="#000000" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="118" x="29" y="136.9186">password: varchar(255)</text><ellipse cx="18" cy="148.8996" fill="#000000" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="119" x="29" y="154.1185">username: varchar(255)</text><!--MD5=[d30575ce9a25030c53f38ef80df7f25d]
+class event--><rect codeLine="42" fill="#FEFECE" height="164.7994" id="event" rx="2.5" ry="2.5" style="stroke:#A80036;stroke-width:1.5;" width="252" x="524.5" y="7"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="37" x="632" y="25.1481">Events</text><line style="stroke:#A80036;stroke-width:1.5;" x1="525.5" x2="775.5" y1="35.4001" y2="35.4001"/><ellipse cx="535.5" cy="46.4001" fill="#000000" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="134" x="546.5" y="51.619">student_id:Interger(7) &lt;PK&gt;</text><ellipse cx="535.5" cy="63.6" fill="#000000" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="124" x="546.5" y="68.8189">event_id: Integer(7) &lt;PK&gt;</text><line style="stroke:#A80036;stroke-width:1.0;" x1="525.5" x2="775.5" y1="77.7999" y2="77.7999"/><ellipse cx="535.5" cy="88.7999" fill="#000000" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="92" x="546.5" y="94.0188">start_time:datetime</text><ellipse cx="535.5" cy="105.9998" fill="#000000" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="88" x="546.5" y="111.2187">end_time:datetime</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="104" x="546.5" y="128.4186">locations:varchar(80)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="120" x="546.5" y="145.6185">description:varchar(200)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="222" x="546.5" y="162.8184">repeat:["daily","fortnightly","weekly","monthly"]</text><!--MD5=[5ed83b17a8d406e2c2a5f15e30eb450a]
+class sevents--><rect codeLine="53" fill="#FEFECE" height="78.7999" id="sevents" rx="2.5" ry="2.5" style="stroke:#A80036;stroke-width:1.5;" width="160" x="279.5" y="50"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="79" x="320" y="68.1481">StudentEvents</text><line style="stroke:#A80036;stroke-width:1.5;" x1="280.5" x2="438.5" y1="78.4001" y2="78.4001"/><ellipse cx="290.5" cy="89.4001" fill="#000000" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="130" x="301.5" y="94.619">student_id:Integer(7) &lt;PK&gt;</text><line style="stroke:#A80036;stroke-width:1.0;" x1="280.5" x2="438.5" y1="103.6" y2="103.6"/><ellipse cx="290.5" cy="114.6" fill="#000000" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="95" x="301.5" y="119.8189">event_id: Integer(7)</text><!--MD5=[5b2f37d9f80049edeb6ca08332066294]
+link student to sevents--><path codeLine="103" d="M184.4985,89.5 C212.6233,89.5 243.4147,89.5 271.2215,89.5 " fill="none" id="student-sevents" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="271.3635" x2="279.3635" y1="89.5" y2="83.5"/><line style="stroke:#A80036;stroke-width:1.0;" x1="271.3635" x2="279.3635" y1="89.5" y2="95.5"/><line style="stroke:#A80036;stroke-width:1.0;" x1="271.3635" x2="279.3635" y1="89.5" y2="89.5"/><line style="stroke:#A80036;stroke-width:1.0;" x1="269.3635" x2="269.3635" y1="85.5" y2="93.5"/><line style="stroke:#A80036;stroke-width:1.0;" x1="180.2969" x2="180.2969" y1="93.5" y2="85.5"/><line style="stroke:#A80036;stroke-width:1.0;" x1="183.2969" x2="183.2969" y1="93.5" y2="85.5"/><line style="stroke:#A80036;stroke-width:1.0;" x1="184.2969" x2="176.2969" y1="89.5" y2="89.5"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="63" x="196.25" y="80.577">subscribes</text><!--MD5=[b0a5a73599bf812dd72bca8e7cf109d1]
+link sevents to event--><path codeLine="104" d="M447.8629,89.5 C469.4281,89.5 492.9842,89.5 516.1605,89.5 " fill="none" id="sevents-event" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="516.3384" x2="524.3384" y1="89.5" y2="83.5"/><line style="stroke:#A80036;stroke-width:1.0;" x1="516.3384" x2="524.3384" y1="89.5" y2="95.5"/><line style="stroke:#A80036;stroke-width:1.0;" x1="516.3384" x2="524.3384" y1="89.5" y2="89.5"/><ellipse cx="510.3384" cy="89.5" rx="4" ry="4" style="stroke:#A80036;stroke-width:1.0;fill:none;"/><line style="stroke:#A80036;stroke-width:1.0;fill:none;" x1="443.7873" x2="443.7873" y1="93.5" y2="85.5"/><line style="stroke:#A80036;stroke-width:1.0;fill:none;" x1="446.7873" x2="446.7873" y1="93.5" y2="85.5"/><line style="stroke:#A80036;stroke-width:1.0;fill:none;" x1="447.7873" x2="439.7873" y1="89.5" y2="89.5"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="44" x="460" y="80.577">Type of</text><!--MD5=[2832c1e630ceb59ce42193dd347f0350]
+@startuml entity relationship diagram
+
+' ======= Theme =======
+skinparam {
+	Style strictuml
+	RoundCorner 5
+	BoxPadding 35
+	ParticipantPadding 15
+    Padding 2
+
+	Sequence {
+		' make activations yellow too
+		LifeLineBackgroundColor #FDFDCD
+
+		' make stereotypes more presentable
+		Stereotype {
+			Font {
+				Size 11
+				Style plain
+			}
+		}
+	}
+
+	Database {
+		' make database border consistent with the rest of the diagram
+		BorderColor #A80036
+	}
+
+}
+
+' ======= Entities =======
+
+entity "Student User" as student {
+  *student_id: Integer(11) <<PK>>
+  - -
+  *surname: varchar(50)
+  *other_names: varchar(50)
+  *email: varchar(255)
+  *password: varchar(255)
+  *username: varchar(255)
+} 
+
+entity "Events" as event{
+  *student_id:Interger(7) <PK>
+  *event_id: Integer(7) <PK>
+  - -
+  *start_time:datetime
+  *end_time:datetime
+  locations:varchar(80)
+  description:varchar(200)
+  repeat:["daily","fortnightly","weekly","monthly"]
+}
+
+entity "StudentEvents" as sevents{
+  *student_id:Integer(7) <PK>
+  - -
+  *event_id: Integer(7)
+}
+
+
+
+
+' entity "timetable" as timetable{
+'   *paper: char(7)<<FK>>
+'   *date:datetime
+'   *start_time:datetime
+'   *end_time:datetime
+'   *type:varchar(30)
+'   *room:varchar(15)
+
+' }
+
+' entity "Classes" as class{
+'     *paper: char(7)<<PK>>
+'     *date:datetime
+'     *start_time:datetime
+'     *end_time:datetime
+'     *type:varchar(30)
+'     *room:varchar(15)
+
+' }
+
+' entity "Keydates" as key{
+'   *event_name:
+'   *start_time:
+'   *end_time:
+'    location:
+'    type:
+' }
+
+' entity "Calendar" as calendar{
+'   *paper: char(7)<<FK>>
+'   *date:datetime
+'   *type:varchar(30)
+'   *room:varchar(15)
+'   *comment/review:varchar(100)
+' }
+
+
+' ======= Relationships =======
+
+' Note: the \r is a right-aligned line break (\l is left-aligned, and \n is centred)
+
+student ||-|{ sevents : subscribes
+sevents ||-o{event:Type of 
+
+
+
+@enduml
+
+@startuml entity relationship diagram
+
+skinparam {
+	Style strictuml
+	RoundCorner 5
+	BoxPadding 35
+	ParticipantPadding 15
+    Padding 2
+
+	Sequence {
+		LifeLineBackgroundColor #FDFDCD
+
+		Stereotype {
+			Font {
+				Size 11
+				Style plain
+			}
+		}
+	}
+
+	Database {
+		BorderColor #A80036
+	}
+
+}
+
+
+entity "Student User" as student {
+  *student_id: Integer(11) <<PK>>
+  - -
+  *surname: varchar(50)
+  *other_names: varchar(50)
+  *email: varchar(255)
+  *password: varchar(255)
+  *username: varchar(255)
+} 
+
+entity "Events" as event{
+  *student_id:Interger(7) <PK>
+  *event_id: Integer(7) <PK>
+  - -
+  *start_time:datetime
+  *end_time:datetime
+  locations:varchar(80)
+  description:varchar(200)
+  repeat:["daily","fortnightly","weekly","monthly"]
+}
+
+entity "StudentEvents" as sevents{
+  *student_id:Integer(7) <PK>
+  - -
+  *event_id: Integer(7)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+student ||-|{ sevents : subscribes
+sevents ||-o{event:Type of 
+
+
+
+@enduml
+
+PlantUML version 1.2022.0(Wed Jan 12 05:16:42 NZDT 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>
