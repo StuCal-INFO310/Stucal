@@ -34,14 +34,14 @@ header {
     flex-grow: 1;
     text-align: center;
     /* Apply your logo background image here */
-    background-image: url(images/logo.png);
+    background-image: url(../../public/images/logo.png);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
 }
 
 .white-logo {
-    background-image: url(images/logo_white.png);
+    background-image: url(../../public/images/logo_white.png);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
