@@ -1,0 +1,109 @@
+@startuml entity relationship diagram
+
+' ======= Theme =======
+skinparam {
+	Style strictuml
+	RoundCorner 5
+	BoxPadding 35
+	ParticipantPadding 15
+    Padding 2
+
+	Sequence {
+		' make activations yellow too
+		LifeLineBackgroundColor #FDFDCD
+
+		' make stereotypes more presentable
+		Stereotype {
+			Font {
+				Size 11
+				Style plain
+			}
+		}
+	}
+
+	Database {
+		' make database border consistent with the rest of the diagram
+		BorderColor #A80036
+	}
+
+}
+
+' ======= Entities =======
+
+entity "Student User" as student {
+  *student_id: Integer(11) <<PK>>
+  --
+  *surname: varchar(50)
+  *other_names: varchar(50)
+  *email: varchar(255)
+  *password: varchar(255)
+  *username: varchar(255)
+} 
+
+entity "Events" as event{
+  *student_id:Interger(7) <PK>
+  *event_id: Integer(7) <PK>
+  --
+  *start_time:datetime
+  *end_time:datetime
+  locations:varchar(80)
+  description:varchar(200)
+  repeat:["daily","fortnightly","weekly","monthly"]
+}
+
+entity "StudentEvents" as sevents{
+  *student_id:Integer(7) <PK>
+  --
+  *event_id: Integer(7)
+}
+
+
+
+
+' entity "timetable" as timetable{
+'   *paper: char(7)<<FK>>
+'   *date:datetime
+'   *start_time:datetime
+'   *end_time:datetime
+'   *type:varchar(30)
+'   *room:varchar(15)
+
+' }
+
+' entity "Classes" as class{
+'     *paper: char(7)<<PK>>
+'     *date:datetime
+'     *start_time:datetime
+'     *end_time:datetime
+'     *type:varchar(30)
+'     *room:varchar(15)
+
+' }
+
+' entity "Keydates" as key{
+'   *event_name:
+'   *start_time:
+'   *end_time:
+'    location:
+'    type:
+' }
+
+' entity "Calendar" as calendar{
+'   *paper: char(7)<<FK>>
+'   *date:datetime
+'   *type:varchar(30)
+'   *room:varchar(15)
+'   *comment/review:varchar(100)
+' }
+
+
+' ======= Relationships =======
+
+' Note: the \r is a right-aligned line break (\l is left-aligned, and \n is centred)
+
+student ||-|{ sevents : subscribes
+sevents ||-o{event:Type of 
+
+
+
+@enduml
