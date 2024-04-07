@@ -188,7 +188,7 @@ async function upload() {
 
     // show show table button
     document.getElementById('show-table').style.display = 'block';
-    
+
 
 
 
@@ -250,3 +250,10 @@ text.split('\n').forEach(line => {
 });
 
 console.log(events);
+
+
+async function database() {
+    
+                
+
+}
