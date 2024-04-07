@@ -5,3 +5,4 @@ const supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
 
 // Include this in all html files that access supabase:
 // <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+
