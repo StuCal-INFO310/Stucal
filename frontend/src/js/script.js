@@ -251,6 +251,148 @@ text.split('\n').forEach(line => {
 
 console.log(events);
 
+async function upload() {
+    // Get the JSON string from the input element
+    const jsonString = document.getElementById('input-text').value;
+  
+    // Parse the JSON string to an array of objects
+    const data = JSON.parse(jsonString);
+  
+    // Show a loading animation
+    document.querySelector('.loading').style.display = 'flex';
+    await delay(500);
+    document.querySelector('.loading').style.display = 'none';
+  
+    // Call the extractData function
+    const result = extractData(data);
+    console.log(result);
+  
+    // Make a table of the result
+    const table = document.querySelector('.table');
+    table.innerHTML = '';
+    const thead = document.createElement('thead');
+    const tbody = document.createElement('tbody');
+    const tr = document.createElement('tr');
+    const headers = ['Date', 'Start Time', 'End Time', 'Type', 'Title', 'Paper', 'Room'];
+    headers.forEach(header => {
+      const th = document.createElement('th');
+      th.textContent = header;
+      tr.appendChild(th);
+    });
+    thead.appendChild(tr);
+    table.appendChild(thead);
+    result.forEach(item => {
+      const tr = document.createElement('tr');
+      for (const key in item) {
+        const td = document.createElement('td');
+        td.textContent = item[key];
+        tr.appendChild(td);
+      }
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+  
+    // Download the JSON
+    const downloadButton = document.createElement('a');
+    downloadButton.href = `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(result, null, 2))}`;
+    downloadButton.download = 'timetable.json';
+    downloadButton.click();
+    downloadButton.remove();
+  
+    // Show the table button
+    document.getElementById('show-table').style.display = 'block';
+  };
 
+  function output12MonthTable(data) {
+    const months = [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+    const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    const daysInWeek = 7;
+    const weeksInMonth = Math.ceil(daysInMonth[0] / daysInWeek);
+  
+    let currentDate = new Date(data[0].date);
+    const startDate = new Date(currentDate.getFullYear(), 0, 1);
+    const endDate = new Date(currentDate.getFullYear(), 11, 31);
+  
+    let tableHTML = `
+      <table>
+        <thead>
+          <tr>
+            <th colspan="7">${currentDate.getFullYear()}</th>
+          </tr>
+          <tr>
+    `;
+  
+    daysOfWeek.forEach(day => {
+      tableHTML += `<th>${day}</th>`;
+    });
+  
+    tableHTML += `
+          </tr>
+        </thead>
+        <tbody>
+    `;
+  
+    for (let month = 0; month < 12; month++) {
+      tableHTML += `<tr><td colspan="7">${months[month]}</td></tr>`;
+  
+      for (let week = 0; week < weeksInMonth; week++) {
+        tableHTML += `<tr>`;
+  
+        for (let day = 0; day < daysInWeek; day++) {
+          const dayDate = new Date(startDate.getTime());
+          dayDate.setDate(dayDate.getDate() + (week * daysInWeek) + day);
+  
+          if (dayDate.getMonth() === month) {
+            const dayEvents = data.filter(event => new Date(event.date).getTime() === dayDate.getTime());
+  
+            if (dayEvents.length > 0) {
+              tableHTML += `<td>${dayDate.getDate()}<br>`;
+  
+              dayEvents.forEach(event => {
+                tableHTML += `${event.type} - ${event.title}<br>`;
+              });
+  
+              tableHTML += `</td>`;
+            } else {
+              tableHTML += `<td>${dayDate.getDate()}</td>`;
+            }
+          } else {
+            tableHTML += `<td></td>`;
+          }
+        }
+  
+        tableHTML += `</tr>`;
+      }
+    }
+  
+    tableHTML += `
+        </tbody>
+      </table>
+    `;
+  
+    return tableHTML;
+  };
 
+  function print() {
+    // Get the input text from the input element
+    const inputText = document.getElementById('input-text').value;
+  
+    // Call the extractData function and pass the input text as an argument
+    const data = extractData(inputText);
+  
+    // Call the output12MonthTable function and insert the HTML into the print-area div
+    document.getElementById('print-area').innerHTML = output12MonthTable(data);
+  
+    // Print the contents of the print-area div
+    window.print();
+  }
+  
+  // Add an event listener to the print button
+  document.getElementById('print-button').addEventListener('click', print);
+ 
 
+  
