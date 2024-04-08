@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@supabase/supabase-js": "^2.42.0",
-    "firebase": "^10.9.0"
+    "firebase": "^10.9.0",
+    "sweetalert2": "^11.10.7"
   }
 }
