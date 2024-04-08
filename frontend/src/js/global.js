@@ -6,3 +6,49 @@ const supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
 // Include this in all html files that access supabase:
 // <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 
+async function login(email, password) {
+    console.log(email, password);
+    // supabase login
+    const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password
+    });
+    console.log(data, error);
+
+    if (error) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: error.message
+        });
+        return;
+    }
+
+
+    window.location.href = 'dashboard.html';
+
+}
+
+async function signup(email, password) {
+    console.log(email, password);
+    // supabase signup
+    const { data, error } = await supabase.auth.signUp({
+        email,
+        password
+    });
+    // login
+    if (error) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: error.message
+        });
+        return;
+    }
+    Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: 'Account created successfully'
+    });
+    window.location.href = 'dashboard.html';
+}

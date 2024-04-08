@@ -58,4 +58,16 @@
     </footer>
 </body>
 
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const loginButton = document.getElementById('login-button');
+    loginButton.addEventListener('click', () => {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+    
+        login(email, password);
+    }); 
+});
+</script>
+
 </html>

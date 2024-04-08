@@ -252,36 +252,5 @@ text.split('\n').forEach(line => {
 console.log(events);
 
 
-// wait for dom
-document.addEventListener('DOMContentLoaded', () => {
-    const loginButton = document.getElementById('login-button');
-    loginButton.addEventListener('click', () => {
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-    
-        login(email, password);
-    }); 
-});
-
-async function login(email, password) {
-    console.log(email, password);
-    // supabase login
-    const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password
-    });
-    console.log(data, error);
-
-    if (error) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: error.message
-        });
-        return;
-    }
 
 
-    window.location.href = 'dashboard.html';
-
-}
