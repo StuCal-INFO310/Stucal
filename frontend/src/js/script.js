@@ -251,148 +251,131 @@ text.split('\n').forEach(line => {
 
 console.log(events);
 
-async function upload() {
-    // Get the JSON string from the input element
-    const jsonString = document.getElementById('input-text').value;
+function output12MonthTable() {
+  const inputText = document.getElementById('input-text').value.trim(); // Get the input text from the textarea
+  const lines = inputText.split('\n'); // Split the input text into lines
   
-    // Parse the JSON string to an array of objects
-    const data = JSON.parse(jsonString);
-  
-    // Show a loading animation
-    document.querySelector('.loading').style.display = 'flex';
-    await delay(500);
-    document.querySelector('.loading').style.display = 'none';
-  
-    // Call the extractData function
-    const result = extractData(data);
-    console.log(result);
-  
-    // Make a table of the result
-    const table = document.querySelector('.table');
-    table.innerHTML = '';
-    const thead = document.createElement('thead');
-    const tbody = document.createElement('tbody');
-    const tr = document.createElement('tr');
-    const headers = ['Date', 'Start Time', 'End Time', 'Type', 'Title', 'Paper', 'Room'];
-    headers.forEach(header => {
-      const th = document.createElement('th');
-      th.textContent = header;
-      tr.appendChild(th);
-    });
-    thead.appendChild(tr);
-    table.appendChild(thead);
-    result.forEach(item => {
-      const tr = document.createElement('tr');
-      for (const key in item) {
-        const td = document.createElement('td');
-        td.textContent = item[key];
-        tr.appendChild(td);
-      }
-      tbody.appendChild(tr);
-    });
-    table.appendChild(tbody);
-  
-    // Download the JSON
-    const downloadButton = document.createElement('a');
-    downloadButton.href = `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(result, null, 2))}`;
-    downloadButton.download = 'timetable.json';
-    downloadButton.click();
-    downloadButton.remove();
-  
-    // Show the table button
-    document.getElementById('show-table').style.display = 'block';
-  };
+  // Combine consecutive lines that belong to the same event
+  const combinedLines = [];
+  let combinedLine = '';
+  const calendarEvents = {}; // Object to store events for each day
 
-  function output12MonthTable(data) {
-    const months = [
+  lines.forEach(line => {
+      if (line.match(/^\w+\s+\d+\s+\w+\s+\d+$/)) { // Check if the line matches the date pattern
+          if (combinedLine) {
+              combinedLines.push(combinedLine.trim());
+              combinedLine = '';
+          }
+      }
+      combinedLine += line + '\t'; // Concatenate lines with a tab separator
+  });
+  if (combinedLine) {
+      combinedLines.push(combinedLine.trim());
+  }
+
+  console.log(combinedLines); // Check the combined lines
+
+
+  // Regular expression patterns to match date and event information
+  const datePattern = /^\w+\s+(\d+)\s+\w+\s+(\d+)/;
+  const eventPattern = /^\w+\s+(\d+)\s+\w+\s+(\d+)\s+(\d+:\d+)-(\d+:\d+)\s+(.+)/;
+
+  // Loop through each line of input
+  lines.forEach(line => {
+      const dateMatch = line.match(datePattern); // Match date
+      const eventMatch = line.match(eventPattern); // Match event
+
+      if (dateMatch && eventMatch) {
+          const day = parseInt(dateMatch[1]);
+          const month = parseInt(dateMatch[2]);
+          const startHour = eventMatch[3];
+          const startMinute = eventMatch[4];
+          const endHour = eventMatch[5];
+          const endMinute = eventMatch[6];
+          const eventDetails = eventMatch[7];
+
+          // Generate date key in the format "day month 2024"
+          const dateKey = `${day} ${months[month - 1]} 2024`;
+
+          // Add event to the calendarEvents object
+          if (calendarEvents[dateKey]) {
+              calendarEvents[dateKey].push({
+                  time: `${startHour}:${startMinute}-${endHour}:${endMinute}`,
+                  info: eventDetails // Changed from "event" to "info"
+              });
+          } else {
+              calendarEvents[dateKey] = [{
+                  time: `${startHour}:${startMinute}-${endHour}:${endMinute}`,
+                  info: eventDetails // Changed from "event" to "info"
+              }];
+          }
+      }
+  });
+
+  // Generate the calendar with events
+  generateCalendar(calendarEvents);
+}
+
+
+
+
+function generateCalendar(calendarEvents) {
+  const months = [
       "January", "February", "March", "April", "May", "June",
       "July", "August", "September", "October", "November", "December"
-    ];
-    const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    const daysInWeek = 7;
-    const weeksInMonth = Math.ceil(daysInMonth[0] / daysInWeek);
-  
-    let currentDate = new Date(data[0].date);
-    const startDate = new Date(currentDate.getFullYear(), 0, 1);
-    const endDate = new Date(currentDate.getFullYear(), 11, 31);
-  
-    let tableHTML = `
-      <table>
-        <thead>
-          <tr>
-            <th colspan="7">${currentDate.getFullYear()}</th>
-          </tr>
-          <tr>
-    `;
-  
-    daysOfWeek.forEach(day => {
-      tableHTML += `<th>${day}</th>`;
-    });
-  
-    tableHTML += `
-          </tr>
-        </thead>
-        <tbody>
-    `;
-  
-    for (let month = 0; month < 12; month++) {
-      tableHTML += `<tr><td colspan="7">${months[month]}</td></tr>`;
-  
-      for (let week = 0; week < weeksInMonth; week++) {
-        tableHTML += `<tr>`;
-  
-        for (let day = 0; day < daysInWeek; day++) {
-          const dayDate = new Date(startDate.getTime());
-          dayDate.setDate(dayDate.getDate() + (week * daysInWeek) + day);
-  
-          if (dayDate.getMonth() === month) {
-            const dayEvents = data.filter(event => new Date(event.date).getTime() === dayDate.getTime());
-  
-            if (dayEvents.length > 0) {
-              tableHTML += `<td>${dayDate.getDate()}<br>`;
-  
-              dayEvents.forEach(event => {
-                tableHTML += `${event.type} - ${event.title}<br>`;
-              });
-  
-              tableHTML += `</td>`;
-            } else {
-              tableHTML += `<td>${dayDate.getDate()}</td>`;
-            }
-          } else {
-            tableHTML += `<td></td>`;
+  ];
+  const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+  let calendarHTML = "";
+
+  for (let month = 0; month < 12; month++) {
+      calendarHTML += `<div>`;
+      calendarHTML += `<h2 class="month-title">${months[month]}</h2>`;
+      calendarHTML += `<table class="calendar"><tr>`;
+      daysOfWeek.forEach(day => {
+          calendarHTML += `<th>${day}</th>`;
+      });
+      calendarHTML += `</tr><tr>`;
+
+      let dayCounter = 1;
+      const totalDays = daysInMonth[month];
+      let firstDayOfMonth = new Date(2024, month, 1).getDay(); // Starting day of the week for the month
+
+      // Initialize an array to store events for each day of the month
+      const eventsForMonth = new Array(totalDays).fill(null).map(() => []);
+
+      // Loop through each day in the calendar
+      for (let i = 0; i < 6; i++) { // 6 rows for each month
+          for (let j = 0; j < 7; j++) { // 7 columns for each week
+              if (i === 0 && j < firstDayOfMonth) {
+                  calendarHTML += `<td></td>`; // Empty cell before the first day of the month
+              } else if (dayCounter <= totalDays) {
+                  const currentDate = new Date(2024, month, dayCounter);
+                  const events = calendarEvents[currentDate.toDateString()] || [];
+
+                  // Create event list for the current day
+                  const eventList = events.map(event => `<li>${event.time} - ${event.info}</li>`).join('');
+
+                  // Insert events into cell
+                  calendarHTML += `<td>${dayCounter}`;
+                  if (events.length > 0) {
+                      calendarHTML += `<ul>${eventList}</ul>`;
+                  }
+                  calendarHTML += `</td>`;
+
+                  dayCounter++;
+              } else {
+                  calendarHTML += `<td></td>`; // Empty cell after the last day of the month
+              }
           }
-        }
-  
-        tableHTML += `</tr>`;
+          if (dayCounter > totalDays) break; // Exit loop if all days of the month are added
+          calendarHTML += `</tr><tr>`;
       }
-    }
-  
-    tableHTML += `
-        </tbody>
-      </table>
-    `;
-  
-    return tableHTML;
-  };
-
-  function print() {
-    // Get the input text from the input element
-    const inputText = document.getElementById('input-text').value;
-  
-    // Call the extractData function and pass the input text as an argument
-    const data = extractData(inputText);
-  
-    // Call the output12MonthTable function and insert the HTML into the print-area div
-    document.getElementById('print-area').innerHTML = output12MonthTable(data);
-  
-    // Print the contents of the print-area div
-    window.print();
+      calendarHTML += `</tr></table>`;
+      calendarHTML += `</div>`;
   }
-  
-  // Add an event listener to the print button
-  document.getElementById('print-button').addEventListener('click', print);
- 
 
-  
+  document.getElementById('calendar').innerHTML = calendarHTML;
+}
+

@@ -3,55 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Physical Calendars</title>
-    <link rel="stylesheet" href="./css/styles.css">
+    <title>Printable Calendar</title>
+	<link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+	
+	<style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .calendar-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .calendar th,
+        .calendar td {
+            border: 1px solid #000;
+            padding: 10px;
+            text-align: center;
+        }
+        .month-title {
+            text-align: center;
+            font-size: 20px;
+            margin-bottom: 10px;
+            width: 100%; /* Center the month name within the table */
+        }
+        @media print {
+            .print-button {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <div class="white-logo" style="width: 100px; height: 50px;"></div>
-        <div class="menu-toggle" onclick="toggleMenu()">
-            <span class="material-symbols-outlined">menu</span>
-        </div>
-        <nav class="menu">
-            <ul>
-                <li><a href="login.html">Login</a></li>
-                <li><a href="signup.html">Sign Up</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="faq.html">FAQ</a></li>                
-            </ul>
-        </nav>
-    </header>
+    <button class="print-button" onclick="window.print()">Print Calendar</button>
+	<textarea style="height: 500px; width: 80%;" id="input-text" class="textbox" placeholder="Paste content here..."></textarea>
+	<button class="submit-btn" style="width: 60%;" onclick="output12MonthTable()">Insert timetable in Calendar <span class="material-symbols-rounded"></span></button>
 
-    <h1>Physical Calendars</h1>
-    <p>Enter your text here:</p>
-    <textarea id="input-text" rows="10" cols="50"></textarea>
+	<div class="calendar-container" id="calendar">
+        <!-- JavaScript will generate the calendar here -->
+    </div>
 
-    <button id="print-button">Print</button>
-    <div id="print-area"></div>
-
-    <footer>
-        <div class="centered">
-            <p>&copy; 2024 StuCal</p>
-        </div>
-    </footer>
-
-    <script src="../src/js/script.js"></script>
     <script>
-        // Get the input text from the input element
-        const inputText = document.getElementById('input-text').value;
+        function generateCalendar() {
+        }
 
-        // Call the extractData function and pass the input text as an argument
-        const data = extractData(inputText);
+        function output12MonthTable() {
+            // After parsing input and obtaining calendarEvents, call generateCalendar
+            generateCalendar();
+        }
 
-        // Call the output12MonthTable function and insert the HTML into the print-area div
-        document.getElementById('print-area').innerHTML = output12MonthTable(data);
-
-        // Add an event listener to the print button
-        document.getElementById('print-button').addEventListener('click', () => {
-            // Print the contents of the print-area div
-            window.print();
-        });
+        // Call the function to generate the calendar when the page loads
+        window.onload = generateCalendar;
     </script>
 </body>
+<script src="../src/js/script.js"></script>
 </html>
