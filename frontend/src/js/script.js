@@ -326,7 +326,8 @@ function generateCalendar(calendarEvents) {
   ];
   const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-
+//Add a comparison for day in the text file to match the daysOfWeek
+//or comapre the dates with the json file to match teh dates to display in the cell of the table
   let calendarHTML = "";
 
   for (let month = 0; month < 12; month++) {
