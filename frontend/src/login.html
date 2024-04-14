@@ -11,7 +11,7 @@
     <!-- link supabase jsdeliver -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
-
+    <!-- link global and script js -->
     <script src="./js/global.js"></script>
     <script src="./js/script.js"></script>
 
@@ -86,34 +86,21 @@
 </body>
 
 <script>
-// document.addEventListener('DOMContentLoaded', () => {
-//   const loginButton = document.getElementById('login-button');
-//   loginButton.addEventListener('click', async () => {
-//       const email = document.getElementById('email').value;
-//       const password = document.getElementById('password').value;
-      
-//       try {
-//           await login(email, password);
-//       } catch (error) {
-//           console.error('Login error:', error.message);
-//           Swal.fire({
-//               icon: "error",
-//               title: "Oops...",
-//               text: error.message,
-//           });
-//       }
-//   }); 
-// });
-
+// This script initializes the login functionality when the DOM is ready
 document.addEventListener('DOMContentLoaded', async () => {
+  // Get the login button element
   const loginButton = document.getElementById('login-button');
+  // Add a click event listener to the login button
   loginButton.addEventListener('click', async () => {
+    // Get the user-entered email and password values
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     
     try {
+      // Call the login function with the provided credentials
       await login(email, password);
     } catch (error) {
+      // Handle login errors by displaying an error message
       console.error('Login error:', error.message);
       Swal.fire({
         icon: "error",
@@ -124,122 +111,5 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 });
 </script>
-
-<!-- <script>
-    document.addEventListener('DOMContentLoaded', () => {
-    const loginButton = document.getElementById('login-button');
-    loginButton.addEventListener('click', () => {
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-    
-        login(email, password);
-    }); 
-});
-</script> -->
-
-<!-- <script>
-  document.addEventListener('DOMContentLoaded', () => {
-      const loginButton = document.getElementById('login_button'); // Correct ID used
-      loginButton.addEventListener('click', (event) => {
-          event.preventDefault(); // This will prevent the form from submitting normally and causing the error.
-  
-          const email = document.getElementById('login_email').value; // Correct ID used
-          const password = document.getElementById('login_password').value; // Correct ID used
-  
-          login(email, password);
-      }); 
-  });
-
-  document.addEventListener('DOMContentLoaded', () => {
-    const form = document.querySelector('form');
-    form.addEventListener('submit', (event) => {
-        event.preventDefault(); // Prevent the form from submitting traditionally.
-
-        const email = document.getElementById('login_email').value;
-        const password = document.getElementById('login_password').value;
-
-        login(email, password);
-    });
-});
-  </script> -->
-  
-<!-- <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const loginButton = document.getElementById('login_button');
-    loginButton.addEventListener('click', async () => {
-        const email = document.getElementById('login_email').value;
-        const password = document.getElementById('login_password').value;
-
-        try {
-            const { user, error } = await supabase.auth.signIn({
-                email,
-                password,
-            });
-
-            if (error) {
-                throw error;
-            }
-
-            console.log('User logged in:', user);
-            window.location.href = "dashboard.html"; // Redirect after successful login
-        } catch (error) {
-            console.error('Login error:', error.message);
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: error.message,
-            });
-        }
-    }); 
-});
-
-</script> -->
-<!-- <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const loginButton = document.getElementById('login_button');
-    loginButton.addEventListener('click', async () => {
-        const email = document.getElementById('login_email').value;
-        const options = {
-            emailRedirectTo: 'http://127.0.0.1:5500/frontend/src/dashboard.html'
-        };
-
-        try {
-            const { data, error } = await supabase.auth.signInWithOtp({
-                email,
-                options,
-            });
-
-            if (error) {
-                throw error;
-            }
-
-            console.log('OTP sent successfully:', data);
-            // Handle redirection or any other action here
-        } catch (error) {
-            console.error('OTP sending error:', error.message);
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: error.message,
-            });
-        }
-    }); 
-}); -->
-
-
-
-<!-- <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const loginButton = document.getElementById('login_button');
-  loginButton.addEventListener('click', async () => {
-    const email = document.getElementById('login_email').value;
-    const options = {
-      emailRedirectTo: 'http://127.0.0.1:5500/frontend/src/dashboard.html'
-    };
-
-    await login(email, options);
-  }); 
-});
-</script> -->
 
 </html>
