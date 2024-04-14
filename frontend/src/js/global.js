@@ -89,14 +89,20 @@ async function login(email, password) {
       title: "Oops...",
       text: error.message,
     });
-    return; // Exit the function if there's an error
+    return;
+  } else{
+    Swal.fire({
+      icon: "success",
+      title: "Success",
+      text: "Login successful",
+    });
   }
 
   // Login successful! Handle user data (optional)
   console.log("Login successful:", data);
 
   // Redirect to the dashboard or perform other actions
-  window.location.href = "dashboard.html";
+//   window.location.href = "dashboard.html";
 }
 
 // document.addEventListener("DOMContentLoaded", async () => {
@@ -124,5 +130,5 @@ async function signup(email, password) {
     title: "Success",
     text: "Account created successfully",
   });
-  window.location.href = "dashboard.html";
+//   window.location.href = "dashboard.html";
 }
