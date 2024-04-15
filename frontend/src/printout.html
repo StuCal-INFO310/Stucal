@@ -67,11 +67,11 @@
         }
 
         /* Updated event colors */
-        .day.h3-blue { background-color: #3498db; }
-        .day.h3-green { background-color: #2ecc71; }
-        .day.h3-red { background-color: #e74c3c; }
-        .day.h3-orange { background-color: #f39c12; }
-        .day.h3-purple { background-color: #9b59b6; }
+        /* .day.h3-blue { background-color: #3498db; }
+        .day.h3-green { background-color: #354ee0; }
+        .day.h3-red { background-color: #808080; }
+        .day.h3-orange { background-color: #de5b5b; }
+        .day.h3-purple { background-color: #cb8ae5; } */
 
         .color-picker {
             margin-bottom: 10px;
@@ -92,23 +92,39 @@
         }
 
         @media print {
-            .print-button {
-                display: none;
-            }
+    .print-button {
+        display: none;
+    }
 
-            .calendar-container {
-                display: block;
-            }
+    .calendar-container {
+        display: block;
+    }
 
-            /* Adjust layout for printing */
-            .time-column {
-                display: none; /* Hide time column when printing */
-            }
+    /* Adjust layout for printing */
+    .time-column {
+        display: none;
+    }
 
-            .calendar {
-                grid-template-columns: repeat(7, 1fr); /* Adjusted for A3 printing */
-            }
-        }
+    .calendar {
+        grid-template-columns: repeat(7, 1fr);
+    }
+
+    /* Remove or adjust the body color to maintain original colors */
+    body {
+        color: inherit; /* Keep original text color */
+    }
+
+    /* Add a rule to maintain background color */
+    .day h3 {
+        color: #fff; /* Set text color for day headers */
+    }
+
+    /* Add a rule to maintain event colors */
+    .day li {
+        color: inherit; /* Keep original text color for events */
+    }
+}
+
     </style>
 </head>
 <body>
@@ -121,10 +137,10 @@
             <div class="color-picker">
                 <!-- <button class="color" style="background-color: #3498db;" onclick="changeEventColor('.day h3')"></button>  -->
                 <button class="color" style="background-color: #3498db;" onclick="changeEventColor('.day h3', this)"></button>
-                <button class="color" style="background-color: #2ecc71;" onclick="changeEventColor('.day h3',this)"></button>
-                <button class="color" style="background-color: #e74c3c;" onclick="changeEventColor('.day h3', this)"></button>
-                <button class="color" style="background-color: #f39c12;" onclick="changeEventColor('.day h3', this)"></button>
-                <button class="color" style="background-color: #9b59b6;" onclick="changeEventColor('.day h3', this)"></button>
+                <button class="color" style="background-color: #354ee0;" onclick="changeEventColor('.day h3',this)"></button>
+                <button class="color" style="background-color: #808080;" onclick="changeEventColor('.day h3', this)"></button>
+                <button class="color" style="background-color: #de5b5b;" onclick="changeEventColor('.day h3', this)"></button>
+                <button class="color" style="background-color: #cb8ae5;" onclick="changeEventColor('.day h3', this)"></button>
             </div>
             <div class="calendar-container">
                 <!-- Time column -->
