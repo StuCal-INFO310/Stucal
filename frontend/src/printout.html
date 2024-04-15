@@ -1,56 +1,251 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Printable Calendar</title>
-    <link rel="stylesheet" href="./css/styles.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-    
+    <title>Physical Calendar</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <script src="./js/global.js"></script>
+    <script src="./js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
         }
+
         .calendar-container {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: auto repeat(7, 1fr); /* Added auto for time column */
             grid-template-rows: repeat(3, 1fr);
             gap: 20px;
         }
+
+        .time-column {
+            grid-column: 1; /* Align to the first column */
+        }
+
+        .time {
+            padding: 10px;
+            text-align: right;
+            border-right: 1px solid #ccc; /* Vertical border */
+        }
+
         .calendar {
             display: grid;
-            grid-template-columns: repeat(7, 1fr);
+            grid-template-columns: repeat(8, 1fr); /* Adjusted to fit A3 size */
             border-collapse: collapse;
             width: 100%;
         }
+
         .calendar th,
         .calendar td {
             border: 1px solid #000;
             padding: 10px;
             text-align: center;
         }
-        .month-title {
-            text-align: center;
-            font-size: 20px;
-            margin-bottom: 10px;
-            width: 100%; /* Center the month name within the table */
+
+        .day h3 {
+            margin: 0;
+            padding: 5px;
+            background-color: #3498db;
+            color: #fff;
         }
+
+        .day ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .day li {
+            margin-bottom: 5px;
+            padding: 5px;
+            color: #333; /* Dark text color */
+            border-bottom: 1px solid #ccc; /* Add a bottom border between events */
+        }
+
+        /* Updated event colors */
+        .day.h3-blue { background-color: #3498db; }
+        .day.h3-green { background-color: #2ecc71; }
+        .day.h3-red { background-color: #e74c3c; }
+        .day.h3-orange { background-color: #f39c12; }
+        .day.h3-purple { background-color: #9b59b6; }
+
+        .color-picker {
+            margin-bottom: 10px;
+        }
+
+        .color-picker button {
+            margin-right: 10px;
+            cursor: pointer;
+            border: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            outline: none;
+        }
+
+        .color-picker button.selected {
+            border: 2px solid #000;
+        }
+
         @media print {
             .print-button {
                 display: none;
+            }
+
+            .calendar-container {
+                display: block;
+            }
+
+            /* Adjust layout for printing */
+            .time-column {
+                display: none; /* Hide time column when printing */
+            }
+
+            .calendar {
+                grid-template-columns: repeat(7, 1fr); /* Adjusted for A3 printing */
             }
         }
     </style>
 </head>
 <body>
+    <header>
+        <div class="container">
+            <div class="header">
+                <h1>StuCal Physical Calendar</h1>
+            </div>
+            <!-- Color Picker -->
+            <div class="color-picker">
+                <!-- <button class="color" style="background-color: #3498db;" onclick="changeEventColor('.day h3')"></button>  -->
+                <button class="color" style="background-color: #3498db;" onclick="changeEventColor('.day h3', this)"></button>
+                <button class="color" style="background-color: #2ecc71;" onclick="changeEventColor('.day h3',this)"></button>
+                <button class="color" style="background-color: #e74c3c;" onclick="changeEventColor('.day h3', this)"></button>
+                <button class="color" style="background-color: #f39c12;" onclick="changeEventColor('.day h3', this)"></button>
+                <button class="color" style="background-color: #9b59b6;" onclick="changeEventColor('.day h3', this)"></button>
+            </div>
+            <div class="calendar-container">
+                <!-- Time column -->
+                <div class="time-column">
+                    <!-- Time slots from 6am to 10pm -->
+                    <div class="time"></div>
+                    <div class="time">8:00 AM</div>
+                    <div class="time"></div>
+                    <div class="time">9:00 AM</div>
+                    <div class="time"></div>
+                    <div class="time">10:00 AM</div>
+                    <div class="time"></div>
+                    <div class="time">11:00 AM</div>
+                    <div class="time"></div>
+                    <div class="time">12:00 PM</div>
+                    <div class="time"></div>
+                    <div class="time">1:00 PM</div>
+                    <div class="time"></div>
+                    <div class="time">2:00 PM</div>
+                    <div class="time"></div>
+                    <div class="time">3:00 PM</div>
+                    <div class="time"></div>
+                    <div class="time">4:00 PM</div>
+                    <div class="time"></div>
+                    <div class="time">5:00 PM</div>
+                    <div class="time"></div>
+                    <div class="time">6:00 PM</div>
+                    <div class="time"></div>
+                    <div class="time">7:00 PM</div>
+                    <div class="time"></div>
+                    <div class="time">8:00 PM</div>
+                </div>
+                <!-- Calendar -->
+                <div class="calendar">
+                    <!-- Replace this with your calendar component or embed a third-party calendar here -->
+                </div>
+            </div>
+        </div>
+    </header>
     <button class="print-button" onclick="window.print()">Print Calendar</button>
-    <textarea style="height: 500px; width: 80%;" id="input-text" class="textbox" placeholder="Paste content here..."></textarea>
-    <button class="submit-btn" style="width: 60%;" onclick="outputWeekTable()">Insert timetable in Calendar <span class="material-symbols-rounded"></span></button>
+    <script>
+        // insert events into calendar from supabase events
+        // fetch events from supabase
+        let myEvents = [];
+        getEvents();
 
-    <div id="printable-calendar">
-        <!-- Generated calendar will be inserted here -->
-    </div>
+        async function getEvents() {
+            const user = await supabase.auth.getUser();
+            const user_id = user.data.user.id;
+            const { data, error } = await supabase.from('events').select('*').eq('user_id', user_id);
+            myEvents = data;
+            console.log(myEvents);
+            generateEvents();
+        }
 
-    <script src="./js/script.js"></script>
+        async function generateEvents() {
+            // generate events in calendar from myEvents
+            // build from html
+            // have day titles for each day of the week and then list events for that day.
+            // include all details like start_time, end_time, title, location, type, code.
+            // make it look nice and use material icons
+
+            let calendar = document.querySelector('.calendar');
+            let html = '';
+            let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+            for (let i = 0; i < days.length; i++) {
+                html += `<div class="day">`;
+                html += `<h3>${days[i]}</h3>`;
+
+                let events = myEvents.filter(event => getDay(event.date) === i);
+
+                if (events.length === 0) {
+                    html += `<p></p>`;
+                } else {
+                    html += `<ul>`;
+                    for (let j = 0; j < events.length; j++) {
+                        html += `<li class=${events[j].type}>${events[j].title} - ${events[j].start_time} to ${events[j].end_time} at ${events[j].location} (${events[j].type})</li>`;
+                    }
+                    html += `</ul>`;
+                }
+
+                html += `</div>`;
+            }
+
+            calendar.innerHTML = html;
+        }
+
+        function getDay(date) {
+            let parts = date.split('/');
+            let day = parseInt(parts[0]);
+            let month = parseInt(parts[1]);
+            let year = parseInt(parts[2]);
+            let dateObj = new Date(year, month - 1, day);
+            return dateObj.getDay();
+        }
+
+        function changeEventColor(type, button) {
+    console.log("Clicked color button");
+    let events = document.querySelectorAll(type);
+    console.log("Events before color change:", events); // Add this line
+
+    if (button) {
+        let selectedColor = button.style.backgroundColor;
+
+        document.querySelectorAll('.color').forEach(btn => {
+            btn.classList.remove('selected');
+        });
+
+        button.classList.add('selected');
+
+        events.forEach(event => {
+            event.style.backgroundColor = selectedColor;
+        });
+
+        console.log("Events after color change:", events); // Add this line
+    } else {
+        console.error("Button element is undefined.");
+    }
+}
+
+    </script>
 </body>
 </html>
