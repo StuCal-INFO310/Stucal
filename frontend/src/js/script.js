@@ -1,9 +1,9 @@
 function extractData(inputText) {
   const timePattern = /\b\d{2}:\d{2}-\d{2}:\d{2}\b/g;
-  const paperPattern = /\b[A-Z]{4}\d{3}\b/g;
+  const codePattern = /\b[A-Z]{4}\d{3}\b/g;
   const titlePattern =
     /\b(?:\d{2}:\d{2}-\d{2}:\d{2}\s+)(.*?)(?=\s+[A-Z]+\d{3}\b)/g;
-  const roomPattern =
+  const locationPattern =
     /([A-Z]+\d+)\s+(.*?)\s+(?=\d{2}:\d{2}-\d{2}:\d{2}|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday|$)/g;
   const datePattern =
     /^(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\s+(\d{1,2}\s+(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4})/gm;
@@ -20,16 +20,16 @@ function extractData(inputText) {
 
   const times = inputText.match(timePattern) || [];
   const typeAndTitles = extractTitleFromTextBlocks(inputText);
-  const papers = inputText.match(paperPattern) || [];
-  const rooms = extractRoomsFromTextBlocks(inputText);
-  console.log(rooms);
+  const codes = inputText.match(codePattern) || [];
+  const locations = extractlocationsFromTextBlocks(inputText);
+  console.log(locations);
 
   const data = [];
 
   for (
     let i = 0;
     i <
-    Math.max(times.length, typeAndTitles.length, papers.length, rooms.length);
+    Math.max(times.length, typeAndTitles.length, codes.length, locations.length);
     i++
   ) {
     const start_time = times[i] ? times[i].split("-")[0] : "";
@@ -38,10 +38,10 @@ function extractData(inputText) {
     const title = typeAndTitles[i]
       ? typeAndTitles[i].split(" - ")[1].trim()
       : "";
-    const paper = papers[i] || "";
-    const room = rooms[i] || "";
+    const code = codes[i] || "";
+    const location = locations[i] || "";
 
-    // mean the index of the whole item in the inputText. time, type, title, paper, room
+    // mean the index of the whole item in the inputText. time, type, title, code, location
     const wholeItem = `${start_time}-${end_time} ${type} - ${title}`;
     const itemIndex = inputText.indexOf(wholeItem);
     // console.log(wholeItem);
@@ -60,7 +60,7 @@ function extractData(inputText) {
     // date = the date that has index as currIndex;
     const date = dates.find((dateObj) => dateObj.index === currIndex)?.date;
 
-    data.push({ date, start_time, end_time, type, title, paper, room });
+    data.push({ date, start_time, end_time, type, title, code, location });
 
     //corrupt the wholeItem to avoid duplicate
     inputText = inputText.replace(wholeItem, "");
@@ -108,25 +108,25 @@ function extractTitleFromTextBlocks(inputText) {
   return titles;
 }
 
-function extractRoomsFromTextBlocks(inputText, index) {
-  const roomPattern =
+function extractlocationsFromTextBlocks(inputText, index) {
+  const locationPattern =
     /[A-Z]+\d+\s+(.*?)\s+(?=\d{2}:\d{2}-\d{2}:\d{2}|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday|$)/g;
-  const rooms = [];
+  const locations = [];
   let match;
-  while ((match = roomPattern.exec(inputText.substring(index))) !== null) {
-    rooms.push(match[1]);
+  while ((match = locationPattern.exec(inputText.substring(index))) !== null) {
+    locations.push(match[1]);
   }
 
   // Handle the last item separately
-  const lastRoomIndex = rooms.length - 1; // Adjusted to get the correct index
-  if (lastRoomIndex >= 0) {
-    const lastRoomMatch = inputText.match(/\b([A-Z]+\d+)\b/g);
-    if (lastRoomMatch && lastRoomMatch.length > lastRoomIndex) {
-      rooms[lastRoomIndex] = lastRoomMatch[lastRoomIndex];
+  const lastlocationIndex = locations.length - 1; // Adjusted to get the correct index
+  if (lastlocationIndex >= 0) {
+    const lastlocationMatch = inputText.match(/\b([A-Z]+\d+)\b/g);
+    if (lastlocationMatch && lastlocationMatch.length > lastlocationIndex) {
+      locations[lastlocationIndex] = lastlocationMatch[lastlocationIndex];
     }
   }
 
-  return rooms;
+  return locations;
 }
 
 function trimTimetableText(text) {}
@@ -148,6 +148,7 @@ async function upload() {
 
   // call extractData function
   const result = extractData(data);
+  userCalendar = result;
   console.log(result);
   // make a table of result
   const table = document.querySelector(".table");
@@ -156,13 +157,13 @@ async function upload() {
   const tbody = document.createElement("tbody");
   const tr = document.createElement("tr");
   const headers = [
-    "Date",
-    "Start Time",
-    "End Time",
-    "Type",
-    "Title",
-    "Paper",
-    "Room",
+    "date",
+    "start_time",
+    "end_time",
+    "type",
+    "title",
+    "code",
+    "location",
   ];
   headers.forEach((header) => {
     const th = document.createElement("th");
@@ -195,6 +196,20 @@ async function upload() {
 
   // show show table button
   document.getElementById("show-table").style.display = "block";
+
+  // upload events to supabase
+  const user = await supabase.auth.getUser();
+  const user_id = user.data.user.id;
+
+  const { data2, error } = await supabase.from("events").insert(
+    result.map((item) => ({ ...item, user_id }))
+  );
+  if (error) {
+    console.log(error);
+    return;
+  }
+  console.log(data2);
+
 }
 
 const text = `Tuesday
