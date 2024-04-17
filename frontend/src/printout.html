@@ -211,7 +211,7 @@
         } else {
             html += `<ul>`;
             for (let j = 0; j < events.length; j++) {
-                let height = Math.min(100); // 20px for each line of text, plus 10px for padding, but no more than 100px
+                let height = Math.min(120); // 20px for each line of text, plus 10px for padding, but no more than 100px
 
                 html += `<li class=${events[j].type} style="height: ${height}px;">${events[j].title} - ${events[j].start_time} to ${events[j].end_time} at ${events[j].location} (${events[j].type})</li>`;
             }
