@@ -216,7 +216,7 @@
                                     <!-- "dark:text-white" add in class when dark mode -->
                                     <input type="password" name="password" id="password" placeholder="••••••••"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                                        required="">
+                                        required minlength="6">
                                     <!-- "dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" add in class whn dark mode -->
                                 </div>
                                 <div>
@@ -225,14 +225,14 @@
                                     <input type="confirm-password" name="confirm-password" id="confirm-password"
                                         placeholder="••••••••"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                                        required="">
+                                        required minlength="6">
                                     <!-- "dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" add when dark mode -->
                                 </div>
                                 <div class="flex items-start">
                                     <div class="flex items-center h-5">
                                         <input id="terms" aria-describedby="terms" type="checkbox"
                                             class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 "
-                                            required="">
+                                            required>
                                         <!-- "dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" add in class when dark mode -->
                                     </div>
                                     <div class="ml-3 text-sm">
@@ -244,7 +244,7 @@
                                     </div>
                                 </div>
                                 <button type="submit"
-                                    class="flex w-full justify-center rounded-md bg-theme px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-sky-900  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline--sky-500">Create
+                                    class="flex w-full justify-center rounded-md bg-theme px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-sky-900  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline--sky-500" id="submit-button">Create
                                     an account</button>
                                 <!-- "dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" add in class when dark mode-->
                                 <p class="text-sm font-light text-gray-500 dark:text-gray-400">
