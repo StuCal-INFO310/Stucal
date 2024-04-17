@@ -48,11 +48,15 @@ async function signup(email, password) {
       text: error.message,
     });
     return;
+  } else {
+    Swal.fire({
+      icon: "success",
+      title: "Success",
+      text: "Account created successfully",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = "dashboard.html";
+      }
+    });
   }
-  Swal.fire({
-    icon: "success",
-    title: "Success",
-    text: "Account created successfully",
-  });
-//   window.location.href = "dashboard.html";
 }
