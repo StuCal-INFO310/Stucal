@@ -90,6 +90,22 @@
         .color-picker button.selected {
             border: 2px solid #000;
         }
+        .Tutorial{
+            background-color: #e6f2ff;
+        }
+
+        .Lecture{
+            background-color: #ffebee;
+        }
+
+        .Computer{
+            background-color: #e8f5e9;
+        }
+
+        .Practical{
+            background-color: rgb(240, 240, 157);
+        }
+
 
         @media print {
     .print-button {
@@ -102,7 +118,7 @@
 
     /* Adjust layout for printing */
     .time-column {
-        display: none;
+        display:none;
     }
 
     .calendar {
@@ -142,45 +158,19 @@
                 <button class="color" style="background-color: #de5b5b;" onclick="changeEventColor('.day h3', this)"></button>
                 <button class="color" style="background-color: #cb8ae5;" onclick="changeEventColor('.day h3', this)"></button>
             </div>
-            <div class="calendar-container">
-                <!-- Time column -->
-                <div class="time-column">
-                    <!-- Time slots from 6am to 10pm -->
-                    <div class="time"></div>
-                    <div class="time">8:00 AM</div>
-                    <div class="time"></div>
-                    <div class="time">9:00 AM</div>
-                    <div class="time"></div>
-                    <div class="time">10:00 AM</div>
-                    <div class="time"></div>
-                    <div class="time">11:00 AM</div>
-                    <div class="time"></div>
-                    <div class="time">12:00 PM</div>
-                    <div class="time"></div>
-                    <div class="time">1:00 PM</div>
-                    <div class="time"></div>
-                    <div class="time">2:00 PM</div>
-                    <div class="time"></div>
-                    <div class="time">3:00 PM</div>
-                    <div class="time"></div>
-                    <div class="time">4:00 PM</div>
-                    <div class="time"></div>
-                    <div class="time">5:00 PM</div>
-                    <div class="time"></div>
-                    <div class="time">6:00 PM</div>
-                    <div class="time"></div>
-                    <div class="time">7:00 PM</div>
-                    <div class="time"></div>
-                    <div class="time">8:00 PM</div>
-                </div>
-                <!-- Calendar -->
-                <div class="calendar">
+            <button class="print-button" onclick="window.print()">Print Calendar</button>
+
+            
+
+          <div class="calendar-container">
+                <div class="calendar"> 
                     <!-- Replace this with your calendar component or embed a third-party calendar here -->
                 </div>
-            </div>
+
+            </div> 
         </div>
+
     </header>
-    <button class="print-button" onclick="window.print()">Print Calendar</button>
     <script>
         // insert events into calendar from supabase events
         // fetch events from supabase
@@ -196,39 +186,43 @@
             generateEvents();
         }
 
+      
         async function generateEvents() {
-            // generate events in calendar from myEvents
-            // build from html
-            // have day titles for each day of the week and then list events for that day.
-            // include all details like start_time, end_time, title, location, type, code.
-            // make it look nice and use material icons
+    // generate events in calendar from myEvents
+    // build from html
+    // have day titles for each day of the week and then list events for that day.
+    // include all details like start_time, end_time, title, location, type, code.
+    // make it look nice and use material icons
+    // make each event a set height of 100px including the event text
 
-            let calendar = document.querySelector('.calendar');
-            let html = '';
-            let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    let calendar = document.querySelector('.calendar');
+    let html = '';
 
-            for (let i = 0; i < days.length; i++) {
-                html += `<div class="day">`;
-                html += `<h3>${days[i]}</h3>`;
+    let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-                let events = myEvents.filter(event => getDay(event.date) === i);
+    for (let i = 0; i < days.length; i++) {
+        html += `<div class="day">`;
+        html += `<h3>${days[i]}</h3>`;
 
-                if (events.length === 0) {
-                    html += `<p></p>`;
-                } else {
-                    html += `<ul>`;
-                    for (let j = 0; j < events.length; j++) {
-                        html += `<li class=${events[j].type}>${events[j].title} - ${events[j].start_time} to ${events[j].end_time} at ${events[j].location} (${events[j].type})</li>`;
-                    }
-                    html += `</ul>`;
-                }
+        let events = myEvents.filter(event => getDay(event.date) === i);
 
-                html += `</div>`;
+        if (events.length === 0) {
+            html += `<p></p>`;
+        } else {
+            html += `<ul>`;
+            for (let j = 0; j < events.length; j++) {
+                let height = Math.min(100); // 20px for each line of text, plus 10px for padding, but no more than 100px
+
+                html += `<li class=${events[j].type} style="height: ${height}px;">${events[j].title} - ${events[j].start_time} to ${events[j].end_time} at ${events[j].location} (${events[j].type})</li>`;
             }
-
-            calendar.innerHTML = html;
+            html += `</ul>`;
         }
 
+        html += `</div>`;
+    }
+
+    calendar.innerHTML = html;
+}
         function getDay(date) {
             let parts = date.split('/');
             let day = parseInt(parts[0]);
