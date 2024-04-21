@@ -114,6 +114,7 @@
 
         li{
             list-style-type: none;
+            background-color: #c8c8c8;
         }
 
         .Tutorial{
@@ -127,6 +128,30 @@
         .Computer{
             background-color: #e8f5e9;
         }
+
+        .custom{
+            background-color: #cdaffa;
+        }
+
+        .submit-button{
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .close{
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+
     </style>
 </head>
 
@@ -134,7 +159,7 @@
     <div class="container">
         <div class="header">
             <h1>User Dashboard</h1>
-            <button>Add Event</button>
+            <button onclick="document.querySelector('#addEventDialog').showModal()">Add Event</button>
         </div>
         <div class="calendar">
             <!-- Replace this with your calendar component or embed a third-party calendar here -->
@@ -145,12 +170,66 @@
         </div>
     </div>
 
+    <dialog id="addEventDialog">
+        <div class="close" onclick="document.querySelector('#addEventDialog').close()">&times;</div>
+        <form id="addEventForm">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" required>
+            <label for="location">Location</label>
+            <input type="text" id="location" name="location" required>
+            <label for="date">Date</label>
+            <input type="date" id="date" name="date" required>
+            <label for="start_time">Start Time</label>
+            <input type="time" id="start_time" name="start_time" required>
+            <label for="end_time">End Time</label>
+            <input type="time" id="end_time" name="end_time" required>
+            <div onclick="submitNewEvent()" class="submit-button">Add Event</div>
+        </form>
+    </dialog>
+
 
     <script>
         // insert events into calendar from supabase events
         // fetch events from supabase
         let myEvents = [];
         getEvents();
+
+        async function submitNewEvent() {
+            const title = document.querySelector('#title').value;
+            const location = document.querySelector('#location').value;
+            let date = document.querySelector('#date').value;
+            //convert date to dd/mm/yyyy
+            const parts = date.split('-');
+            date = `${parts[2]}/${parts[1]}/${parts[0]}`;
+
+            const start_time = document.querySelector('#start_time').value;
+            const end_time = document.querySelector('#end_time').value;
+            const type = 'custom';
+
+            const user = await supabase.auth.getUser();
+            const user_id = user.data.user.id;
+
+            const { data, error } = await supabase.from('events').insert([
+                { title, location, date, start_time, end_time, type, user_id }
+            ]);
+
+            if (error) {
+                console.log(error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                });
+            } else {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: 'Event added successfully',
+                });
+                getEvents();
+                document.querySelector('#addEventDialog').close();
+            }
+        }
 
         async function getEvents() {
             const user = await supabase.auth.getUser();
