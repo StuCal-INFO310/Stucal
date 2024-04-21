@@ -112,28 +112,28 @@
             padding: 10px;
         }
 
-        li{
+        li {
             list-style-type: none;
             background-color: #c8c8c8;
         }
 
-        .Tutorial{
+        .Tutorial {
             background-color: #e6f2ff;
         }
 
-        .Lecture{
+        .Lecture {
             background-color: #ffebee;
         }
 
-        .Computer{
+        .Computer {
             background-color: #e8f5e9;
         }
 
-        .custom{
+        .custom {
             background-color: #cdaffa;
         }
 
-        .submit-button{
+        .submit-button {
             padding: 8px 16px;
             background-color: #4CAF50;
             color: #ffffff;
@@ -143,7 +143,7 @@
             margin-top: 10px;
         }
 
-        .close{
+        .close {
             position: absolute;
             top: 10px;
             right: 10px;
@@ -151,6 +151,10 @@
             cursor: pointer;
         }
 
+        .delete-event {
+            margin-left: auto;
+            cursor: pointer;
+        }
 
     </style>
 </head>
@@ -187,12 +191,44 @@
         </form>
     </dialog>
 
+    <!-- confirm delete event dialog -->
+    <dialog id="confirmDeleteDialog">
+        <div class="close" onclick="document.querySelector('#confirmDeleteDialog').close()">&times;</div>
+        <h3>Are you sure you want to delete this event?</h3>
+        <div class="buttons">
+            <button onclick="document.querySelector('#confirmDeleteDialog').close()">Cancel</button>
+            <button onclick="deleteEvent()">Delete</button>
+        </div>
+    </dialog>
+
 
     <script>
         // insert events into calendar from supabase events
         // fetch events from supabase
         let myEvents = [];
         getEvents();
+        
+        let currDeleteEventId = null;
+        async function deleteEvent(){
+            const { data, error } = await supabase.from('events').delete().eq('id', currDeleteEventId);
+            if (error) {
+                console.log(error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                });
+            } else {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: 'Event deleted successfully',
+                });
+                getEvents();
+                document.querySelector('#confirmDeleteDialog').close();
+            }
+            
+        }
 
         async function submitNewEvent() {
             const title = document.querySelector('#title').value;
@@ -262,9 +298,9 @@
                 } else {
                     html += `<ul>`;
                     for (let j = 0; j < events.length; j++) {
-                        html += `<li class=${events[j].type}>${events[j].title} - ${events[j].start_time} to ${events[j].end_time} at ${events[j].location} (${events[j].type})</li>`;
+                        html += `<li class=${events[j].type}>${events[j].title} - ${events[j].start_time} to ${events[j].end_time} at ${events[j].location} (${events[j].type}) <span class="delete-event" onclick="currDeleteEventId = ${events[j].id}, document.querySelector('#confirmDeleteDialog').showModal()">&times;</span></li>`;
+                        html += `</ul>`;
                     }
-                    html += `</ul>`;
                 }
 
                 html += `</div>`;
