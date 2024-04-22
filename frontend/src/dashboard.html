@@ -156,6 +156,47 @@
             cursor: pointer;
         }
 
+        .weather-container {
+            background-color: #c5c5c5;
+            border-radius: 10px;
+            padding: 20px;
+            width: 300px;
+        }
+
+        .weather-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .weather-type {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .weather-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .weather-desc {
+            font-size: 16px;
+        }
+
+        .temperature {
+            font-size: 20px;
+        }
+
+        .wind {
+            font-size: 16px;
+        }
+
+        #weather-icon {
+            width: 100px;
+            height: 100px;
+        }
     </style>
 </head>
 
@@ -164,6 +205,22 @@
         <div class="header">
             <h1>User Dashboard</h1>
             <button onclick="document.querySelector('#addEventDialog').showModal()">Add Event</button>
+            <!-- weather -->
+            <div class="weather-container">
+                <div class="weather-title">Today's Weather</div>
+                <div class="weather-type">Sunny</div>
+                <div class="weather-info">
+                    <span class="weather-desc">Scattered clouds</span>
+                    <img id="weather-icon">
+                </div>
+                <div class="weather-info">
+                    <span class="temperature">25°C</span>
+                </div>
+                <div class="weather-info">
+                    <span class="wind">Wind: 10 mph</span>
+                </div>
+            </div>
+
         </div>
         <div class="calendar">
             <!-- Replace this with your calendar component or embed a third-party calendar here -->
@@ -207,9 +264,9 @@
         // fetch events from supabase
         let myEvents = [];
         getEvents();
-        
+
         let currDeleteEventId = null;
-        async function deleteEvent(){
+        async function deleteEvent() {
             const { data, error } = await supabase.from('events').delete().eq('id', currDeleteEventId);
             if (error) {
                 console.log(error);
@@ -227,7 +284,7 @@
                 getEvents();
                 document.querySelector('#confirmDeleteDialog').close();
             }
-            
+
         }
 
         async function submitNewEvent() {
@@ -317,9 +374,38 @@
             let year = parseInt(parts[2]);
             let dateObj = new Date(year, month - 1, day);
             return dateObj.getDay();
+        }
 
+        async function fetchWeather() {
+            const response = await fetch('https://api.openweathermap.org/data/2.5/weather?q=Dunedin&appid=026ea7877a22ff3a2dd720539706c117');
+            const data = await response.json();
+            console.log(data);
+            const temp = data.main.temp - 273.15;
+            const humidity = data.main.humidity;
+            const wind = data.wind.speed;
+            const weather = data.weather[0];
+            const weatherId = weather.icon;
+            const weatherDesc = weather.description;
+
+            document.querySelector('.weather-desc').innerText = weatherDesc;
+            document.querySelector('.temperature').innerText = `${temp.toFixed(2)}°C`;
+            document.querySelector('.wind').innerText = `Wind: ${wind} mph`;
+
+
+
+            setWeatherIcon(weatherId);
 
         }
+
+        async function setWeatherIcon(id) {
+            const img = document.getElementById('weather-icon');
+            const response = await fetch(`https://openweathermap.org/img/wn/${id}@2x.png`);
+            const data = await response.blob();
+            console.log(data);
+            img.src = URL.createObjectURL(data);
+        }
+
+        fetchWeather();
 
     </script>
 </body>

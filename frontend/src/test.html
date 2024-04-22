@@ -3,24 +3,61 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Print Page with Colors</title>
+<title>Weather Widget</title>
 <style>
-  /* Specify background colors for elements */
-  body {
-    background-color: white; /* Set body background color */
-  }
-  .content {
-    background-color: lightblue; /* Set content background color */
-    padding: 20px;
-    margin: 20px;
-  }
+.weather-container {
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  padding: 20px;
+  width: 300px;
+}
+
+.weather-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.weather-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.weather-info img {
+  width: 50px;
+  height: 50px;
+}
+
+.weather-desc {
+  font-size: 16px;
+}
+
+.temperature {
+  font-size: 20px;
+}
+
+.wind {
+  font-size: 16px;
+}
+
 </style>
 </head>
 <body>
 
-<div class="content">
-  <h1>This is a heading</h1>
-  <p>This is a paragraph with some content.</p>
+<div class="weather-container">
+  <div class="weather-title">Today's Weather</div>
+  <div class="weather-info">
+    <span class="weather-desc">Sunny</span>
+    <img src="https://www.example.com/sunny.png" alt="Sunny">
+  </div>
+  <div class="weather-info">
+    <span class="temperature">25°C</span>
+  </div>
+  <div class="weather-info">
+    <span class="wind">Wind: 10 mph</span>
+  </div>
 </div>
 
 </body>
