@@ -215,11 +215,14 @@
 
 <body>
     <div class="lg:container mx-auto max-width:960 shadow-md px-3 py-2">
-        <div class="header text-[24px] bg-gray-800 px-3 py-2">
-            <h1 class="text-white font-semibold">User Dashboard</h1>
-            <button onclick="document.querySelector('#addEventDialog').showModal()" class="py-0.5 px-3 inline-flex bg-green-500 hover:bg-green-600 text-white text-center text-[16px] font-semibold rounded-md shadow focus:outline-none width-auto">Add Event</button>
+        <div class="header text-[24px] bg-gray-800 px-3 py-2 flex flex-row">
+            <div class="event-dash display:flex px-2">
+                <h1 class="text-white font-semibold">User Dashboard</h1>
+                <br>
+                <button onclick="document.querySelector('#addEventDialog').showModal()" class="py-0.5 px-3 inline-flex bg-green-500 hover:bg-green-600 text-white text-center text-[16px] font-semibold rounded-md shadow focus:outline-none width-auto">Add Event</button>
+            </div>
             <!-- weather -->
-            <div class="weather-container bg-[#c5c5c5] px-3 py-2">
+            <div class="weather-container bg-[#c5c5c5] px-3 py-2 inset-y-0 right-0">
                 <div class="weather-title text-[24px] font-bold">Today's Weather</div>
                 <div class="weather-type text-[18px] font-semibold">Sunny</div>
                 <div class="weather-info">
