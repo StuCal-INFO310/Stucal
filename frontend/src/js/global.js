@@ -60,3 +60,13 @@ async function signup(email, password) {
     });
   }
 }
+
+
+// Export the variables and functions
+module.exports = {
+  supabaseUrl,
+  supabaseKey,
+  supabase,
+  login,
+  signup,
+};
