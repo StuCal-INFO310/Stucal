@@ -299,8 +299,10 @@
         const username = document.getElementById('signup-email').value;
         signup(email, password);
 
+        const custom_id = createCustomId();
+
         await supabase.from('users').insert([
-            { email, username }
+            { email, username, custom_id}
         ]).then(res => {
             console.log(res);
         }).catch(err => {
