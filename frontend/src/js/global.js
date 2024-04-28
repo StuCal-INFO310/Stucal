@@ -69,3 +69,12 @@ function createCustomId(){
   const rand3Digit = Math.floor(100 + Math.random() * 900);
   return `${randomAdjective}${randomNoun}${rand3Digit}`;
 }
+
+// Export the variables and functions
+module.exports = {
+  supabaseUrl,
+  supabaseKey,
+  supabase,
+  login,
+  signup,
+};
