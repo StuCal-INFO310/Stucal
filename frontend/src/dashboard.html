@@ -199,7 +199,7 @@
             height: 100px;
         }
 
-        .share-button{
+        .share-button {
             position: absolute;
             right: 30px;
             /* font-size: 24px; */
@@ -288,9 +288,10 @@
     <dialog id="incomingEventDialog">
         <div class="close" onclick="document.querySelector('#incomingEventDialog').close()">&times;</div>
         <h3>Event Shared</h3>
-        <p>You have been shared an event from <span id="incoming-id"></span>. Do you want to add it to your calendar?</p>
+        <p>You have been shared an event from <span id="incoming-id"></span>. Do you want to add it to your calendar?
+        </p>
         <div class="buttons">
-            <button onclick="document.querySelector('#incomingEventDialog').close()">No</button>
+            <button onclick="document.querySelector('#incomingEventDialog').close(), deleteShareEvent()">No</button>
             <button onclick="addIncomingEvent()">Yes</button>
         </div>
     </dialog>
@@ -444,7 +445,7 @@
             img.src = URL.createObjectURL(data);
         }
 
-        
+
 
 
         const channels = supabase.channel('sharing')
@@ -458,7 +459,40 @@
             )
             .subscribe()
 
-            let currentIncomingEvent = null;
+        let currentIncomingEvent = null;
+
+        async function deleteShareEvent(){
+            // delete from sharing table
+            const event = currentIncomingEvent;
+            const { data, error } = await supabase.from('sharing').delete().eq('from', event.from).eq('to', event.to).eq('data', event);
+            if (error) {
+                console.log(error);
+            }
+        }
+
+        async function checkManualSharing(){
+            // pull sharing table for events with this user's custom_id in the to field
+            const user = await supabase.auth.getUser();
+            const email = user.data.user.email;
+            const { data, error } = await supabase.from('users').select('custom_id').eq('email', email);
+            if (error) {
+                console.log(error);
+            } else {
+                const custom_id = data[0].custom_id;
+                const { data, error } = await supabase.from('sharing').select('*').eq('to', custom_id);
+                if (error) {
+                    console.log(error);
+                } else {
+                    for (let i = 0; i < data.length; i++) {
+                        // tell the user that they have been shared an event and ask if they want to add it to their calendar
+                        // #incomingEventDialog open
+                        document.querySelector('#incomingEventDialog').showModal();
+                        document.querySelector('#incoming-id').innerText = data[i].from;
+                        currentIncomingEvent = data[i].data;
+                    }
+                }
+            }
+        }
 
         async function checkSharing(payload) {
             // check if the to field is this user's custom_id
@@ -476,7 +510,7 @@
                     document.querySelector('#incoming-id').innerText = payload.new.from;
                     currentIncomingEvent = payload.new.data;
 
-                   
+
                 }
             }
 
@@ -488,8 +522,8 @@
             const event = currentIncomingEvent;
             console.log(event);
             const user = await supabase.auth.getUser();
-            const user_id = user.data.user.id;  
-    
+            const user_id = user.data.user.id;
+
             const { data, error } = await supabase.from('events').insert([
                 { title: event.title, location: event.location, date: event.date, start_time: event.start_time, end_time: event.end_time, type: event.type, user_id }
             ]);
@@ -504,6 +538,14 @@
                 getEvents();
                 document.querySelector('#incomingEventDialog').close();
             }
+
+            // delete from sharing table
+            const { data2, error2 } = await supabase.from('sharing').delete().eq('from', event.from).eq('to', event.to).eq('data', event);
+            if (error2) {
+                console.log(error2);
+            }
+
+
         }
 
         async function setName() {
@@ -520,12 +562,12 @@
         }
         let currentShareId = null;
 
-        async function startShareEvent(id){
+        async function startShareEvent(id) {
             document.querySelector('#shareEventDialog').showModal();
             currentShareId = id;
         }
 
-        async function shareEvent(){
+        async function shareEvent() {
             // get #username value
             const username = document.querySelector('#username').value;
             // get #user-name value (this user)
