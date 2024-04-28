@@ -11,7 +11,20 @@
     <script src="./js/global.js"></script>
     <script src="./js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <style>
+    <!-- tailwind config -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            theme: '#077BFF',
+          }
+        }
+      }
+    }
+    </script>
+    <!-- <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -197,27 +210,27 @@
             width: 100px;
             height: 100px;
         }
-    </style>
+    </style> -->
 </head>
 
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>User Dashboard</h1>
-            <button onclick="document.querySelector('#addEventDialog').showModal()">Add Event</button>
+    <div class="lg:container mx-auto max-width:960 shadow-md px-3 py-2">
+        <div class="header text-[24px] bg-gray-800 px-3 py-2">
+            <h1 class="text-white font-semibold">User Dashboard</h1>
+            <button onclick="document.querySelector('#addEventDialog').showModal()" class="py-0.5 px-3 inline-flex bg-green-500 hover:bg-green-600 text-white text-center text-[16px] font-semibold rounded-md shadow focus:outline-none width-auto">Add Event</button>
             <!-- weather -->
-            <div class="weather-container">
-                <div class="weather-title">Today's Weather</div>
-                <div class="weather-type">Sunny</div>
+            <div class="weather-container bg-[#c5c5c5] px-3 py-2">
+                <div class="weather-title text-[24px] font-bold">Today's Weather</div>
+                <div class="weather-type text-[18px] font-semibold">Sunny</div>
                 <div class="weather-info">
-                    <span class="weather-desc">Scattered clouds</span>
+                    <span class="weather-desc text-[16px] font-semibold">Scattered clouds</span>
                     <img id="weather-icon">
                 </div>
                 <div class="weather-info">
-                    <span class="temperature">25°C</span>
+                    <span class="temperature text-[20px] font-semibold">25°C</span>
                 </div>
                 <div class="weather-info">
-                    <span class="wind">Wind: 10 mph</span>
+                    <span class="wind text-[16px] font-semibold">Wind: 10 mph</span>
                 </div>
             </div>
 
@@ -226,7 +239,7 @@
             <!-- Replace this with your calendar component or embed a third-party calendar here -->
             <h2>Calendar</h2>
         </div>
-        <div class="buttons">
+        <div class="px-3 py-0.5 inline-flex bg-sky-500 hover:bg-sky-600 text-white text-center text-[20px] font-semibold rounded-md shadow focus:outline-none width-auto">
             <button onclick="window.location = 'upload.html'">Convert Data</button>
         </div>
     </div>
@@ -408,6 +421,30 @@
         fetchWeather();
 
     </script>
+    <!-- footer -->
+    <footer
+        class="fixed bottom-0 left-0 z-20 w-full p-4 bg-white border-t border-gray-200 shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800 dark:border-gray-600">
+        <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="https://flowbite.com/"
+           class="hover:underline">StuCal™</a>. All Rights Reserved.
+        </span>
+        <!-- <div class="justify-center items-center pt-12">
+        <img src="\frontend\public\images\logo.png" class="h-14" alt="StuCal Logo" />
+        </div> -->
+        <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+            <li>
+            <a href="about.html" class="hover:underline me-4 md:me-6">About</a>
+            </li>
+            <li>
+              <a href="#" class="hover:underline me-4 md:me-6">Privacy Policy</a>
+            </li>
+            <li>
+              <a href="#" class="hover:underline me-4 md:me-6">Licensing</a>
+            </li>
+            <li>
+              <a href="#" class="hover:underline">Contact</a>
+            </li>
+          </ul>
+        </footer>
 </body>
 
 </html>
