@@ -17,13 +17,13 @@ ___
 ## Overview 
 Our motivation behind StuCal stemmed from the inconvenience of regularly checking our eVision timetables for our next classes. 
 
-Recognising this tedious process, we came up with the idea of integrating our class schedules into our everyday calendar apps. 
+Recognising this tedious process, we came up with the idea of integrating our class schedules into our everyday calendar apps and providing extra features dedicated to students. 
 
 
 ## Built With
 
 * **Framework:** [React.js](https://reactjs.org) 
-* **Styling:** [Bootstrap](https://getbootstrap.com) **&** [SCSS](https://sass-lang.com)
+* **Styling:** [Bootstrap](https://getbootstrap.com), [Tailwind](https://tailwindcss.com) **&** [SCSS](https://sass-lang.com)
 <br>
 
 * **Alert Library:** [Sweet Alert Library](https://sweetalert2.github.io)
