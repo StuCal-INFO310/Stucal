@@ -509,22 +509,6 @@
                     class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add Event</button>
             </div>
         </form>
-
-
-        <!-- <div class="close" onclick="document.querySelector('#addEventDialog').close()">&times;</div>
-        <form id="addEventForm">
-            <label for="title">Title</label>
-            <input type="text" id="title" name="title" required>
-            <label for="location">Location</label>
-            <input type="text" id="location" name="location" required>
-            <label for="date">Date</label>
-            <input type="date" id="date" name="date" required>
-            <label for="start_time">Start Time</label>
-            <input type="time" id="start_time" name="start_time" required>
-            <label for="end_time">End Time</label>
-            <input type="time" id="end_time" name="end_time" required>
-            <div onclick="submitNewEvent()" class="submit-button">Add Event</div>
-        </form> -->
     </dialog>
 
     <!-- confirm delete event dialog -->
@@ -574,11 +558,42 @@
     <!-- share event dialog. enter the person you want to share's user name -->
     <dialog id="shareEventDialog">
         <div class="close" onclick="document.querySelector('#shareEventDialog').close()">&times;</div>
+
         <form id="shareEventForm">
-            <p>Enter the user name of the person you want to share this event with</p>
-            <label for="username">User Name</label>
-            <input type="text" id="username" name="username" required>
-            <div onclick="shareEvent()" class="submit-button">Share Event</div>
+            <div class="space-y-12 mx-auto max-w-7xl px-2 py-5 sm:px-6 lg:px-8">
+                <div class="border-b border-gray-900/10 pb-5">
+                    <h2 class="text-base font-semibold leading-7 text-gray-900">
+                        Share Event
+                    </h2>
+                    <p class="mt-1 text-sm leading-6 text-gray-600">
+                        Enter the user name of the person you want to share this <br>
+                        event and all it's details with.
+                    </p>
+                </div>
+        
+                <div class="border-b border-gray-900/10 pb-8">
+                    <div class="mt-1 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        
+                        <div class="sm:col-span-full">
+                            <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Username</label>
+                            <div class="mt-2">
+                                <input type="text" id="username" name="username" required autofocus
+                                    class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+            </div>
+        
+            <div class="mt-6 flex items-center justify-end gap-x-6 mx-auto max-w-7xl px-2 py-5 sm:px-6 lg:px-8">
+                <button type="button" onclick="document.querySelector('#addEventDialog').close()" class="text-sm font-semibold leading-6 text-gray-900">
+                    Cancel
+                </button>
+                <button type="submit" onclick="shareEvent()" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                    Share Event
+                </button>
+            </div>
         </form>
     </dialog>
 
