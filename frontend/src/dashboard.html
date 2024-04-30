@@ -68,6 +68,7 @@
             border-radius: 4px;
             display: flex;
             align-items: center;
+            position: relative;
         }
 
         .calendar li .material-icons {
@@ -197,6 +198,14 @@
             width: 100px;
             height: 100px;
         }
+
+        .share-button {
+            position: absolute;
+            right: 30px;
+            /* font-size: 24px; */
+            cursor: pointer;
+
+        }
     </style>
 </head>
 
@@ -204,6 +213,12 @@
     <div class="container">
         <div class="header">
             <h1>User Dashboard</h1>
+            <div class="user-name-container">
+                <!-- title -->
+                <h1>Your User Name:</h1>
+                <span id="user-name"></span>
+
+            </div>
             <button onclick="document.querySelector('#addEventDialog').showModal()">Add Event</button>
             <!-- weather -->
             <div class="weather-container">
@@ -258,12 +273,37 @@
         </div>
     </dialog>
 
+    <!-- share event dialog. enter the person you want to share's user name -->
+    <dialog id="shareEventDialog">
+        <div class="close" onclick="document.querySelector('#shareEventDialog').close()">&times;</div>
+        <form id="shareEventForm">
+            <p>Enter the user name of the person you want to share this event with</p>
+            <label for="username">User Name</label>
+            <input type="text" id="username" name="username" required>
+            <div onclick="shareEvent()" class="submit-button">Share Event</div>
+        </form>
+    </dialog>
+
+    <!-- incoming event share dialog -->
+    <dialog id="incomingEventDialog">
+        <div class="close" onclick="document.querySelector('#incomingEventDialog').close()">&times;</div>
+        <h3>Event Shared</h3>
+        <p>You have been shared an event from <span id="incoming-id"></span>. Do you want to add it to your calendar?
+        </p>
+        <div class="buttons">
+            <button onclick="document.querySelector('#incomingEventDialog').close(), deleteShareEvent()">No</button>
+            <button onclick="addIncomingEvent()">Yes</button>
+        </div>
+    </dialog>
+
 
     <script>
         // insert events into calendar from supabase events
         // fetch events from supabase
         let myEvents = [];
         getEvents();
+        fetchWeather();
+        setName();
 
         let currDeleteEventId = null;
         async function deleteEvent() {
@@ -355,7 +395,7 @@
                 } else {
                     html += `<ul>`;
                     for (let j = 0; j < events.length; j++) {
-                        html += `<li class=${events[j].type}>${events[j].title} - ${events[j].start_time} to ${events[j].end_time} at ${events[j].location} (${events[j].type}) <span class="delete-event" onclick="currDeleteEventId = ${events[j].id}, document.querySelector('#confirmDeleteDialog').showModal()">&times;</span></li>`;
+                        html += `<li class=${events[j].type}>${events[j].title} - ${events[j].start_time} to ${events[j].end_time} at ${events[j].location} (${events[j].type}) <span class="share-button" onclick="startShareEvent(${events[j].id})">Share</span> <span class="delete-event" onclick="currDeleteEventId = ${events[j].id}, document.querySelector('#confirmDeleteDialog').showModal()">&times;</span></li>`;
                         html += `</ul>`;
                     }
                 }
@@ -405,7 +445,154 @@
             img.src = URL.createObjectURL(data);
         }
 
-        fetchWeather();
+
+
+
+        const channels = supabase.channel('sharing')
+            .on(
+                'postgres_changes',
+                { event: 'INSERT', schema: 'public', table: 'sharing' },
+                (payload) => {
+                    console.log('Change received!', payload)
+                    checkSharing(payload);
+                }
+            )
+            .subscribe()
+
+        let currentIncomingEvent = null;
+
+        async function deleteShareEvent(){
+            // delete from sharing table
+            const event = currentIncomingEvent;
+            const { data, error } = await supabase.from('sharing').delete().eq('from', event.from).eq('to', event.to).eq('data', event);
+            if (error) {
+                console.log(error);
+            }
+        }
+
+        async function checkManualSharing(){
+            // pull sharing table for events with this user's custom_id in the to field
+            const user = await supabase.auth.getUser();
+            const email = user.data.user.email;
+            const { data, error } = await supabase.from('users').select('custom_id').eq('email', email);
+            if (error) {
+                console.log(error);
+            } else {
+                const custom_id = data[0].custom_id;
+                const { data, error } = await supabase.from('sharing').select('*').eq('to', custom_id);
+                if (error) {
+                    console.log(error);
+                } else {
+                    for (let i = 0; i < data.length; i++) {
+                        // tell the user that they have been shared an event and ask if they want to add it to their calendar
+                        // #incomingEventDialog open
+                        document.querySelector('#incomingEventDialog').showModal();
+                        document.querySelector('#incoming-id').innerText = data[i].from;
+                        currentIncomingEvent = data[i].data;
+                    }
+                }
+            }
+        }
+
+        async function checkSharing(payload) {
+            // check if the to field is this user's custom_id
+            const user = await supabase.auth.getUser();
+            const email = user.data.user.email;
+            const { data, error } = await supabase.from('users').select('custom_id').eq('email', email);
+            if (error) {
+                console.log(error);
+            } else {
+                const custom_id = data[0].custom_id;
+                if (payload.new.to === custom_id) {
+                    // tell the user that they have been shared an event and ask if they want to add it to their calendar
+                    // #incomingEventDialog open
+                    document.querySelector('#incomingEventDialog').showModal();
+                    document.querySelector('#incoming-id').innerText = payload.new.from;
+                    currentIncomingEvent = payload.new.data;
+
+
+                }
+            }
+
+        }
+
+        async function addIncomingEvent() {
+            // add the event to the user's calendar
+            // insert into events table
+            const event = currentIncomingEvent;
+            console.log(event);
+            const user = await supabase.auth.getUser();
+            const user_id = user.data.user.id;
+
+            const { data, error } = await supabase.from('events').insert([
+                { title: event.title, location: event.location, date: event.date, start_time: event.start_time, end_time: event.end_time, type: event.type, user_id }
+            ]);
+            if (error) {
+                console.log(error);
+            } else {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: 'Event added successfully',
+                });
+                getEvents();
+                document.querySelector('#incomingEventDialog').close();
+            }
+
+            // delete from sharing table
+            const { data2, error2 } = await supabase.from('sharing').delete().eq('from', event.from).eq('to', event.to).eq('data', event);
+            if (error2) {
+                console.log(error2);
+            }
+
+
+        }
+
+        async function setName() {
+            // get custom_id from 'users'  table for this email
+            const user = await supabase.auth.getUser();
+            console.log(user);
+            const email = user.data.user.email;
+            const { data, error } = await supabase.from('users').select('custom_id').eq('email', email);
+            if (error) {
+                console.log(error);
+            } else {
+                document.querySelector('#user-name').innerText = data[0].custom_id;
+            }
+        }
+        let currentShareId = null;
+
+        async function startShareEvent(id) {
+            document.querySelector('#shareEventDialog').showModal();
+            currentShareId = id;
+        }
+
+        async function shareEvent() {
+            // get #username value
+            const username = document.querySelector('#username').value;
+            // get #user-name value (this user)
+            const thisUserName = document.querySelector('#user-name').innerText;
+            // get event details from currentShareId
+            const event = myEvents.find(event => event.id === currentShareId);
+            console.log(event);
+            // upload event to sharing table with from: thisUserName, to: username, data: event
+            const { data, error } = await supabase.from('sharing').insert([
+                { from: thisUserName, to: username, data: event }
+            ]);
+
+            if (error) {
+                console.log(error);
+            } else {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: 'Event shared successfully',
+                });
+                document.querySelector('#shareEventDialog').close();
+            }
+
+
+        }
 
     </script>
 </body>

@@ -61,6 +61,14 @@ async function signup(email, password) {
   }
 }
 
+function createCustomId(){
+  const adjectives = ["happy", "sad", "angry", "excited", "bored", "tired", "hungry", "thirsty", "cold", "hot"];
+  const nouns = ["dog", "cat", "bird", "fish", "rabbit", "hamster", "turtle", "snake", "lizard", "frog"]; 
+  const randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)];
+  const randomNoun = nouns[Math.floor(Math.random() * nouns.length)];
+  const rand3Digit = Math.floor(100 + Math.random() * 900);
+  return `${randomAdjective}${randomNoun}${rand3Digit}`;
+}
 
 // Export the variables and functions
 module.exports = {
