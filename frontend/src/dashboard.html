@@ -737,7 +737,7 @@
         }
 
         async function fetchWeather() {
-            const response = await fetch('https://api.openweathermap.org/data/2.5/weather?q=Dunedin&appid=026ea7877a22ff3a2dd720539706c117');
+            const response = await fetch('https://api.openweathermap.org/data/2.5/weather?q=Dunedin&appid=026ea7877a22ff3a2dd720539706c117&units=metric');
             const data = await response.json();
             console.log(data);
             const temp = data.main.temp - 273.15;
