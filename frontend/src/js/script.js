@@ -142,9 +142,9 @@ async function upload() {
   const data = document.getElementById("input-text").value;
 
   // show a really cool loading animation scanning over the text for 2seconds
-  document.querySelector(".loading").style.display = "flex";
-  await delay(500);
-  document.querySelector(".loading").style.display = "none";
+  // document.querySelector(".loading").style.display = "flex";
+  // await delay(500);
+  // document.querySelector(".loading").style.display = "none";
 
   // call extractData function
   const result = extractData(data);
