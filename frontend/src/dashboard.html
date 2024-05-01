@@ -512,7 +512,7 @@
         
             <div class="mt-6 flex items-center justify-end gap-x-6 mx-auto max-w-7xl px-2 py-5 sm:px-6 lg:px-8">
                 <button type="button" onclick="document.querySelector('#addEventDialog').close()" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
-                <button type="submit" onclick="submitNewEvent()"
+                <button onclick="submitNewEvent()"
                     class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add Event</button>
             </div>
         </form>
@@ -597,9 +597,9 @@
                 <button type="button" onclick="document.querySelector('#addEventDialog').close()" class="text-sm font-semibold leading-6 text-gray-900">
                     Cancel
                 </button>
-                <button type="submit" onclick="shareEvent()" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                <div onclick="shareEvent()" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                     Share Event
-                </button>
+                </div>
             </div>
         </form>
     </dialog>
@@ -679,7 +679,7 @@
                     title: 'Success',
                     text: 'Event added successfully',
                 });
-                getEvents();
+                //getEvents();
                 document.querySelector('#addEventDialog').close();
             }
         }
@@ -891,7 +891,7 @@
             // get #username value
             const username = document.querySelector('#username').value;
             // get #user-name value (this user)
-            const thisUserName = document.querySelector('#user-name').innerText;
+            const thisUserName = document.querySelector('#user_name_here').innerText;
             // get event details from currentShareId
             const event = myEvents.find(event => event.id === currentShareId);
             console.log(event);
