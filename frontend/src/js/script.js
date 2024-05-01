@@ -151,51 +151,51 @@ async function upload() {
   userCalendar = result;
   console.log(result);
   // make a table of result
-  const table = document.querySelector(".table");
-  table.innerHTML = "";
-  const thead = document.createElement("thead");
-  const tbody = document.createElement("tbody");
-  const tr = document.createElement("tr");
-  const headers = [
-    "date",
-    "start_time",
-    "end_time",
-    "type",
-    "title",
-    "code",
-    "location",
-  ];
-  headers.forEach((header) => {
-    const th = document.createElement("th");
-    th.textContent = header;
-    tr.appendChild(th);
-  });
-  thead.appendChild(tr);
-  table.appendChild(thead);
-  result.forEach((item) => {
-    const tr = document.createElement("tr");
-    for (const key in item) {
-      const td = document.createElement("td");
-      td.textContent = item[key];
-      tr.appendChild(td);
-    }
-    tbody.appendChild(tr);
-  });
-  table.appendChild(tbody);
+  // const table = document.querySelector(".table");
+  // table.innerHTML = "";
+  // const thead = document.createElement("thead");
+  // const tbody = document.createElement("tbody");
+  // const tr = document.createElement("tr");
+  // const headers = [
+  //   "date",
+  //   "start_time",
+  //   "end_time",
+  //   "type",
+  //   "title",
+  //   "code",
+  //   "location",
+  // ];
+  // headers.forEach((header) => {
+  //   const th = document.createElement("th");
+  //   th.textContent = header;
+  //   tr.appendChild(th);
+  // });
+  // thead.appendChild(tr);
+  // table.appendChild(thead);
+  // result.forEach((item) => {
+  //   const tr = document.createElement("tr");
+  //   for (const key in item) {
+  //     const td = document.createElement("td");
+  //     td.textContent = item[key];
+  //     tr.appendChild(td);
+  //   }
+  //   tbody.appendChild(tr);
+  // });
+  // table.appendChild(tbody);
 
-  // download the json
-  const downloadButton = document.createElement("a");
-  downloadButton.href = `data:text/json;charset=utf-8,${encodeURIComponent(
-    JSON.stringify(result, null, 2)
-  )}`;
-  downloadButton.download = "timetable.json";
-  // click the download button
-  downloadButton.click();
-  // remove the download button
-  downloadButton.remove();
+  // // download the json
+  // const downloadButton = document.createElement("a");
+  // downloadButton.href = `data:text/json;charset=utf-8,${encodeURIComponent(
+  //   JSON.stringify(result, null, 2)
+  // )}`;
+  // downloadButton.download = "timetable.json";
+  // // click the download button
+  // downloadButton.click();
+  // // remove the download button
+  // downloadButton.remove();
 
-  // show show table button
-  document.getElementById("show-table").style.display = "block";
+  // // show show table button
+  // document.getElementById("show-table").style.display = "block";
 
   // upload events to supabase
   const user = await supabase.auth.getUser();
@@ -208,7 +208,8 @@ async function upload() {
     console.log(error);
     return;
   }
-  console.log(data2);
+
+  location.reload();
 
 }
 
