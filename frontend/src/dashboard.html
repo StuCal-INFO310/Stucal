@@ -262,11 +262,6 @@
                     </div>
                     <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
     
-                        <!-- <div class="flex flex-shrink-0 items-center">
-                      <img class="h-8 w-auto" src="\frontend\public\images\logo.png" alt="StuCal Logo">
-                    </div> -->
-    
-                        <!-- why is the link so big??? **Need fixing**, copy to index.html after fixing -->
                         <span class="absolute -inset-1.5"></span>
                         <span class="sr-only">Open user menu</span>
                         <a href="index.html" class="flex items-center" style="z-index:100;">
@@ -276,33 +271,25 @@
                         <!-- other header buttons -->
                         <div class="hidden sm:ml-6 sm:block">
                             <div class="flex space-x-4">
-                                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                                <!--<a href="about.html" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">About</a>-->
-                                <a href="faq.html"
-                                    class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                                    style="z-index:100;">FAQ</a>
-                                <a href="printout.html"
-                                    class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                                    style="z-index:100;">Calendar</a>
+                                <a href="faq.html" id="nav__faq" class="z-10 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">FAQ</a>
+                                <a href="printout.html" id="nav__calendar" class="z-10 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Calendar</a>
+                                <a href="dashboard.html" id="nav__dashboard" class="hidden z-10 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Dashboard</a>
                             </div>
                         </div>
                     </div>
                     <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                         <!-- sign up and log in button, **doesn't work** -->
                         <div class="z-10">
-                            <a href="login.html"
-                                class="text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
-                                aria-current="page">Log In</a>
-                            <a href="signup.html"
-                                class="text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
-                                aria-current="page">Sign Up</a>
+                            <a href="login.html" id="nav__login" class="z-10 text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Log In</a>
+                            <a href="signup.html" id="nav__signup" class="z-10 text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Sign Up</a>
+                            <a onclick="logOut()" id="nav__logout" class="z-10 hidden cursor-pointer text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Logout</a>
                         </div>
                         <!-- Profile -->
                         <div id="profile-img" class="relative ml-3">
                             <div>
                                 <button type="button"
-                                    class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                                    id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                                    class="hidden relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                                    id="nav__profile" aria-expanded="false" aria-haspopup="true">
                                     <!-- <span class="absolute -inset-1.5"></span> -->
                                     <span class="sr-only">Open user menu</span>
                                     <img class="h-8 w-8 rounded-full"
@@ -330,24 +317,51 @@
                         </div>
                     </div>
                 </div>
+
             </div>
     
             <!-- Mobile menu, show/hide based on menu state. -->
             <div class="sm:hidden" id="mobile-menu">
                 <div class="space-y-1 px-2 pb-3 pt-2 z-10">
-                    <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                    <a href="login.html" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium"
-                        aria-current="page">Log In</a>
-                    <a href="signup.html" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium"
-                        aria-current="page">Sign Up</a>
-                    <a href="faq.html"
-                        class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">FAQ</a>
-                    <!--<a href="about.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">About</a>-->
-                    <a href="#"
-                        class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Calendar</a>
+                    <a href="login.html" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">Log In</a>
+                    <a href="signup.html" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">Sign Up</a>
+                    <a href="faq.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">FAQ</a>
+                    <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Calendar</a>
                 </div>
             </div>
         </nav>
+
+        <script defer>
+
+            const displayNavBar = async () => {
+                const user = await supabase.auth.getUser();
+                console.log("user", user);
+
+                if (user.data.user === null) {
+                    window.location.href = "login.html";
+                } else {
+                    // Unhide element 
+                    document.getElementById("nav__logout").classList.remove("hidden");
+                    document.getElementById("nav__profile").classList.remove("hidden");
+                    document.getElementById("nav__dashboard").classList.remove("hidden");
+
+                    // Hide others
+                    document.getElementById("nav__login").classList.add("hidden");
+                    document.getElementById("nav__signup").classList.add("hidden");
+                }
+            }
+
+            const logOut = async () => {
+                const { error } = await supabase.auth.signOut();
+                if (error) {
+                    console.log("Error logging out", error);
+                } else {
+                    window.location.href = "index.html";
+                }
+            }
+            
+            displayNavBar();
+        </script>
     
     </header>
 
@@ -1008,9 +1022,9 @@
         </ul>
     </footer>
 
-    <script src="./js/sync.js"></script>
+    <!-- <script src="./js/sync.js"></script>
     <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
-    <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
+    <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script> -->
 </body>
 
 </html>
