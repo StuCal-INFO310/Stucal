@@ -33,6 +33,7 @@ async function login(email, password) {
 
   console.log("Login successful:", data);
 };
+
 async function signup(email, password) {
   console.log(email, password);
   // supabase signup

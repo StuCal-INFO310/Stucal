@@ -66,6 +66,7 @@
 
         .calendar {
             margin-bottom: 20px;
+            padding-top: 20px;
         }
 
         .calendar h3 {
@@ -221,6 +222,11 @@
             /* font-size: 24px; */
             cursor: pointer;
 
+        }
+
+        .today{
+            background-color: rgb(255, 255, 255);
+            border: 1px solid rgb(79 70 229);
         }
     </style>
 </head>
@@ -439,6 +445,30 @@
         </div>
     </div>
 
+    <!-- scroll to today button -->
+    <div class="flex justify-center items-center">
+        <button
+          onclick="scrollToToday()"
+          class="inline-flex items-center rounded-full bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 transition-colors duration-200"
+        >
+          <svg
+            class="w-5 h-5 mr-2 -ml-1 text-gray-500"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 13l-3 3m0 0l-3-3m3 3V8m0 13a9 9 0 110-18 9 9 0 010 18z"
+            ></path>
+          </svg>
+          Scroll to Today
+        </button>
+      </div>
+
     <div class="calendar mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 lg:pb-5">
     </div>
 
@@ -647,6 +677,13 @@
 
         }
 
+        function scrollToToday(){
+            const today = new Date();
+            const todayDay = today.getDay();
+            document.querySelector('.today').scrollIntoView({ behavior: 'smooth', block: 'center'});
+
+        }
+
         async function submitNewEvent() {
             const title = document.querySelector('#title').value;
             const location = document.querySelector('#location').value;
@@ -688,9 +725,27 @@
             const user = await supabase.auth.getUser();
             const user_id = user.data.user.id;
             const { data, error } = await supabase.from('events').select('*').eq('user_id', user_id);
-            myEvents = data;
-            console.log(myEvents);
-            generateEvents();
+            if (error) {
+                console.log(error);
+            } else {
+                // filter events just for this week. (the database stores dd/mm/yyyy format)
+                const today = new Date();
+                const week = [];
+                for (let i = 0; i < 7; i++) {
+                    const day = new Date(today);
+                    day.setDate(today.getDate() + i);
+                    const dayStr = `${day.getDate().toString().padStart(2, '0')}/${(day.getMonth() + 1).toString().padStart(2, '0')}/${day.getFullYear()}`;
+                    week.push(dayStr);
+                }
+                myEvents = data.filter(event => week.includes(event.date));
+                generateEvents();
+                //highlight today's day of week
+                const todayDay = today.getDay();
+                document.querySelectorAll('.day')[todayDay].classList.add('today');
+                //scroll to today in the middle of sreen div smoothly
+
+
+            }
         }
 
         async function generateEvents() {
