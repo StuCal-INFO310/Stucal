@@ -431,6 +431,13 @@
         </div>
     </div>
 
+    <!-- user name here -->
+    <div class="mx-auto max-w-7xl px-2 py-5 sm:px-6 lg:px-8">
+        <div class="border-b border-gray-900/10 pb-5">
+            <h2 class="text-base font-semibold leading-7 text-gray-900">Welcome <span id="user_name_here"></span></h2>
+            <p class="mt-1 text-sm leading-6 text-gray-600">This is your personal dashboard. You can view and manage your events here.</p>
+        </div>
+    </div>
 
     <div class="calendar mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 lg:pb-5">
     </div>
@@ -870,7 +877,7 @@
             if (error) {
                 console.log(error);
             } else {
-                document.querySelector('#user-name').innerText = data[0].custom_id;
+                document.querySelector('#user_name_here').innerText = data[0].custom_id;
             }
         }
         let currentShareId = null;
