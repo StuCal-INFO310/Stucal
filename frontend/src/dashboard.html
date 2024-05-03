@@ -268,47 +268,34 @@
                     </div>
                     <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
     
-                        <!-- <div class="flex flex-shrink-0 items-center">
-                      <img class="h-8 w-auto" src="\frontend\public\images\logo.png" alt="StuCal Logo">
-                    </div> -->
-    
-                        <!-- why is the link so big??? **Need fixing**, copy to index.html after fixing -->
                         <span class="absolute -inset-1.5"></span>
                         <span class="sr-only">Open user menu</span>
                         <a href="index.html" class="flex items-center" style="z-index:100;">
-                            <img class="mr-3 h-6 sm:h-9" src="\frontend\public\images\logo.png" alt="">
+                            <img class="mr-3 h-6 sm:h-9" src="../public/images/logo.png" alt="">
                         </a>
     
                         <!-- other header buttons -->
                         <div class="hidden sm:ml-6 sm:block">
                             <div class="flex space-x-4">
-                                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                                <!--<a href="about.html" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">About</a>-->
-                                <a href="faq.html"
-                                    class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                                    style="z-index:100;">FAQ</a>
-                                <a href="printout.html"
-                                    class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                                    style="z-index:100;">Calendar</a>
+                                <a href="faq.html" id="nav__faq" class="z-10 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">FAQ</a>
+                                <a href="printout.html" id="nav__calendar" class="z-10 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Calendar</a>
+                                <a href="dashboard.html" id="nav__dashboard" class="hidden z-10 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Dashboard</a>
                             </div>
                         </div>
                     </div>
                     <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                         <!-- sign up and log in button, **doesn't work** -->
                         <div class="z-10">
-                            <a href="login.html"
-                                class="text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
-                                aria-current="page">Log In</a>
-                            <a href="signup.html"
-                                class="text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
-                                aria-current="page">Sign Up</a>
+                            <a href="login.html" id="nav__login" class="z-10 text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Log In</a>
+                            <a href="signup.html" id="nav__signup" class="z-10 text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Sign Up</a>
+                            <a onclick="logOut()" id="nav__logout" class="z-10 hidden cursor-pointer text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Logout</a>
                         </div>
                         <!-- Profile -->
                         <div id="profile-img" class="relative ml-3">
                             <div>
                                 <button type="button"
-                                    class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                                    id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                                    class="hidden relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                                    id="nav__profile" aria-expanded="false" aria-haspopup="true">
                                     <!-- <span class="absolute -inset-1.5"></span> -->
                                     <span class="sr-only">Open user menu</span>
                                     <img class="h-8 w-8 rounded-full"
@@ -336,24 +323,51 @@
                         </div>
                     </div>
                 </div>
+
             </div>
     
             <!-- Mobile menu, show/hide based on menu state. -->
             <div class="sm:hidden" id="mobile-menu">
                 <div class="space-y-1 px-2 pb-3 pt-2 z-10">
-                    <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                    <a href="login.html" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium"
-                        aria-current="page">Log In</a>
-                    <a href="signup.html" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium"
-                        aria-current="page">Sign Up</a>
-                    <a href="faq.html"
-                        class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">FAQ</a>
-                    <!--<a href="about.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">About</a>-->
-                    <a href="#"
-                        class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Calendar</a>
+                    <a href="login.html" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">Log In</a>
+                    <a href="signup.html" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">Sign Up</a>
+                    <a href="faq.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">FAQ</a>
+                    <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Calendar</a>
                 </div>
             </div>
         </nav>
+
+        <script defer>
+
+            const displayNavBar = async () => {
+                const user = await supabase.auth.getUser();
+                console.log("user", user);
+
+                if (user.data.user === null) {
+                    window.location.href = "login.html";
+                } else {
+                    // Unhide element 
+                    document.getElementById("nav__logout").classList.remove("hidden");
+                    document.getElementById("nav__profile").classList.remove("hidden");
+                    document.getElementById("nav__dashboard").classList.remove("hidden");
+
+                    // Hide others
+                    document.getElementById("nav__login").classList.add("hidden");
+                    document.getElementById("nav__signup").classList.add("hidden");
+                }
+            }
+
+            const logOut = async () => {
+                const { error } = await supabase.auth.signOut();
+                if (error) {
+                    console.log("Error logging out", error);
+                } else {
+                    window.location.href = "index.html";
+                }
+            }
+            
+            displayNavBar();
+        </script>
     
     </header>
 
@@ -627,9 +641,9 @@
                 <button type="button" onclick="document.querySelector('#addEventDialog').close()" class="text-sm font-semibold leading-6 text-gray-900">
                     Cancel
                 </button>
-                <button type="submit" onclick="shareEvent()" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                <div onclick="shareEvent()" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                     Share Event
-                </button>
+                </div>
             </div>
         </form>
     </dialog>
@@ -660,7 +674,7 @@
                                 Tutorial
                             </label>
                             <div class="relative mt-2 flex justify-center">
-                                <img class="h-60" src="\frontend\public\images\tutorialuploadv3.gif" loop=infinite alt="Tutorial GIF">
+                                <img class="h-60" src="../public/images/tutorialuploadv3.gif" loop=infinite alt="Tutorial GIF">
                             </div>
                         </div>
         
@@ -690,16 +704,28 @@
     </dialog>
 
     <!-- incoming event share dialog -->
-    <dialog id="incomingEventDialog">
-        <div class="close" onclick="document.querySelector('#incomingEventDialog').close()">&times;</div>
-        <h3>Event Shared</h3>
-        <p>You have been shared an event from <span id="incoming-id"></span>. Do you want to add it to your calendar?
-        </p>
-        <div class="buttons">
-            <button onclick="document.querySelector('#incomingEventDialog').close(), deleteShareEvent()">No</button>
-            <button onclick="addIncomingEvent()">Yes</button>
+    <dialog id="incomingEventDialog" class="fixed z-10 inset-0 overflow-y-auto">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+                <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+            </div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                <div class="bg-gray-50 px-4 py-5 sm:p-6 sm:pb-4">
+                    <div class="flex justify-end">
+                        <button class="text-gray-500 hover:text-gray-700" onclick="document.querySelector('#incomingEventDialog').close()">&times;</button>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900">Event Shared</h3>
+                    <p class="mt-3 text-sm text-gray-500">You have been shared an event from <span id="incoming-id" style="font-weight: bold;"></span>. Do you want to add it to your calendar?</p>
+                </div>
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button type="button" onclick="document.querySelector('#incomingEventDialog').close(), deleteShareEvent()" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">No</button>
+                    <div onclick="addIncomingEvent()" class="mt-3 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">Yes</div>
+                </div>
+            </div>
         </div>
     </dialog>
+    
 
 
     <script>
@@ -1045,7 +1071,7 @@
                 class="hover:underline">StuCal™</a>. All Rights Reserved.
         </span>
         <!-- <div class="justify-center items-center pt-12">
-              <img src="\frontend\public\images\logo.png" class="h-14" alt="StuCal Logo" />
+              <img src="../public/images/logo.png" class="h-14" alt="StuCal Logo" />
             </div> -->
         <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
             <li>
@@ -1063,9 +1089,9 @@
         </ul>
     </footer>
 
-    <script src="./js/sync.js"></script>
+    <!-- <script src="./js/sync.js"></script>
     <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
-    <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
+    <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script> -->
 </body>
 
 </html>

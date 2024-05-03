@@ -44,7 +44,7 @@ Recognising this tedious process, we came up with the idea of integrating our cl
 ## View Project
 
 <div align="center">
-   <img style="width: 100%" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/rcdywbhax0k9hbipb486.png">
+   <img style="width: 100%" src="./_docs/readme_imgs/project_screenshots.png">
 </div>
 
 
