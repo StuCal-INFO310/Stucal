@@ -1,64 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Weather Widget</title>
-<style>
-.weather-container {
-  background-color: #f0f0f0;
-  border-radius: 10px;
-  padding: 20px;
-  width: 300px;
-}
-
-.weather-title {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.weather-info {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.weather-info img {
-  width: 50px;
-  height: 50px;
-}
-
-.weather-desc {
-  font-size: 16px;
-}
-
-.temperature {
-  font-size: 20px;
-}
-
-.wind {
-  font-size: 16px;
-}
-
-</style>
+  <title>Print Preview Example</title>
+  <style>
+    @media print {
+      /* Add your CSS styles for print here */
+      h1 {
+        color: red;
+      }
+      p {
+        font-style: italic;
+      }
+    }
+  </style>
 </head>
 <body>
+  <h1>Original Page Content</h1>
+  <p>This is the original content of the page.</p>
 
-<div class="weather-container">
-  <div class="weather-title">Today's Weather</div>
-  <div class="weather-info">
-    <span class="weather-desc">Sunny</span>
-    <img src="https://www.example.com/sunny.png" alt="Sunny">
-  </div>
-  <div class="weather-info">
-    <span class="temperature">25°C</span>
-  </div>
-  <div class="weather-info">
-    <span class="wind">Wind: 10 mph</span>
-  </div>
-</div>
+  <button onclick="showPrintPreview()">Show Print Preview</button>
 
+  <script>
+    function showPrintPreview() {
+      const printContent = document.createElement('div');
+      printContent.id = 'print-content';
+      document.body.appendChild(printContent);
+
+      const headingElement = document.createElement('h1');
+      headingElement.textContent = 'Print Preview';
+      printContent.appendChild(headingElement);
+
+      const paragraphElement = document.createElement('p');
+      paragraphElement.textContent = 'This is the print-friendly content.';
+      printContent.appendChild(paragraphElement);
+
+      window.print();
+
+      // Uncomment the following line to remove the print-friendly content after the print preview is closed
+      // document.body.removeChild(printContent);
+    }
+  </script>
 </body>
 </html>

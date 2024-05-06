@@ -1063,6 +1063,76 @@
 
         }
 
+        const selecrtedUsers = ["angrycat668", "boredlizard656"]
+
+        async function getFreeTimes(users){
+            // get all events for each user
+            // get all events for this user
+            // compare and find free times
+            // return free times
+            let freeTimes = [];
+            for (let i = 0; i < users.length; i++){
+                const { data, error } = await supabase.from('events').select('*').eq('user_id', users[i]);
+                if (error) {
+                    console.log(error);
+                } else {
+                    // data is an array of events. use date, start_time, end_time to find free times
+                    // for each day, find free times
+                    // if there is an event for this user at this time, skip
+                    // if there is an event for any other user at this time, skip
+                    // if there is no event at this time, add to freeTimes
+                    // freeTimes is an array of objects with date, start_time, end_time
+                    for (let j = 0; j < data.length; j++){
+                        // get day of week
+                        const day = getDay(data[j].date);
+                        // get all events for this day
+                        const events = data.filter(event => getDay(event.date) === day);
+                        // get all events for all other users for this day
+                        let otherEvents = [];
+                        for (let k = 0; k < users.length; k++){
+                            if (users[k] !== users[i]){
+                                const { data, error } = await supabase.from('events').select('*').eq('user_id', users[k]);
+                                if (error) {
+                                    console.log(error);
+                                } else {
+                                    otherEvents = otherEvents.concat(data.filter(event => getDay(event.date) === day));
+                                }
+                            }
+                        }
+                        // get free times for this day
+                        const freeTimesForDay = getFreeTimesForDay(events, otherEvents);
+                        freeTimes = freeTimes.concat(freeTimesForDay);
+                    }
+                }
+            }
+            return freeTimes;
+        }
+
+        function getFreeTimesForDay(events, otherEvents){
+            // get all free times for this day
+            // if there is an event for this user at this time, skip
+            // if there is an event for any other user at this time, skip
+            // if there is no event at this time, add to freeTimes
+            // freeTimes is an array of objects with date, start_time, end_time
+            let freeTimes = [];
+            for (let i = 0; i < 24; i++){
+                const start_time = `${i.toString().padStart(2, '0')}:00`;
+                const end_time = `${(i + 1).toString().padStart(2, '0')}:00`;
+                const event = events.find(event => event.start_time === start_time);
+                if (event){
+                    continue;
+                }
+                const otherEvent = otherEvents.find(event => event.start_time === start_time);
+                if (otherEvent){
+                    continue;
+                }
+                freeTimes.push({date: events[0].date, start_time, end_time});
+            }
+            return freeTimes;   
+        }
+
+
+
     </script>
 
     <footer
