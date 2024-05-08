@@ -22,23 +22,22 @@ Recognising this tedious process, we came up with the idea of integrating our cl
 
 ## Built With
 
-* **Framework:** [React.js](https://reactjs.org) 
-* **Styling:** [Bootstrap](https://getbootstrap.com), [Tailwind](https://tailwindcss.com) **&** [SCSS](https://sass-lang.com)
+* **Languages** HTML5 & Vanilla JS
+* **Styling:** [Tailwind](https://tailwindcss.com)
 <br>
 
 * **Alert Library:** [Sweet Alert Library](https://sweetalert2.github.io)
+* **Database:** [Supabase](https://supabase.com)
 
 ## File Tree 
 - `_docs` - Contains all the documentation for the project
-- `backend` - Contains the backend code for the project such as the api 
 - `frontend/public` - Contains the public files for the frontend
 - `frontend/src` - Contains the source code for the frontend
-- `frontend/src/components` - Contains the components for the frontend
 
 
 ### Running Locally
 
-1. Access the web application via the AWS CloudFront distribution here: ...
+1. Access the web application via the Github Pages  distribution here: [https://stucal-info310.github.io/stucal/frontend/src/index.html](https://stucal-info310.github.io/stucal/frontend/src/index.html)
 
 <!-- USAGE EXAMPLES -->
 ## View Project
