@@ -221,9 +221,27 @@
             const user = await supabase.auth.getUser();
             const user_id = user.data.user.id;
             const { data, error } = await supabase.from('events').select('*').eq('user_id', user_id);
-            myEvents = data;
-            console.log(myEvents);
-            generateEvents();
+            if (error) {
+                console.log(error);
+            } else {
+                // filter events just for this week. (the database stores dd/mm/yyyy format)
+                const today = new Date();
+                const week = [];
+                for (let i = 0; i < 7; i++) {
+                    const day = new Date(today);
+                    day.setDate(today.getDate() + i);
+                    const dayStr = `${day.getDate().toString().padStart(2, '0')}/${(day.getMonth() + 1).toString().padStart(2, '0')}/${day.getFullYear()}`;
+                    week.push(dayStr);
+                }
+                myEvents = data.filter(event => week.includes(event.date));
+                generateEvents();
+                //highlight today's day of week
+                const todayDay = today.getDay();
+                document.querySelectorAll('.day')[todayDay].classList.add('today');
+                //scroll to today in the middle of sreen div smoothly
+
+
+            }
         }
 
         async function generateEvents() {
@@ -244,7 +262,7 @@
                 } else {
                     html += `<ul>`;
                     for (let j = 0; j < events.length; j++) {
-                        let height = Math.min(160); // 20px for each line of text, plus 10px for padding
+                        let height = Math.min(180); // 20px for each line of text, plus 10px for padding
 
                         html += `<li class=${events[j].type} style="height: ${height}px;">${events[j].title} - ${events[j].start_time} to ${events[j].end_time} at ${events[j].location} (${events[j].type})</li>`;
                     }
