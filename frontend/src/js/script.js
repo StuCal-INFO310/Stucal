@@ -200,9 +200,10 @@ async function upload() {
   // upload events to supabase
   const user = await supabase.auth.getUser();
   const user_id = user.data.user.id;
+  const username = document.querySelector("#user_name_here").textContent;
 
   const { data2, error } = await supabase.from("events").insert(
-    result.map((item) => ({ ...item, user_id }))
+    result.map((item) => ({ ...item, user_id, username}))
   );
   if (error) {
     console.log(error);

@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Dashboard</title>
-    <link rel="icon" type="image/x-icon" href="/favicon-32x32.png" >
+    <link rel="icon" type="image/x-icon" href="/favicon-32x32.png">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./js/global.js"></script>
@@ -225,7 +226,7 @@
 
         }
 
-        .today{
+        .today {
             background-color: rgb(255, 255, 255);
             border: 1px solid rgb(79 70 229);
         }
@@ -235,7 +236,7 @@
 <body class="w-screen overflow-x-hidden">
 
     <header>
-    
+
         <nav class="bg-gray-800 max-h-7xxl">
             <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                 <div class="relative flex h-16 items-center justify-between">
@@ -268,28 +269,38 @@
                         </button>
                     </div>
                     <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-    
+
                         <span class="absolute -inset-1.5"></span>
                         <span class="sr-only">Open user menu</span>
                         <a href="index.html" class="flex items-center" style="z-index:100;">
                             <img class="mr-3 h-6 sm:h-9" src="../public/images/logo.png" alt="">
                         </a>
-    
+
                         <!-- other header buttons -->
                         <div class="hidden sm:ml-6 sm:block">
                             <div class="flex space-x-4">
-                                <a href="faq.html" id="nav__faq" class="z-10 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">FAQ</a>
-                                <a href="printout.html" id="nav__calendar" class="z-10 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Calendar</a>
-                                <a href="dashboard.html" id="nav__dashboard" class="hidden z-10 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Dashboard</a>
+                                <a href="faq.html" id="nav__faq"
+                                    class="z-10 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">FAQ</a>
+                                <a href="printout.html" id="nav__calendar"
+                                    class="z-10 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Calendar</a>
+                                <a href="dashboard.html" id="nav__dashboard"
+                                    class="hidden z-10 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Dashboard</a>
                             </div>
                         </div>
                     </div>
-                    <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                    <div
+                        class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                         <!-- sign up and log in button, **doesn't work** -->
                         <div class="z-10">
-                            <a href="login.html" id="nav__login" class="z-10 text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Log In</a>
-                            <a href="signup.html" id="nav__signup" class="z-10 text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Sign Up</a>
-                            <a onclick="logOut()" id="nav__logout" class="z-10 hidden cursor-pointer text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Logout</a>
+                            <a href="login.html" id="nav__login"
+                                class="z-10 text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
+                                aria-current="page">Log In</a>
+                            <a href="signup.html" id="nav__signup"
+                                class="z-10 text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
+                                aria-current="page">Sign Up</a>
+                            <a onclick="logOut()" id="nav__logout"
+                                class="z-10 hidden cursor-pointer text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
+                                aria-current="page">Logout</a>
                         </div>
                         <!-- Profile -->
                         <div id="profile-img" class="relative ml-3">
@@ -304,7 +315,7 @@
                                         alt="">
                                 </button>
                             </div>
-    
+
                             <!--
                         Dropdown menu, show/hide based on menu state.
             
@@ -326,14 +337,19 @@
                 </div>
 
             </div>
-    
+
             <!-- Mobile menu, show/hide based on menu state. -->
             <div class="sm:hidden" id="mobile-menu">
                 <div class="space-y-1 px-2 pb-3 pt-2 z-10">
-                    <a href="login.html" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">Log In</a>
-                    <a href="signup.html" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">Sign Up</a>
-                    <a href="faq.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">FAQ</a>
-                    <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Calendar</a>
+                    <a href="login.html" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium"
+                        aria-current="page">Log In</a>
+                    <a href="signup.html"
+                        class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium"
+                        aria-current="page">Sign Up</a>
+                    <a href="faq.html"
+                        class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">FAQ</a>
+                    <a href="#"
+                        class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Calendar</a>
                 </div>
             </div>
         </nav>
@@ -366,10 +382,10 @@
                     window.location.href = "index.html";
                 }
             }
-            
+
             displayNavBar();
         </script>
-    
+
     </header>
 
     <!-- Background gradient -->
@@ -382,13 +398,14 @@
     <!-- Dashboard -->
     <div class="lg:flex lg:items-center lg:justify-between px-10 py-10 mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div class="min-w-0">
-            <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight"> <span id="user_name"></span> Dashboard</h2>
-            
+            <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight"> <span
+                    id="user_name"></span> Dashboard</h2>
+
         </div>
 
         <!-- Todays Weather -->
         <div class="flex justify-center lg:items-center mt-5 flex lg:ml-4 lg:mt-0">
-            <div class="sm:pr-4 flex justify-center" >
+            <div class="sm:pr-4 flex justify-center">
                 <span class="temperature">25°C</span>
             </div>
             <div class="flex justify-center items-center">
@@ -406,9 +423,10 @@
             <span class="hidden sm:block">
                 <button type="button" onclick="handleAuthClick()"
                     class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-                    <svg class="-ml-0.5 mr-1.5 h-5 w-5" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <rect width="416" height="384" x="48" y="80" fill="none" stroke-linejoin="round" stroke-width="32" rx="48"></rect>
+                    <svg class="-ml-0.5 mr-1.5 h-5 w-5" stroke="currentColor" fill="currentColor" stroke-width="0"
+                        viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="416" height="384" x="48" y="80" fill="none" stroke-linejoin="round"
+                            stroke-width="32" rx="48"></rect>
                         <circle cx="296" cy="232" r="24"></circle>
                         <circle cx="376" cy="232" r="24"></circle>
                         <circle cx="296" cy="312" r="24"></circle>
@@ -418,7 +436,8 @@
                         <circle cx="136" cy="392" r="24"></circle>
                         <circle cx="216" cy="392" r="24"></circle>
                         <circle cx="296" cy="392" r="24"></circle>
-                        <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M128 48v32m256-32v32"></path>
+                        <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"
+                            d="M128 48v32m256-32v32"></path>
                         <path fill="none" stroke-linejoin="round" stroke-width="32" d="M464 160H48"></path>
                     </svg>
                     Export to Google Calendar
@@ -428,8 +447,9 @@
             <span class="hidden sm:block sm:ml-3">
                 <button type="button" onclick="document.querySelector('#importTimetableDialog').showModal()"
                     class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-                    <svg class="-ml-0.5 mr-1.5 h-5 w-5" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round"
-                        stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="-ml-0.5 mr-1.5 h-5 w-5" stroke="currentColor" fill="none" stroke-width="2"
+                        viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em"
+                        xmlns="http://www.w3.org/2000/svg">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                         <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
                         <path d="M5 13v-8a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2h-5.5m-9.5 -2h7m-3 -3l3 3l-3 3"></path>
@@ -437,18 +457,33 @@
                     Import Timetable
                 </button>
             </span>
-    
+
             <span class="sm:ml-3">
                 <button type="button" onclick="document.querySelector('#addEventDialog').showModal()"
                     class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                    <svg class="-ml-0.5 mr-1.5 h-5 w-5" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M256 112v288m144-144H112">
+                    <svg class="-ml-0.5 mr-1.5 h-5 w-5" stroke="currentColor" fill="currentColor" stroke-width="0"
+                        viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"
+                            d="M256 112v288m144-144H112">
                         </path>
                     </svg>
                     Add Event
                 </button>
             </span>
+
+            <!-- find free time button -->
+            <span class="sm:ml-3">
+                <button type="button" onclick="document.querySelector('#findFreeTimeDialog').showModal()"
+                    class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                    <svg class="-ml-0.5 mr-1.5 h-5 w-5" stroke="currentColor" fill="currentColor" stroke-width="0"
+                        viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"
+                            d="M256 112v288m144-144H112">
+                        </path>
+                    </svg>
+                    Find Free Time
+                </button>
+
         </div>
     </div>
 
@@ -456,33 +491,23 @@
     <div class="mx-auto max-w-7xl px-2 pb-5 sm:px-6 lg:px-8">
         <div class="border-b border-gray-900/10 pb-5">
             <h2 class="text-base font-semibold leading-7 text-gray-900">Welcome <span id="user_name_here"></span></h2>
-            <p class="mt-1 text-sm leading-6 text-gray-600">This is your personal dashboard. You can view and manage your events here.</p>
+            <p class="mt-1 text-sm leading-6 text-gray-600">This is your personal dashboard. You can view and manage
+                your events here.</p>
         </div>
     </div>
 
     <!-- scroll to today button -->
     <div class="flex justify-center items-center">
-        <button
-          onclick="scrollToToday()"
-          class="inline-flex items-center rounded-full bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 transition-colors duration-200"
-        >
-          <svg
-            class="w-5 h-5 mr-2 -ml-1 text-gray-500"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M15 13l-3 3m0 0l-3-3m3 3V8m0 13a9 9 0 110-18 9 9 0 010 18z"
-            ></path>
-          </svg>
-          Scroll to Today
+        <button onclick="scrollToToday()"
+            class="inline-flex items-center rounded-full bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 transition-colors duration-200">
+            <svg class="w-5 h-5 mr-2 -ml-1 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 13l-3 3m0 0l-3-3m3 3V8m0 13a9 9 0 110-18 9 9 0 010 18z"></path>
+            </svg>
+            Scroll to Today
         </button>
-      </div>
+    </div>
 
     <div class="calendar mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 lg:pb-5">
     </div>
@@ -493,22 +518,25 @@
             <div class="space-y-12 mx-auto max-w-7xl px-2 py-5 sm:px-6 lg:px-8">
                 <div class="border-b border-gray-900/10 pb-5">
                     <h2 class="text-base font-semibold leading-7 text-gray-900">Add Event</h2>
-                    <p class="mt-1 text-sm leading-6 text-gray-600">This information will be used to add an event into your personal calendar.</p>
+                    <p class="mt-1 text-sm leading-6 text-gray-600">This information will be used to add an event into
+                        your personal calendar.</p>
                 </div>
-        
+
                 <div class="border-b border-gray-900/10 pb-8">
                     <div class="mt-1 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
                         <div class="sm:col-span-full">
-                            <label for="title" class="block text-sm font-medium leading-6 text-gray-900">Event Title</label>
+                            <label for="title" class="block text-sm font-medium leading-6 text-gray-900">Event
+                                Title</label>
                             <div class="mt-2">
-                                <input type="text" id="title" name="title" required 
+                                <input type="text" id="title" name="title" required
                                     class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                         </div>
 
                         <div class="sm:col-span-full">
-                            <label for="location" class="block text-sm font-medium leading-6 text-gray-900">Location</label>
+                            <label for="location"
+                                class="block text-sm font-medium leading-6 text-gray-900">Location</label>
                             <div class="mt-2">
                                 <input type="text" id="location" name="location" required
                                     class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
@@ -536,15 +564,17 @@
 
 
                         <div class="sm:col-span-3">
-                            <label for="start_time" class="block text-sm font-medium leading-6 text-gray-900">Start Time</label>
+                            <label for="start_time" class="block text-sm font-medium leading-6 text-gray-900">Start
+                                Time</label>
                             <div class="mt-2">
                                 <input type="time" id="start_time" name="start_time" required
                                     class="px-2 block w-full rounded-md border-0 pt-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                         </div>
-        
+
                         <div class="sm:col-span-3">
-                            <label for="end_time" class="block text-sm font-medium leading-6 text-gray-900">End Time</label>
+                            <label for="end_time" class="block text-sm font-medium leading-6 text-gray-900">End
+                                Time</label>
                             <div class="mt-2">
                                 <input type="time" name="end_time" id="end_time"
                                     class="px-2 block w-full rounded-md border-0 pt-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
@@ -552,13 +582,15 @@
                         </div>
                     </div>
                 </div>
-        
+
             </div>
-        
+
             <div class="mt-6 flex items-center justify-end gap-x-6 mx-auto max-w-7xl px-2 py-5 sm:px-6 lg:px-8">
-                <button type="button" onclick="document.querySelector('#addEventDialog').close()" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
+                <button type="button" onclick="document.querySelector('#addEventDialog').close()"
+                    class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
                 <button type="button" onclick="submitNewEvent()"
-                    class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add Event</button>
+                    class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add
+                    Event</button>
             </div>
         </form>
     </dialog>
@@ -583,7 +615,8 @@
                     <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                         <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">Delete Event</h3>
                         <div class="mt-2">
-                            <p class="text-sm text-gray-500">Are you sure you want to delete this event? This event will be
+                            <p class="text-sm text-gray-500">Are you sure you want to delete this event? This event will
+                                be
                                 permanently deleted.
                                 This action cannot be undone.</p>
                         </div>
@@ -622,12 +655,13 @@
                         event and all it's details with.
                     </p>
                 </div>
-        
+
                 <div class="border-b border-gray-900/10 pb-8">
                     <div class="mt-1 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-        
+
                         <div class="sm:col-span-full">
-                            <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Username</label>
+                            <label for="username"
+                                class="block text-sm font-medium leading-6 text-gray-900">Username</label>
                             <div class="mt-2">
                                 <input type="text" id="username" name="username" required autofocus
                                     class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
@@ -635,14 +669,16 @@
                         </div>
                     </div>
                 </div>
-        
+
             </div>
-        
+
             <div class="mt-6 flex items-center justify-end gap-x-6 mx-auto max-w-7xl px-2 py-5 sm:px-6 lg:px-8">
-                <button type="button" onclick="document.querySelector('#addEventDialog').close()" class="text-sm font-semibold leading-6 text-gray-900">
+                <button type="button" onclick="document.querySelector('#addEventDialog').close()"
+                    class="text-sm font-semibold leading-6 text-gray-900">
                     Cancel
                 </button>
-                <div onclick="shareEvent()" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                <div onclick="shareEvent()"
+                    class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                     Share Event
                 </div>
             </div>
@@ -663,10 +699,11 @@
                         Login to you eVision account and navigate to your timetable view, <br>
                         select timeline view, then select all of the text on the page and paste it here.
                         <br><br>
-                        <a href="https://evision.otago.ac.nz/sitsvision/wrd/siw_lgn" class="text-blue-400">Login to eVision here</a>
+                        <a href="https://evision.otago.ac.nz/sitsvision/wrd/siw_lgn" class="text-blue-400">Login to
+                            eVision here</a>
                     </p>
                 </div>
-        
+
                 <div class="border-b border-gray-900/10 pb-8" style="margin-top: 1rem;">
                     <div class="mt-1 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
@@ -675,29 +712,32 @@
                                 Tutorial
                             </label>
                             <div class="relative mt-2 flex justify-center">
-                                <img class="h-60" src="../public/images/tutorialuploadv3.gif" loop=infinite alt="Tutorial GIF">
+                                <img class="h-60" src="../public/images/tutorialuploadv3.gif" loop=infinite
+                                    alt="Tutorial GIF">
                             </div>
                         </div>
-        
+
                         <div class="sm:col-span-full">
-                            <label for="timetable" class="block text-sm font-medium leading-6 text-gray-900">Timetable</label>
+                            <label for="timetable"
+                                class="block text-sm font-medium leading-6 text-gray-900">Timetable</label>
                             <div class="mt-2">
 
                                 <textarea name="timetable" id="input-text" placeholder="Paste content here..." required
-                                    class="px-2 block w-full h-36 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                ></textarea>
+                                    class="px-2 block w-full h-36 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
                             </div>
                         </div>
                     </div>
                 </div>
-        
+
             </div>
-        
+
             <div class="flex items-center justify-end gap-x-6 mx-auto max-w-7xl px-2 py-5 sm:px-6 lg:px-8">
-                <button type="button" onclick="document.querySelector('#importTimetableDialog').close()" class="text-sm font-semibold leading-6 text-gray-900">
+                <button type="button" onclick="document.querySelector('#importTimetableDialog').close()"
+                    class="text-sm font-semibold leading-6 text-gray-900">
                     Cancel
                 </button>
-                <button type="button" onclick="upload()" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                <button type="button" onclick="upload()"
+                    class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                     Import Timetable
                 </button>
             </div>
@@ -711,22 +751,211 @@
                 <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
             </div>
             <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <div
+                class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
                 <div class="bg-gray-50 px-4 py-5 sm:p-6 sm:pb-4">
                     <div class="flex justify-end">
-                        <button class="text-gray-500 hover:text-gray-700" onclick="document.querySelector('#incomingEventDialog').close()">&times;</button>
+                        <button class="text-gray-500 hover:text-gray-700"
+                            onclick="document.querySelector('#incomingEventDialog').close()">&times;</button>
                     </div>
                     <h3 class="text-lg font-medium text-gray-900">Event Shared</h3>
-                    <p class="mt-3 text-sm text-gray-500">You have been shared an event from <span id="incoming-id" style="font-weight: bold;"></span>. Do you want to add it to your calendar?</p>
+                    <p class="mt-3 text-sm text-gray-500">You have been shared an event from <span id="incoming-id"
+                            style="font-weight: bold;"></span>. Do you want to add it to your calendar?</p>
                 </div>
                 <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    <button type="button" onclick="document.querySelector('#incomingEventDialog').close(), deleteShareEvent()" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">No</button>
-                    <div onclick="addIncomingEvent()" class="mt-3 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">Yes</div>
+                    <button type="button"
+                        onclick="document.querySelector('#incomingEventDialog').close(), deleteShareEvent()"
+                        class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">No</button>
+                    <div onclick="addIncomingEvent()"
+                        class="mt-3 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                        Yes</div>
                 </div>
             </div>
         </div>
     </dialog>
-    
+
+    <!-- find free time dialog. add user names to see what time you and your friends are free -->
+    <dialog id="findFreeTimeDialog">
+        <div class="close" onclick="document.querySelector('#findFreeTimeDialog').close()">&times;</div>
+        <form id="findFreeTimeForm">
+            <div class="space-y-12 mx-auto max-w-7xl px-2 py-5 sm:px-6 lg:px-8">
+                <div class="border-b border-gray-900/10 pb-5">
+                    <h2 class="text-base font-semibold leading-7 text-gray-900">Find Free Time</h2>
+                    <p class="mt-1 text-sm leading-6 text-gray-600">Enter the user names of the people you want to find
+                        free time with.</p>
+                </div>
+                <div class="border-b border-gray-900/10 pb-8">
+                    <div class="mt-1 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                        <div class="sm:col-span-full">
+                            <label for="username"
+                                class="block text-sm font-medium leading-6 text-gray-900">Usernames</label>
+                            <div class="mt-2">
+                                <div id="usernamesContainer">
+                                    <div class="flex items-center">
+                                        <input type="text" id="usernameInput" placeholder="Enter a username"
+                                            class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                        <button type="button" onclick="addUsername()"
+                                            class="ml-2 px-2 py-1.5 bg-indigo-600 text-white rounded-md shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-b border-gray-900/10 pb-8">
+                    <div class="mt-1 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                        <div class="sm:col-span-full">
+                            <label for="displayUsernames"
+                                class="block text-sm font-medium leading-6 text-gray-900">Usernames</label>
+                            <div class="mt-2">
+                                <div id="displayUsernamesContainer" class="flex flex-wrap gap-2">
+                                    <!-- Usernames will be displayed here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-6 flex items-center justify-end gap-x-6 mx-auto max-w-7xl px-2 py-5 sm:px-6 lg:px-8">
+                <button type="button" onclick="document.querySelector('#findFreeTimeDialog').close()"
+                    class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
+                <div onclick="findFreeTime()"
+                    class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                    Find Free Time</div>
+            </div>
+        </form>
+    </dialog>
+
+    <!-- free time dialog -->
+    <dialog id="freeTimeDialog">
+        <div class="close" onclick="document.querySelector('#freeTimeDialog').close()">&times;</div>
+        <div class="space-y-12 mx-auto max-w-7xl px-2 py-5 sm:px-6 lg:px-8">
+            <div class="border-b border-gray-900/10 pb-5">
+                <h2 class="text-base font-semibold leading-7 text-gray-900">Free Time</h2>
+                <p class="mt-1 text-sm leading-6 text-gray-600">Here are the free times you and your friends have in
+                    common.</p>
+            </div>
+            <div class="border-b border-gray-900/10 pb-8">
+                <div class="mt-1 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                    <div class="sm:col-span-full">
+                        <label for="freeTime" class="block text-sm font-medium leading-6 text-gray-900">Free
+                            Time</label>
+                        <div class="mt-2">
+                            <div id="freeTimeContainer">
+                                <!-- Free time will be displayed here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-6 flex items-center justify-end gap-x-6 mx-auto max-w-7xl px-2 py-5 sm:px-6 lg:px-8">
+            <button type="button" onclick="document.querySelector('#freeTimeDialog').close()"
+                class="text-sm font-semibold leading-6 text-gray-900">Close</button>
+        </div>
+    </dialog>
+
+    <script>
+        let usernames = [];
+
+        function addUsername() {
+            const usernameInput = document.getElementById('usernameInput');
+            const username = usernameInput.value.trim();
+
+            if (username) {
+                usernames.push(username);
+                usernameInput.value = '';
+                renderUsernames();
+            }
+        }
+
+        function renderUsernames() {
+            const displayUsernamesContainer = document.getElementById('displayUsernamesContainer');
+            displayUsernamesContainer.innerHTML = '';
+
+            usernames.forEach((username) => {
+                const usernameElement = document.createElement('div');
+                usernameElement.classList.add('bg-gray-200', 'rounded-full', 'px-3', 'py-1', 'text-sm', 'font-semibold', 'text-gray-700', 'flex', 'items-center');
+                usernameElement.textContent = username;
+
+                const crossButton = document.createElement('button');
+                crossButton.classList.add('ml-2', 'text-gray-500', 'hover:text-gray-700', 'focus:outline-none');
+                crossButton.textContent = '×';
+                crossButton.addEventListener('click', () => removeUsername(username));
+
+                usernameElement.appendChild(crossButton);
+                displayUsernamesContainer.appendChild(usernameElement);
+            });
+        }
+
+        function removeUsername(username) {
+            usernames = usernames.filter((name) => name !== username);
+            renderUsernames();
+        }
+
+        async function findFreeTime() {
+            // fetch events for all usernames
+            const allEvents = [];
+            //if this user username is not in the list, add it
+            const username = document.querySelector('#user_name_here').textContent;
+            if (!usernames.includes(username)) {
+                usernames.push(username);
+            }
+            for (let i = 0; i < usernames.length; i++) {
+                const { data, error } = await supabase.from('events').select('*').eq('username', usernames[i]);
+                if (error) {
+                    console.log(error);
+                } else {
+                    allEvents.push(data);
+                }
+            }
+
+            // find free time from all events and format: day, start_time, end_time
+            const freeTime = [];
+            // get all events for each day
+            for (let i = 0; i < 7; i++) {
+                const dayEvents = allEvents.map(events => events.filter(event => getDay(event.date) === i));
+                // get all events for each hour
+                for (let j = 0; j < 24; j++) {
+                    const hourEvents = dayEvents.map(events => events.filter(event => parseInt(event.start_time.split(':')[0]) <= j && parseInt(event.end_time.split(':')[0]) >= j));
+                    if (hourEvents.every(events => events.length === 0)) {
+                        freeTime.push({ day: i, start_time: `${j.toString().padStart(2, '0')}:00`, end_time: `${(j + 1).toString().padStart(2, '0')}:00` });
+                    }
+                }
+            }
+
+            // display free time in dialog
+            const freeTimeDialog = document.querySelector('#findFreeTimeDialog');
+            freeTimeDialog.close();
+
+            const freeTimeContainer = document.getElementById('freeTimeContainer');
+            freeTimeContainer.innerHTML = '';
+
+            freeTime.forEach(time => {
+                const timeElement = document.createElement('div');
+                timeElement.classList.add('bg-gray-200', 'rounded-md', 'px-3', 'py-1', 'text-sm', 'font-semibold', 'text-gray-700', 'flex', 'items-center');
+                timeElement.textContent = `${getDayName(time.day)} ${time.start_time} to ${time.end_time}`;
+                freeTimeContainer.appendChild(timeElement);
+            });
+
+            document.querySelector('#freeTimeDialog').showModal();
+
+        }
+
+        function getDayName(day) {
+            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            return days[day];
+        }
+
+        function getDay(date) {
+            const parts = date.split('/');
+            return new Date(parts[2], parts[1] - 1, parts[0]).getDay();
+        }
+        
+
+    </script>
+
+
 
 
     <script>
@@ -771,10 +1000,10 @@
 
         }
 
-        function scrollToToday(){
+        function scrollToToday() {
             const today = new Date();
             const todayDay = today.getDay();
-            document.querySelector('.today').scrollIntoView({ behavior: 'smooth', block: 'center'});
+            document.querySelector('.today').scrollIntoView({ behavior: 'smooth', block: 'center' });
 
         }
 
@@ -809,7 +1038,7 @@
                     icon: 'success',
                     title: 'Event added successfully',
                 })
-                
+
                 getEvents();
                 document.querySelector('#addEventDialog').close();
                 // location.reload();   
@@ -931,7 +1160,7 @@
 
         let currentIncomingEvent = null;
 
-        async function deleteShareEvent(){
+        async function deleteShareEvent() {
             // delete from sharing table
             const event = currentIncomingEvent;
             const { data, error } = await supabase.from('sharing').delete().eq('from', event.from).eq('to', event.to).eq('data', event);
@@ -940,7 +1169,7 @@
             }
         }
 
-        async function checkManualSharing(){
+        async function checkManualSharing() {
             // pull sharing table for events with this user's custom_id in the to field
             const user = await supabase.auth.getUser();
             const email = user.data.user.email;
@@ -1066,13 +1295,13 @@
 
         const selecrtedUsers = ["angrycat668", "boredlizard656"]
 
-        async function getFreeTimes(users){
+        async function getFreeTimes(users) {
             // get all events for each user
             // get all events for this user
             // compare and find free times
             // return free times
             let freeTimes = [];
-            for (let i = 0; i < users.length; i++){
+            for (let i = 0; i < users.length; i++) {
                 const { data, error } = await supabase.from('events').select('*').eq('user_id', users[i]);
                 if (error) {
                     console.log(error);
@@ -1083,15 +1312,15 @@
                     // if there is an event for any other user at this time, skip
                     // if there is no event at this time, add to freeTimes
                     // freeTimes is an array of objects with date, start_time, end_time
-                    for (let j = 0; j < data.length; j++){
+                    for (let j = 0; j < data.length; j++) {
                         // get day of week
                         const day = getDay(data[j].date);
                         // get all events for this day
                         const events = data.filter(event => getDay(event.date) === day);
                         // get all events for all other users for this day
                         let otherEvents = [];
-                        for (let k = 0; k < users.length; k++){
-                            if (users[k] !== users[i]){
+                        for (let k = 0; k < users.length; k++) {
+                            if (users[k] !== users[i]) {
                                 const { data, error } = await supabase.from('events').select('*').eq('user_id', users[k]);
                                 if (error) {
                                     console.log(error);
@@ -1109,27 +1338,27 @@
             return freeTimes;
         }
 
-        function getFreeTimesForDay(events, otherEvents){
+        function getFreeTimesForDay(events, otherEvents) {
             // get all free times for this day
             // if there is an event for this user at this time, skip
             // if there is an event for any other user at this time, skip
             // if there is no event at this time, add to freeTimes
             // freeTimes is an array of objects with date, start_time, end_time
             let freeTimes = [];
-            for (let i = 0; i < 24; i++){
+            for (let i = 0; i < 24; i++) {
                 const start_time = `${i.toString().padStart(2, '0')}:00`;
                 const end_time = `${(i + 1).toString().padStart(2, '0')}:00`;
                 const event = events.find(event => event.start_time === start_time);
-                if (event){
+                if (event) {
                     continue;
                 }
                 const otherEvent = otherEvents.find(event => event.start_time === start_time);
-                if (otherEvent){
+                if (otherEvent) {
                     continue;
                 }
-                freeTimes.push({date: events[0].date, start_time, end_time});
+                freeTimes.push({ date: events[0].date, start_time, end_time });
             }
-            return freeTimes;   
+            return freeTimes;
         }
 
 
