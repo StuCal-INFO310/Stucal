@@ -896,62 +896,110 @@
         async function findFreeTime() {
             // fetch events for all usernames
             const allEvents = [];
-            //if this user username is not in the list, add it
             const username = document.querySelector('#user_name_here').textContent;
             if (!usernames.includes(username)) {
-                usernames.push(username);
+              usernames.push(username);
             }
             for (let i = 0; i < usernames.length; i++) {
-                const { data, error } = await supabase.from('events').select('*').eq('username', usernames[i]);
-                if (error) {
-                    console.log(error);
-                } else {
-                    allEvents.push(data);
-                }
+              const { data, error } = await supabase
+                .from('events')
+                .select('*')
+                .eq('username', usernames[i]);
+              if (error) {
+                console.log(error);
+              } else {
+                allEvents.push(...data); // Spread the data array into allEvents
+              }
             }
-
+            console.log(allEvents);
+          
             // find free time from all events and format: day, start_time, end_time
             const freeTime = [];
+          
             // get all events for each day
             for (let i = 0; i < 7; i++) {
-                const dayEvents = allEvents.map(events => events.filter(event => getDay(event.date) === i));
-                // get all events for each hour
-                for (let j = 0; j < 24; j++) {
-                    const hourEvents = dayEvents.map(events => events.filter(event => parseInt(event.start_time.split(':')[0]) <= j && parseInt(event.end_time.split(':')[0]) >= j));
-                    if (hourEvents.every(events => events.length === 0)) {
-                        freeTime.push({ day: i, start_time: `${j.toString().padStart(2, '0')}:00`, end_time: `${(j + 1).toString().padStart(2, '0')}:00` });
-                    }
+              const dayEvents = allEvents.filter(event => {
+                const eventDate = new Date(event.date);
+                return eventDate.getDay() === i;
+              });
+          
+              // get all events for each hour
+              for (let j = 0; j < 24; j++) {
+                const hourEvents = dayEvents.filter(event => {
+                  const startHour = parseInt(event.start_time.split(':')[0]);
+                  const endHour = parseInt(event.end_time.split(':')[0]);
+                  return startHour <= j && endHour > j;
+                });
+          
+                if (hourEvents.length === 0) {
+                  freeTime.push({
+                    day: i,
+                    start_time: `${j.toString().padStart(2, '0')}:00`,
+                    end_time: `${(j + 1).toString().padStart(2, '0')}:00`
+                  });
                 }
+              }
             }
-
+          
+            // Clean up the list for all day free time. Condense into one event. If several hours free, condense into one
+            const condensedFreeTime = [];
+            let start = null;
+            let end = null;
+            let day = null;
+            freeTime.forEach(time => {
+              if (start === null) {
+                start = time.start_time;
+                day = time.day;
+              }
+              if (time.end_time === '24:00') {
+                end = '23:59'; // Set end time to 23:59 instead of 24:00
+              } else {
+                end = time.end_time;
+              }
+              if (end !== null && (freeTime.length === 0 || time.end_time === '24:00')) {
+                condensedFreeTime.push({ day, start_time: start, end_time: end });
+                start = null;
+                end = null;
+                day = null;
+              }
+            });
+            console.log(condensedFreeTime);
+          
             // display free time in dialog
             const freeTimeDialog = document.querySelector('#findFreeTimeDialog');
             freeTimeDialog.close();
-
             const freeTimeContainer = document.getElementById('freeTimeContainer');
             freeTimeContainer.innerHTML = '';
-
-            freeTime.forEach(time => {
-                const timeElement = document.createElement('div');
-                timeElement.classList.add('bg-gray-200', 'rounded-md', 'px-3', 'py-1', 'text-sm', 'font-semibold', 'text-gray-700', 'flex', 'items-center');
-                timeElement.textContent = `${getDayName(time.day)} ${time.start_time} to ${time.end_time}`;
-                freeTimeContainer.appendChild(timeElement);
+            condensedFreeTime.forEach(time => {
+              const timeElement = document.createElement('div');
+              timeElement.classList.add(
+                'bg-gray-200',
+                'rounded-md',
+                'px-3',
+                'py-1',
+                'text-sm',
+                'font-semibold',
+                'text-gray-700',
+                'flex',
+                'items-center'
+              );
+              timeElement.textContent = `${getDayName(time.day)} ${time.start_time} to ${time.end_time}`;
+              freeTimeContainer.appendChild(timeElement);
             });
-
             document.querySelector('#freeTimeDialog').showModal();
+          }
 
-        }
-
-        function getDayName(day) {
-            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-            return days[day];
+        // Helper function to get the day name from the day index
+        function getDayName(dayIndex) {
+            const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            return daysOfWeek[dayIndex];
         }
 
         function getDay(date) {
             const parts = date.split('/');
             return new Date(parts[2], parts[1] - 1, parts[0]).getDay();
         }
-        
+
 
     </script>
 
@@ -1289,79 +1337,7 @@
                 });
                 document.querySelector('#shareEventDialog').close();
             }
-
-
         }
-
-        const selecrtedUsers = ["angrycat668", "boredlizard656"]
-
-        async function getFreeTimes(users) {
-            // get all events for each user
-            // get all events for this user
-            // compare and find free times
-            // return free times
-            let freeTimes = [];
-            for (let i = 0; i < users.length; i++) {
-                const { data, error } = await supabase.from('events').select('*').eq('user_id', users[i]);
-                if (error) {
-                    console.log(error);
-                } else {
-                    // data is an array of events. use date, start_time, end_time to find free times
-                    // for each day, find free times
-                    // if there is an event for this user at this time, skip
-                    // if there is an event for any other user at this time, skip
-                    // if there is no event at this time, add to freeTimes
-                    // freeTimes is an array of objects with date, start_time, end_time
-                    for (let j = 0; j < data.length; j++) {
-                        // get day of week
-                        const day = getDay(data[j].date);
-                        // get all events for this day
-                        const events = data.filter(event => getDay(event.date) === day);
-                        // get all events for all other users for this day
-                        let otherEvents = [];
-                        for (let k = 0; k < users.length; k++) {
-                            if (users[k] !== users[i]) {
-                                const { data, error } = await supabase.from('events').select('*').eq('user_id', users[k]);
-                                if (error) {
-                                    console.log(error);
-                                } else {
-                                    otherEvents = otherEvents.concat(data.filter(event => getDay(event.date) === day));
-                                }
-                            }
-                        }
-                        // get free times for this day
-                        const freeTimesForDay = getFreeTimesForDay(events, otherEvents);
-                        freeTimes = freeTimes.concat(freeTimesForDay);
-                    }
-                }
-            }
-            return freeTimes;
-        }
-
-        function getFreeTimesForDay(events, otherEvents) {
-            // get all free times for this day
-            // if there is an event for this user at this time, skip
-            // if there is an event for any other user at this time, skip
-            // if there is no event at this time, add to freeTimes
-            // freeTimes is an array of objects with date, start_time, end_time
-            let freeTimes = [];
-            for (let i = 0; i < 24; i++) {
-                const start_time = `${i.toString().padStart(2, '0')}:00`;
-                const end_time = `${(i + 1).toString().padStart(2, '0')}:00`;
-                const event = events.find(event => event.start_time === start_time);
-                if (event) {
-                    continue;
-                }
-                const otherEvent = otherEvents.find(event => event.start_time === start_time);
-                if (otherEvent) {
-                    continue;
-                }
-                freeTimes.push({ date: events[0].date, start_time, end_time });
-            }
-            return freeTimes;
-        }
-
-
 
     </script>
 
