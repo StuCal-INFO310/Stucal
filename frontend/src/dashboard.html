@@ -551,17 +551,6 @@
                             </div>
                         </div>
 
-                        <div class="sm:col-span-4 flex gap-x-3">
-                            <div class="flex h-6 items-center">
-                                <input id="comments" name="comments" type="checkbox"
-                                    class="px-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
-                            </div>
-                            <div class="flex flex-row text-sm leading-6">
-                                <label for="comments" class="font-medium text-gray-900 pr-5">All Day Event</label>
-                                <p class="text-gray-500">Is this an all day event?</p>
-                            </div>
-                        </div>
-
 
                         <div class="sm:col-span-3">
                             <label for="start_time" class="block text-sm font-medium leading-6 text-gray-900">Start
@@ -893,101 +882,98 @@
             renderUsernames();
         }
 
+        
+
         async function findFreeTime() {
             // fetch events for all usernames
             const allEvents = [];
             const username = document.querySelector('#user_name_here').textContent;
             if (!usernames.includes(username)) {
-              usernames.push(username);
+                usernames.push(username);
             }
+
             for (let i = 0; i < usernames.length; i++) {
-              const { data, error } = await supabase
-                .from('events')
-                .select('*')
-                .eq('username', usernames[i]);
-              if (error) {
-                console.log(error);
-              } else {
-                allEvents.push(...data); // Spread the data array into allEvents
-              }
+                const { data, error } = await supabase
+                    .from('events')
+                    .select('*')
+                    .eq('username', usernames[i]);
+                if (error) {
+                    console.log(error);
+                } else {
+                    allEvents.push(...data); // Spread the data array into allEvents
+                }
             }
             //console.log(allEvents);
-          
-            // find free time from all events and format: day, start_time, end_time
+
+
+            //find time that is unoccupied by all events in allEvents for this week. start with hours from 00:00 to 24:00 and then remove occupied hours.
             const freeTime = [];
-          
-            // get all events for each day
             for (let i = 0; i < 7; i++) {
-              const dayEvents = allEvents.filter(event => {
-                const eventDate = new Date(event.date);
-                return eventDate.getDay() === i;
-              });
-          
-              // get all events for each hour
-              for (let j = 0; j < 24; j++) {
-                const hourEvents = dayEvents.filter(event => {
-                  const startHour = parseInt(event.start_time.split(':')[0]);
-                  const endHour = parseInt(event.end_time.split(':')[0]);
-                  return startHour <= j && endHour > j;
-                });
-          
-                if (hourEvents.length === 0) {
-                  freeTime.push({
-                    day: i,
-                    start_time: `${j.toString().padStart(2, '0')}:00`,
-                    end_time: `${(j + 1).toString().padStart(2, '0')}:00`
-                  });
+                for (let j = 0; j < 24; j++) {
+                    freeTime.push({ day: i, start_time: j.toString().padStart(2, '0') + ':00', end_time: (j + 1).toString().padStart(2, '0') + ':00' });
                 }
-              }
             }
-          
-            // Clean up the list for all day free time. Condense into one event. If several hours free, condense into one
-            const condensedFreeTime = [];
-            let start = null;
-            let end = null;
-            let day = null;
-            freeTime.forEach(time => {
-              if (start === null) {
-                start = time.start_time;
-                day = time.day;
-              }
-              if (time.end_time === '24:00') {
-                end = '23:59'; // Set end time to 23:59 instead of 24:00
-              } else {
-                end = time.end_time;
-              }
-              if (end !== null && (freeTime.length === 0 || time.end_time === '24:00')) {
-                condensedFreeTime.push({ day, start_time: start, end_time: end });
-                start = null;
-                end = null;
-                day = null;
-              }
+
+            allEvents.forEach(event => {
+                const day = getDay(event.date);
+                const startHour = parseInt(event.start_time.split(':')[0]);
+                const endHour = parseInt(event.end_time.split(':')[0]);
+                freeTime.forEach((time, index) => {
+                    if (time.day === day && parseInt(time.start_time.split(':')[0]) >= startHour && parseInt(time.end_time.split(':')[0]) <= endHour) {
+                        freeTime.splice(index, 1);
+                    }
+                });
             });
-            console.log(condensedFreeTime);
-          
+
+            // condense free time
+            const condensedFreeTime = [];
+            let currentDay = freeTime[0].day;
+            let currentStartTime = freeTime[0].start_time;
+            let currentEndTime = freeTime[0].end_time;
+            for (let i = 1; i < freeTime.length; i++) {
+                if (freeTime[i].day === currentDay && freeTime[i].start_time === currentEndTime) {
+                    currentEndTime = freeTime[i].end_time;
+                } else {
+                    condensedFreeTime.push({ day: currentDay, start_time: currentStartTime, end_time: currentEndTime });
+                    currentDay = freeTime[i].day;
+                    currentStartTime = freeTime[i].start_time;
+                    currentEndTime = freeTime[i].end_time;
+                }
+            }
+            condensedFreeTime.push({ day: currentDay, start_time: currentStartTime, end_time: currentEndTime });
+
+
+            
+
+
             // display free time in dialog
             const freeTimeDialog = document.querySelector('#findFreeTimeDialog');
             freeTimeDialog.close();
             const freeTimeContainer = document.getElementById('freeTimeContainer');
             freeTimeContainer.innerHTML = '';
             condensedFreeTime.forEach(time => {
-              const timeElement = document.createElement('div');
-              timeElement.classList.add(
-                'bg-gray-200',
-                'rounded-md',
-                'px-3',
-                'py-1',
-                'text-sm',
-                'font-semibold',
-                'text-gray-700',
-                'flex',
-                'items-center'
-              );
-              timeElement.textContent = `${getDayName(time.day)} ${time.start_time} to ${time.end_time}`;
-              freeTimeContainer.appendChild(timeElement);
+                const timeElement = document.createElement('div');
+                // margin bottom 2px
+                timeElement.classList.add(
+                    'bg-gray-200',
+                    'rounded-md',
+                    'px-3',
+                    'py-1',
+                    'text-sm',
+                    'font-semibold',
+                    'text-gray-700',
+                    'flex',
+                    'items-center',
+                    'mb-1'
+                );
+                timeElement.textContent = `${getDayName(time.day)} ${time.start_time} to ${time.end_time}`;
+                if (time.start_time === '00:00' && time.end_time === '24:00') {
+                    timeElement.textContent = `${getDayName(time.day)} All Day`;
+                }
+                freeTimeContainer.appendChild(timeElement);
             });
             document.querySelector('#freeTimeDialog').showModal();
-          }
+        }
 
         // Helper function to get the day name from the day index
         function getDayName(dayIndex) {
@@ -1070,8 +1056,10 @@
             const user = await supabase.auth.getUser();
             const user_id = user.data.user.id;
 
+            const username = document.querySelector('#user_name_here').textContent;
+
             const { data, error } = await supabase.from('events').insert([
-                { title, location, date, start_time, end_time, type, user_id }
+                { title, location, date, start_time, end_time, type, user_id, username }
             ]);
 
             if (error) {
