@@ -882,7 +882,7 @@
             renderUsernames();
         }
 
-        
+
 
         async function findFreeTime() {
             // fetch events for all usernames
@@ -943,7 +943,7 @@
             condensedFreeTime.push({ day: currentDay, start_time: currentStartTime, end_time: currentEndTime });
 
 
-            
+
 
 
             // display free time in dialog
@@ -966,10 +966,19 @@
                     'items-center',
                     'mb-1'
                 );
-                timeElement.textContent = `${getDayName(time.day)} ${time.start_time} to ${time.end_time}`;
+
+                timeElement.textContent = `${getDayName(time.day)} ${convertTo12Hour(time.start_time)} to ${convertTo12Hour(time.end_time)}`;
+                if (time.end_time === '24:00') {
+                    timeElement.textContent = `${getDayName(time.day)} ${convertTo12Hour(time.start_time)} to Midnight`;
+                }
+                if (time.start_time === '00:00') {
+                    timeElement.textContent = `${getDayName(time.day)} Start of day to ${convertTo12Hour(time.end_time)}`;                   
+                }
                 if (time.start_time === '00:00' && time.end_time === '24:00') {
                     timeElement.textContent = `${getDayName(time.day)} All Day`;
                 }
+
+
                 freeTimeContainer.appendChild(timeElement);
             });
             document.querySelector('#freeTimeDialog').showModal();
@@ -984,6 +993,18 @@
         function getDay(date) {
             const parts = date.split('/');
             return new Date(parts[2], parts[1] - 1, parts[0]).getDay();
+        }
+
+        function convertTo12Hour(time) {
+            const parts = time.split(':');
+            let hours = parseInt(parts[0]);
+            let minutes = parts[1];
+            let ampm = 'AM';
+            if (hours > 12) {
+                hours -= 12;
+                ampm = 'PM';
+            }
+            return `${hours}:${minutes} ${ampm}`;
         }
 
 
