@@ -230,6 +230,43 @@
             background-color: rgb(255, 255, 255);
             border: 1px solid rgb(79 70 229);
         }
+
+        dialog[open] {
+            opacity: 1;
+            transform: scaleY(1);
+
+        }
+
+        dialog {
+            opacity: 0;
+            transform: scaleY(0.9);
+            transition: all 0.2s ease allow-discrete;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        }
+
+        @starting-style {
+            dialog[open] {
+                opacity: 0;
+                transform: scaleY(0.9);
+            }
+        }
+
+        dialog::backdrop {
+            background-color: rgb(0 0 0 / 0%);
+            transition: all 0.2s ease allow-discrete;
+        }
+
+        dialog[open]::backdrop {
+            background-color: rgba(0, 0, 0, 0.101);
+        }
+
+
+        @starting-style {
+            dialog[open]::backdrop {
+                background-color: rgb(0 0 0 / 0%);
+            }
+        }
     </style>
 </head>
 
@@ -951,36 +988,82 @@
             freeTimeDialog.close();
             const freeTimeContainer = document.getElementById('freeTimeContainer');
             freeTimeContainer.innerHTML = '';
+
+            // Group free time by day
+            const freeTimeByDay = {};
             condensedFreeTime.forEach(time => {
-                const timeElement = document.createElement('div');
-                // margin bottom 2px
-                timeElement.classList.add(
+                const day = time.day;
+                if (!freeTimeByDay[day]) {
+                    freeTimeByDay[day] = [];
+                }
+                freeTimeByDay[day].push(time);
+            });
+
+            // Create expandable menu for each day
+            Object.entries(freeTimeByDay).forEach(([day, times]) => {
+                const dayName = getDayName(parseInt(day));
+                const dayContainer = document.createElement('div');
+                dayContainer.classList.add('mb-2');
+
+                const dayHeader = document.createElement('div');
+                dayHeader.classList.add(
                     'bg-gray-200',
                     'rounded-md',
                     'px-3',
-                    'py-1',
-                    'text-sm',
+                    'py-2',
                     'font-semibold',
                     'text-gray-700',
                     'flex',
                     'items-center',
-                    'mb-1'
+                    'justify-between',
+                    'cursor-pointer'
                 );
+                dayHeader.innerHTML = `
+        <span>${dayName}</span>
+        <svg class="h-4 w-4 transition-transform" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+    `;
 
-                timeElement.textContent = `${getDayName(time.day)} ${convertTo12Hour(time.start_time)} to ${convertTo12Hour(time.end_time)}`;
-                if (time.end_time === '24:00') {
-                    timeElement.textContent = `${getDayName(time.day)} ${convertTo12Hour(time.start_time)} to Midnight`;
-                }
-                if (time.start_time === '00:00') {
-                    timeElement.textContent = `${getDayName(time.day)} Start of day to ${convertTo12Hour(time.end_time)}`;                   
-                }
-                if (time.start_time === '00:00' && time.end_time === '24:00') {
-                    timeElement.textContent = `${getDayName(time.day)} All Day`;
-                }
+                const dayContent = document.createElement('div');
+                dayContent.classList.add('mt-2', 'overflow-hidden', 'transition-all', 'duration-300', 'max-h-0');
 
+                times.forEach(time => {
+                    const timeElement = document.createElement('div');
+                    timeElement.classList.add(
+                        'bg-gray-100',
+                        'rounded-md',
+                        'px-3',
+                        'py-1',
+                        'text-sm',
+                        'text-gray-700',
+                        'mb-1'
+                    );
 
-                freeTimeContainer.appendChild(timeElement);
+                    timeElement.textContent = `${convertTo12Hour(time.start_time)} to ${convertTo12Hour(time.end_time)}`;
+                    if (time.end_time === '24:00') {
+                        timeElement.textContent = `${convertTo12Hour(time.start_time)} to Midnight`;
+                    }
+                    if (time.start_time === '00:00') {
+                        timeElement.textContent = `Start of day to ${convertTo12Hour(time.end_time)}`;
+                    }
+                    if (time.start_time === '00:00' && time.end_time === '24:00') {
+                        timeElement.textContent = 'All Day';
+                    }
+
+                    dayContent.appendChild(timeElement);
+                });
+
+                dayHeader.addEventListener('click', () => {
+                    dayContent.classList.toggle('max-h-0');
+                    dayHeader.querySelector('svg').classList.toggle('rotate-180');
+                });
+
+                dayContainer.appendChild(dayHeader);
+                dayContainer.appendChild(dayContent);
+                freeTimeContainer.appendChild(dayContainer);
             });
+
             document.querySelector('#freeTimeDialog').showModal();
         }
 
