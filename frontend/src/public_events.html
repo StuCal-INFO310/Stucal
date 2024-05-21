@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Public Events</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="./js/supabase_client.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Change the font color to white
+                        theme: '#077BFF',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <header>
+
+        <nav class="bg-gray-800 max-h-7xxl">
+            <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+                <div class="relative flex h-16 items-center justify-between">
+                    <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                        <!-- Mobile menu button-->
+                        <button type="button"
+                            class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                            aria-controls="mobile-menu" aria-expanded="false">
+                            <span class="absolute -inset-0.5"></span>
+                            <span class="sr-only">Open main menu</span>
+                            <!--
+                            Icon when menu is closed.
+                
+                            Menu open: "hidden", Menu closed: "block"
+                          -->
+                            <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                            </svg>
+                            <!--
+                            Icon when menu is open.
+                
+                            Menu open: "block", Menu closed: "hidden"
+                          -->
+                            <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+
+                        <span class="absolute -inset-1.5"></span>
+                        <span class="sr-only">Open user menu</span>
+                        <a href="index.html" class="flex items-center" style="z-index:100;">
+                            <img class="mr-3 h-6 sm:h-9" src="../public/images/logo.png" alt="">
+                        </a>
+
+                        <!-- other header buttons -->
+                        <div class="hidden sm:ml-6 sm:block">
+                            <div class="flex space-x-4">
+                                <a href="faq.html" id="nav__faq"
+                                    class="z-10 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
+                                    FAQ
+                                </a>
+                                <a href="printout.html" id="nav__calendar"
+                                    class="z-10 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
+                                    Calendar
+                                </a>
+                                <a href="dashboard.html" id="nav__dashboard"
+                                    class="hidden z-10 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
+                                    Dashboard
+                                </a>
+                                <a href="public_events.html" id="nav__dashboard"
+                                    class="hidden z-10 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
+                                    Public Events
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                        <!-- sign up and log in button, **doesn't work** -->
+                        <div class="z-10">
+                            <a href="login.html" id="nav__login"
+                                class="z-10 text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
+                                aria-current="page">Log In</a>
+                            <a href="signup.html" id="nav__signup"
+                                class="z-10 text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
+                                aria-current="page">Sign Up</a>
+                            <a onclick="logOut()" id="nav__logout"
+                                class="z-10 hidden cursor-pointer text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
+                                aria-current="page">Logout</a>
+                        </div>
+                        <!-- Profile -->
+                        <div id="profile-img" class="relative ml-3">
+                            <div>
+                                <button type="button"
+                                    class="hidden relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                                    id="nav__profile" aria-expanded="false" aria-haspopup="true">
+                                    <!-- <span class="absolute -inset-1.5"></span> -->
+                                    <span class="sr-only">Open user menu</span>
+                                    <img class="h-8 w-8 rounded-full"
+                                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                        alt="">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Mobile menu, show/hide based on menu state. -->
+            <div class="sm:hidden" id="mobile-menu">
+                <div class="space-y-1 px-2 pb-3 pt-2 z-10">
+                    <a href="login.html" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium"
+                        aria-current="page">Log In</a>
+                    <a href="signup.html"
+                        class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium"
+                        aria-current="page">Sign Up</a>
+                    <a href="faq.html"
+                        class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">FAQ</a>
+                    <a href="#"
+                        class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Calendar</a>
+                </div>
+            </div>
+        </nav>
+
+        <script defer>
+
+            const displayNavBar = async () => {
+                const user = await supabase.auth.getUser();
+                console.log(user.data.user)
+
+                if (user.data.user === null) {
+                    window.location.href = "login.html";
+                } else {
+                    // Unhide element 
+                    document.getElementById("nav__logout").classList.remove("hidden");
+                    document.getElementById("nav__profile").classList.remove("hidden");
+                    document.getElementById("nav__dashboard").classList.remove("hidden");
+
+                    // Hide others
+                    document.getElementById("nav__login").classList.add("hidden");
+                    document.getElementById("nav__signup").classList.add("hidden");
+                }
+            }
+
+            const logOut = async () => {
+                const { error } = await supabase.auth.signOut();
+                if (error) {
+                    console.log("Error logging out", error);
+                } else {
+                    window.location.href = "index.html";
+                }
+            }
+
+            displayNavBar();
+        </script>
+
+    </header>
+
+    <div>
+        <div class="lg:flex lg:items-center lg:justify-between px-10 pt-10 pb-5 mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+            <div class="min-w-0">
+                <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight"> <span
+                        id="user_name"></span> Public Events</h2>
+
+            </div>
+
+            <div class="mt-5 flex lg:ml-4 lg:mt-0">
+
+                <span class="sm:ml-3">
+                    <button type="button" onclick="document.querySelector('#addEventDialog').showModal()"
+                        class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                        <svg class="-ml-0.5 mr-1.5 h-5 w-5" stroke="currentColor" fill="currentColor" stroke-width="0"
+                            viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                            <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"
+                                d="M256 112v288m144-144H112">
+                            </path>
+                        </svg>
+                        Add Event
+                    </button>
+                </span>
+            </div>
+        </div>
+
+        <div class="mx-auto max-w-7xl px-2 pb-5 sm:px-6 lg:px-8">
+            <div class="border-b border-gray-900/10 pb-5">
+                <p class="mt-1 text-sm leading-6 text-gray-600">
+                    Public events are scraped from the University of Otago's
+                    <a href="https://www.otago.ac.nz/study/academic-key-dates" class="text-blue-400">key dates page</a>.
+                    You can add these events to your calendar via the add button beside each event.
+                </p>
+            </div>
+
+            <div id="content"></div>
+        </div>
+    </div>
+
+
+    <div id="public-events" class="bg-white mx-auto max-w-7xl pb-10 sm:px-6 lg:px-8">
+    </div>
+
+    <footer
+        class="left-0 z-20 w-full p-4 bg-white border-t border-gray-200 shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800 dark:border-gray-600">
+        <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="https://flowbite.com/"
+                class="hover:underline">StuCal™</a>. All Rights Reserved.
+        </span>
+        <!-- <div class="justify-center items-center pt-12">
+                  <img src="../public/images/logo.png" class="h-14" alt="StuCal Logo" />
+                </div> -->
+        <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+            <li>
+                <a href="about.html" class="hover:underline me-4 md:me-6">About</a>
+            </li>
+            <li>
+                <a href="#" class="hover:underline me-4 md:me-6">Privacy Policy</a>
+            </li>
+            <li>
+                <a href="#" class="hover:underline me-4 md:me-6">Licensing</a>
+            </li>
+            <li>
+                <a href="#" class="hover:underline">Contact</a>
+            </li>
+        </ul>
+    </footer>
+
+    <script src="./js/public_events.js" onload="populatePublicEvents()"></script>
+</body>
+
+</html>
