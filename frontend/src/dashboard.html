@@ -339,19 +339,6 @@
                                 class="z-10 hidden cursor-pointer text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
                                 aria-current="page">Logout</a>
                         </div>
-                        <!-- Profile -->
-                        <div id="profile-img" class="relative ml-3">
-                            <div>
-                                <button type="button"
-                                    class="hidden relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                                    id="nav__profile" aria-expanded="false" aria-haspopup="true">
-                                    <!-- <span class="absolute -inset-1.5"></span> -->
-                                    <span class="sr-only">Open user menu</span>
-                                    <img class="h-8 w-8 rounded-full"
-                                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                        alt="">
-                                </button>
-                            </div>
 
                             <!--
                         Dropdown menu, show/hide based on menu state.
@@ -545,6 +532,16 @@
             Scroll to Today
         </button>
     </div>
+
+    <br>
+
+    <!-- Search Bar -->
+    <div class="flex justify-center items-center space-x-4 mb-6">
+        <p class="text-lg font-medium text-gray-700">Search</p>
+        <input id="search-input" class="search-search px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Search for events...">
+        <button id="search-button" class="bg-indigo-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Search</button>
+    </div>
+
 
     <div class="calendar mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 lg:pb-5">
     </div>
@@ -1185,75 +1182,72 @@
             }
         }
 
-        async function getEvents() {
-            const user = await supabase.auth.getUser();
-            const user_id = user.data.user.id;
-            const { data, error } = await supabase.from('events').select('*').eq('user_id', user_id);
-            if (error) {
-                console.log(error);
-            } else {
-                // filter events just for this week. (the database stores dd/mm/yyyy format)
-                const today = new Date();
-                const week = [];
-                for (let i = 0; i < 7; i++) {
-                    const day = new Date(today);
-                    day.setDate(today.getDate() + i);
-                    const dayStr = `${day.getDate().toString().padStart(2, '0')}/${(day.getMonth() + 1).toString().padStart(2, '0')}/${day.getFullYear()}`;
-                    week.push(dayStr);
-                }
-                myEvents = data.filter(event => week.includes(event.date));
-                generateEvents();
-                //highlight today's day of week
-                const todayDay = today.getDay();
-                document.querySelectorAll('.day')[todayDay].classList.add('today');
-                //scroll to today in the middle of sreen div smoothly
+// Function to get events from the database
+async function getEvents() {
+    const user = await supabase.auth.getUser();
+    const user_id = user.data.user.id;
+    const { data, error } = await supabase.from('events').select('*').eq('user_id', user_id);
+    if (error) {
+        console.log(error);
+    } else {
+        // Filter events for this week
+        const today = new Date();
+        const week = [];
+        for (let i = 0; i < 7; i++) {
+            const day = new Date(today);
+            day.setDate(today.getDate() + i);
+            const dayStr = `${day.getDate().toString().padStart(2, '0')}/${(day.getMonth() + 1).toString().padStart(2, '0')}/${day.getFullYear()}`;
+            week.push(dayStr);
+        }
+        myEvents = data.filter(event => week.includes(event.date));
+        generateEvents();
+        // Highlight today's day of week
+        const todayDay = today.getDay();
+        const todayElements = document.querySelectorAll('.day')[todayDay];
+        if (todayElements) {
+            todayElements.classList.add('today');
+        }
+    }
+}
 
+// Function to generate events in the calendar
+async function generateEvents(events = myEvents) {
+    let calendar = document.querySelector('.calendar');
+    let html = '';
+    let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
+    for (let i = 0; i < days.length; i++) {
+        html += `<div class="day">`;
+        html += `<h3>${days[i]}</h3>`;
+
+        let dayEvents = events.filter(event => getDay(event.date) === i);
+
+        if (dayEvents.length === 0) {
+            html += `<p>No events</p>`;
+        } else {
+            html += `<ul>`;
+            for (let j = 0; j < dayEvents.length; j++) {
+                html += `<li class=${dayEvents[j].type}>${dayEvents[j].title} - ${dayEvents[j].start_time} to ${dayEvents[j].end_time} at ${dayEvents[j].location} (${dayEvents[j].type}) <span class="share-button" onclick="startShareEvent(${dayEvents[j].id})">Share</span> <span class="delete-event" onclick="currDeleteEventId = ${dayEvents[j].id}, document.querySelector('#confirmDeleteDialog').showModal()">&times;</span></li>`;
             }
+            html += `</ul>`;
         }
 
-        async function generateEvents() {
-            // generate events in calendar from myEvents
-            // build from html
-            // have day titles for each day of the week and then list events for that day.
-            // include all details like start_time, end_time, title, location, type, code.
-            // make it look nice and use material icons
+        html += `</div>`;
+    }
 
-            let calendar = document.querySelector('.calendar');
-            let html = '';
-            let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    calendar.innerHTML = html;
+}
 
-            for (let i = 0; i < days.length; i++) {
-                html += `<div class="day">`;
-                html += `<h3>${days[i]}</h3>`;
+// Function to get the day of the week from a date
+function getDay(date) {
+    let parts = date.split('/');
+    let day = parseInt(parts[0]);
+    let month = parseInt(parts[1]);
+    let year = parseInt(parts[2]);
+    let dateObj = new Date(year, month - 1, day);
+    return dateObj.getDay();
+}
 
-                let events = myEvents.filter(event => getDay(event.date) === i);
-
-                if (events.length === 0) {
-                    html += `<p>No events</p>`;
-                } else {
-                    html += `<ul>`;
-                    for (let j = 0; j < events.length; j++) {
-                        html += `<li class=${events[j].type}>${events[j].title} - ${events[j].start_time} to ${events[j].end_time} at ${events[j].location} (${events[j].type}) <span class="share-button" onclick="startShareEvent(${events[j].id})">Share</span> <span class="delete-event" onclick="currDeleteEventId = ${events[j].id}, document.querySelector('#confirmDeleteDialog').showModal()">&times;</span></li>`;
-                        html += `</ul>`;
-                    }
-                }
-
-                html += `</div>`;
-            }
-
-            calendar.innerHTML = html;
-        }
-
-        function getDay(date) {
-            // take 16/04/2024 and return 0 for Sunday, 1 for Monday, etc.
-            let parts = date.split('/');
-            let day = parseInt(parts[0]);
-            let month = parseInt(parts[1]);
-            let year = parseInt(parts[2]);
-            let dateObj = new Date(year, month - 1, day);
-            return dateObj.getDay();
-        }
 
         async function fetchWeather() {
             const response = await fetch('https://api.openweathermap.org/data/2.5/weather?q=Dunedin&appid=026ea7877a22ff3a2dd720539706c117&units=metric');
@@ -1430,6 +1424,51 @@
                 document.querySelector('#shareEventDialog').close();
             }
         }
+
+// Function to search events
+function searchEvents(events, searchTerm) {
+    searchTerm = searchTerm.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    return events.filter(event => 
+        event.title.toLowerCase().includes(searchTerm) ||
+        event.type.toLowerCase().includes(searchTerm) ||
+        event.date.includes(searchTerm) ||
+        event.location.toLowerCase().includes(searchTerm)
+    );
+}
+
+// Function to fetch all events
+async function fetchEventData() {
+    const user = await supabase.auth.getUser();
+    const user_id = user.data.user.id;
+    const { data, error } = await supabase.from('events').select('*').eq('user_id', user_id);
+    if (error) {
+        console.error('Error fetching events:', error);
+        return [];
+    }
+    return data;
+}
+
+// Function to display events
+function displayEvents(events) {
+    generateEvents(events);
+}
+
+
+// Event listener for the search button
+document.getElementById('search-button').addEventListener('click', async () => {
+    try {
+        const allEvents = await fetchEventData();
+        const searchTerm = document.getElementById('search-input').value;
+        const foundEvents = searchEvents(allEvents, searchTerm);
+        displayEvents(foundEvents);
+    } catch (error) {
+        console.error('Error fetching or displaying events:', error);
+    }
+});
+
+// Fetch and display events on page load
+getEvents();
+
 
     </script>
 
