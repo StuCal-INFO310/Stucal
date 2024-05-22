@@ -19,6 +19,7 @@
             }
         }
     </script>
+
     
     <!-- Include necessary CSS and JS files -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
@@ -27,125 +28,6 @@
     <script src="./js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <style>
-        /* Custom styles for the calendar */
-        .calendar-container {
-            display: grid;
-            grid-template-columns: auto repeat(7, 1fr);
-            grid-template-rows: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .time-column {
-            grid-column: 1;
-        }
-
-        .time {
-            padding: 10px;
-            text-align: right;
-            border-right: 1px solid #ccc;
-        }
-
-        .calendar {
-            display: grid;
-            grid-template-columns: repeat(8, 1fr);
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        .calendar th, .calendar td {
-            border: 1px solid #000;
-            padding: 10px;
-            text-align: center;
-        }
-
-        .day h3 {
-            margin: 0;
-            padding: 5px;
-            background-color: #3b82f6;
-            color: #fff;
-        }
-
-        .day ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .day li {
-            margin-bottom: 5px;
-            padding: 5px;
-            color: #333;
-            border-bottom: 1px solid #ccc;
-        }
-
-        /* Event type colors */
-        .Tutorial {
-            background-color: #e6f2ff;
-        }
-
-        .Lecture {
-            background-color: #ffebee;
-        }
-
-        .Computer {
-            background-color: #e8f5e9;
-        }
-
-        .Practical {
-            background-color: rgb(240, 240, 157);
-        }
-
-        /* Print styles */
-        @media print {
-           
-            nav{
-               display: none; 
-            }
-            
-            h1 {
-                display: none;
-            }
-
-            h2 {
-                display: none;
-            }
-
-            .color-picker {
-                display: none;
-            }
-
-            .print-button {
-                display: none;
-            }
-
-            .calendar-container {
-                display: block;
-            }
-
-            /* Adjust layout for printing */
-            .time-column {
-                display: none;
-            }
-
-            .calendar {
-                grid-template-columns: repeat(7, 1fr);
-            }
-
-            /* Keep the background color and text color consistent for print */
-            body {
-                background-color: #f5f5f5;
-                color: #333; /* Dark text color */
-            }
-
-            .day h3 {
-                color: #fff;
-            }
-
-            .day li {
-                color: inherit;
-            }
-        }
-    </style>
 </head>
 
 <body class="w-screen overflow-x-hidden">
@@ -275,29 +157,25 @@
     </header>
 
     <!-- Main content -->
-    <div class="container mx-auto px-4 py-8">
-        <h1 class="text-4xl font-bold mb-6">StuCal Physical Calendar</h1>
-        <h2 class="text font-bold mb-6">*Results are best when printed with A3 format</h1>
-        <!-- Color Picker -->
-        <div class="color-picker mb-6">
-            <button class="color" style="background-color: #3b82f6;" onclick="changeEventColor('.day h3', this)"></button>
-            <button class="color" style="background-color: #354ee0;" onclick="changeEventColor('.day h3', this)"></button>
-            <button class="color" style="background-color: #808080;" onclick="changeEventColor('.day h3', this)"></button>
-            <button class="color" style="background-color: #de5b5b;" onclick="changeEventColor('.day h3', this)"></button>
-            <button class="color" style="background-color: #cb8ae5;" onclick="changeEventColor('.day h3', this)"></button>
-        </div>
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold mb-6">StuCal Contact</h1>
+    <p>Last Updated: [23/05/2024]</p>
+    <br>
+    <p>Welcome to StuCal, a calendar service designed specifically for students. To contact us, email: </p>
+    <a href="mailto:stucalotago@gmail.com">stucalotago@gmail.com</a>
+    <br>
+    <br>
+    <p>StuCal Team</p>
+    <br>
+    <div class="relative w-full lg:w-1/2 flex items-center justify-center">
+        <img class="w-full h-auto bg-cover rounded-md ring-white" src="../public/images/team_photo_v2.jpg" alt="Team Photo">
+      </div>
+</div>
 
-        <button class="print-button bg-blue-500 text-white py-2 px-4 rounded shadow-md" onclick="window.print()">Print Calendar</button>
 
-        <div class="calendar-container mt-6">
-            <div class="calendar">
-                <!-- Calendar content will be inserted here -->
-            </div>
-        </div>
-    </div>
 
-        <!-- footer -->
-        <footer class="flex bottom-0 left-0 z-20 w-full p-4 bg-white border-t border-gray-200 shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800 dark:border-gray-600">
+           <!-- footer -->
+           <footer class="flex bottom-0 left-0 z-20 w-full p-4 bg-white border-t border-gray-200 shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800 dark:border-gray-600">
             <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="https://flowbite.com/" class="hover:underline">StuCal™</a>. All Rights Reserved.
             </span>
             <!-- <div class="justify-center items-center pt-12">
@@ -319,93 +197,4 @@
             </ul>
         </footer>
 
-    <!-- JavaScript to fetch events and handle color change -->
-    <script>
-        let myEvents = [];
-        getEvents();
-
-        async function getEvents() {
-            const user = await supabase.auth.getUser();
-            const user_id = user.data.user.id;
-            const { data, error } = await supabase.from('events').select('*').eq('user_id', user_id);
-            if (error) {
-                console.log(error);
-            } else {
-                // filter events just for this week. (the database stores dd/mm/yyyy format)
-                const today = new Date();
-                const week = [];
-                for (let i = 0; i < 7; i++) {
-                    const day = new Date(today);
-                    day.setDate(today.getDate() + i);
-                    const dayStr = `${day.getDate().toString().padStart(2, '0')}/${(day.getMonth() + 1).toString().padStart(2, '0')}/${day.getFullYear()}`;
-                    week.push(dayStr);
-                }
-                myEvents = data.filter(event => week.includes(event.date));
-                generateEvents();
-                //highlight today's day of week
-                const todayDay = today.getDay();
-                document.querySelectorAll('.day')[todayDay].classList.add('today');
-                //scroll to today in the middle of sreen div smoothly
-
-
-            }
-        }
-
-        async function generateEvents() {
-            // generate events in calendar from myEvents
-            let calendar = document.querySelector('.calendar');
-            let html = '';
-
-            let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
-            for (let i = 0; i < days.length; i++) {
-                html += `<div class="day">`;
-                html += `<h3>${days[i]}</h3>`;
-
-                let events = myEvents.filter(event => getDay(event.date) === i);
-
-                if (events.length === 0) {
-                    html += `<p></p>`;
-                } else {
-                    html += `<ul>`;
-                    for (let j = 0; j < events.length; j++) {
-                        let height = Math.min(180); // 20px for each line of text, plus 10px for padding
-
-                        html += `<li class=${events[j].type} style="height: ${height}px;">${events[j].title} - ${events[j].start_time} to ${events[j].end_time} at ${events[j].location} (${events[j].type})</li>`;
-                    }
-                    html += `</ul>`;
-                }
-
-                html += `</div>`;
-            }
-
-            calendar.innerHTML = html;
-        }
-
-        function getDay(date) {
-            let parts = date.split('/');
-            let day = parseInt(parts[0]);
-            let month = parseInt(parts[1]);
-            let year = parseInt(parts[2]);
-            let dateObj = new Date(year, month - 1, day);
-            return dateObj.getDay();
-        }
-
-        function changeEventColor(type, button) {
-            let events = document.querySelectorAll(type);
-            let selectedColor = button.style.backgroundColor;
-
-            document.querySelectorAll('.color').forEach(btn => {
-                btn.classList.remove('selected');
-            });
-
-            button.classList.add('selected');
-
-            events.forEach(event => {
-                event.style.backgroundColor = selectedColor;
-            });
-        }
-    </script>
 </body>
-
-</html>
