@@ -32,7 +32,13 @@
       }
     }
   </script>
-
+<style>
+  /* Footer styles */
+  footer {
+            flex-shrink: 0;
+            position: absolute;
+        }
+</style>
 </head>
 
 <body class="w-screen overflow-x-hidden">
@@ -102,19 +108,6 @@
                 class="text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
                 aria-current="page" style="z-index:100;">Sign Up</a>
             </div>
-            <!-- Profile -->
-            <div class="relative ml-3">
-              <div>
-                <button type="button"
-                  class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                  id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                  <!-- <span class="absolute -inset-1.5"></span> -->
-                  <span class="sr-only">Open user menu</span>
-                  <img class="h-8 w-8 rounded-full"
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt="">
-                </button>
-              </div>
 
               <!--
                   Dropdown menu, show/hide based on menu state.
@@ -155,13 +148,11 @@
   </header>
 
   <div class="content">
-
     <!-- title -->
     <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
       <div class="sm:mx-auto sm:w-full sm:max-w-sm">
         <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in here!</h2>
       </div>
-
       <!-- email section -->
       <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form class="space-y-6">
@@ -205,30 +196,28 @@
 
       </div>
 
-      <!-- footer -->
-      <footer
-        class="fixed bottom-0 left-0 z-20 w-full p-4 bg-white border-t border-gray-200 shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800 dark:border-gray-600">
-        <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="https://flowbite.com/"
-            class="hover:underline">StuCal™</a>. All Rights Reserved.
-        </span>
-        <!-- <div class="justify-center items-center pt-12">
+          <!-- footer -->
+    <footer class="flex bottom-0 left-0 z-20 w-full p-4 bg-white border-t border-gray-200 shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800 dark:border-gray-600">
+      <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="https://flowbite.com/" class="hover:underline">StuCal™</a>. All Rights Reserved.
+      </span>
+      <!-- <div class="justify-center items-center pt-12">
         <img src="../public/images/logo.png" class="h-14" alt="StuCal Logo" />
       </div> -->
-        <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+      <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+          <!-- <li>
+              <a href="#" class="hover:underline me-4 md:me-6">About</a>
+          </li> -->
           <li>
-            <a href="about.html" class="hover:underline me-4 md:me-6">About</a>
+              <a href="privacyPolicy.html" class="hover:underline me-4 md:me-6">Privacy Policy</a>
           </li>
-          <li>
-            <a href="privacyPolicy.html" class="hover:underline me-4 md:me-6">Privacy Policy</a>
+          <!-- <li>
+              <a href="#" class="hover:underline me-4 md:me-6">Licensing</a>
           </li>
-          <li>
-            <a href="#" class="hover:underline me-4 md:me-6">Licensing</a>
+          <li> -->
+              <a href="contact.html" class="hover:underline">Contact</a>
           </li>
-          <li>
-            <a href="#" class="hover:underline">Contact</a>
-          </li>
-        </ul>
-      </footer>
+      </ul>
+  </footer>
 
 </body>
 

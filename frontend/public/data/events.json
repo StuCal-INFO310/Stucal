@@ -1,0 +1,206 @@
+{
+    "separated_by_month": {
+        "April 2024": {
+            "2024-04-25": "ANZAC Day"
+        },
+        "May 2024": {
+            "2024-05-03": "Last day to withdraw from semester 1 papers (11:59pm deadline)",
+            "2024-05-11": "Graduation ceremonies",
+            "2024-05-18": "Graduation ceremonies",
+            "2024-05-31": "Lectures cease before semester 1 examinations"
+        },
+        "June 2024": {
+            "2024-06-03": "King's Birthday",
+            "2024-06-05": "Semester 1 examinations begin",
+            "2024-06-19": "Semester 1 examinations end",
+            "2024-06-25": "Due date for submission of papers for course approval by students taking only semester 2 papers",
+            "2024-06-28": "Matariki"
+        },
+        "July 2024": {
+            "2024-07-10": "Due date for payment of all fees enrolled for students registering for study commencing in semester 2 only",
+            "2024-07-15": "Due date for completion of course enrolment declaration by students taking only semester 2 papers (late fee may apply)",
+            "2024-07-19": "Last day to add semester 2 papers (11:59pm deadline)",
+            "2024-07-24": "2024 Sem 1 Special Exams (centrally managed) end"
+        },
+        "August 2024": {
+            "2024-08-02": "Last day to delete semester 2 papers with refund of fees (11:59pm deadline)",
+            "2024-08-17": "Graduation ceremonies",
+            "2024-08-31": "Mid-semester break begins"
+        },
+        "September 2024": {
+            "2024-09-09": "Semester 2 resumes",
+            "2024-09-20": "Last day to withdraw from semester 2 and full-year papers (11:59pm deadline)"
+        },
+        "October 2024": {
+            "2024-10-18": "Lectures end before semester 2 examinations",
+            "2024-10-21": "Semester 2 examinations begin",
+            "2024-10-28": "Labour Day"
+        },
+        "November 2024": {
+            "2024-11-09": "Semester 2 examinations end",
+            "2024-11-11": "Due date for completion of course enrolment declaration concerning Pre-Christmas Summer School papers (late fee may apply)",
+            "2024-11-13": "Last day to add Pre-Christmas Summer School papers (11:59 deadline)",
+            "2024-11-17": "Last day to delete Pre-Christmas Summer School papers with refund of fees (11:59pm deadline)"
+        },
+        "December 2024": {
+            "2024-12-06": "Last day to withdraw from Pre-Christmas Summer School papers (11:59pm deadline)",
+            "2024-12-07": "Graduation ceremonies",
+            "2024-12-11": "Graduation ceremonies",
+            "2024-12-13": "Pre-Christmas Summer School classes end",
+            "2024-12-14": "Graduation ceremonies",
+            "2024-12-15": "Due date for submission of 2025 Summer School papers for course approval"
+        },
+        "January 2025": {
+            "2025-01-03": "University reopens",
+            "2025-01-06": "Due date for completion of course enrolment declaration concerning Summer School papers (late fee may apply)",
+            "2025-01-09": " Last day to add Summer School Papers",
+            "2025-01-15": "Last day to delete Summer School papers"
+        },
+        "February 2025": {
+            "2025-02-06": "Waitangi Day",
+            "2025-02-07": "Last day to withdraw from Summer School papers",
+            "2025-02-14": "Summer School classes end",
+            "2025-02-15": "Summer School examinations begin",
+            "2025-02-20": "Summer School examinations end",
+            "2025-02-21": "Due date for completion of course enrolment declaration by students taking semester 1 and full-year papers (a late fee may apply)",
+            "2025-02-24": "Formal lectures begin"
+        },
+        "March 2025": {
+            "2025-03-02": "Last day to add full-year papers",
+            "2025-03-16": "Last day to delete semester 1 papers with refund of fees",
+            "2025-03-23": "Last day to delete full-year papers with refund of fees"
+        },
+        "April 2025": {
+            "2025-04-18": "Good Friday \u2013 Mid-semester break begins",
+            "2025-04-21": "Easter Monday",
+            "2025-04-22": "Otago Anniversary Day observance (Dunedin)",
+            "2025-04-25": "ANZAC Day",
+            "2025-04-28": "Semester 1 resumes"
+        },
+        "May 2025": {
+            "2025-05-04": "Last day to withdraw from semester 1 papers",
+            "2025-05-10": "Graduation Ceremonies",
+            "2025-05-17": "Graduation Ceremonies",
+            "2025-05-30": "Lectures cease before semester 1 examinations"
+        },
+        "June 2025": {
+            "2025-06-02": "King's Birthday",
+            "2025-06-04": "Semester 1 examinations begin",
+            "2025-06-18": "Semester 1 examinations end",
+            "2025-06-20": "Matariki",
+            "2025-06-25": "Due date for submission of papers for course approval by students taking only semester 2 papers"
+        },
+        "July 2025": {
+            "2025-07-14": "Due date for completion of course enrolment declaration by students taking only semester 2 papers (late fee may apply)",
+            "2025-07-20": "Last day to add semester 2 papers"
+        },
+        "August 2025": {
+            "2025-08-03": "Last day to delete semester 2 papers with refund of fees",
+            "2025-08-23": "Graduation Ceremony",
+            "2025-08-30": "Mid-semester break begins"
+        },
+        "September 2025": {
+            "2025-09-08": "Semester 2 resumes",
+            "2025-09-21": "Last day to withdraw from semester 2 papers"
+        },
+        "October 2025": {
+            "2025-10-17": "Lectures end before semester 2 examinations",
+            "2025-10-20": "Semester 2 examinations begin",
+            "2025-10-27": "Labour Day"
+        },
+        "November 2025": {
+            "2025-11-08": "Semester 2 examinations end",
+            "2025-11-10": "Due date for completion of course enrolment declaration concerning Pre-Christmas Summer School papers (late fee may apply)",
+            "2025-11-12": "Last day to add Pre-Christmas Summer School papers",
+            "2025-11-17": "Last day to delete Pre-Christmas Summer School papers"
+        },
+        "December 2025": {
+            "2025-12-05": "Last day to withdraw from Pre-Christmas Summer School papers",
+            "2025-12-06": "Graduation Ceremonies",
+            "2025-12-10": "Graduation Ceremonies",
+            "2025-12-12": "Pre-Christmas Summer School classes end",
+            "2025-12-13": "Graduation Ceremonies"
+        }
+    },
+    "flat": {
+        "2024-04-25": "ANZAC Day",
+        "2024-05-03": "Last day to withdraw from semester 1 papers (11:59pm deadline)",
+        "2024-05-11": "Graduation ceremonies",
+        "2024-05-18": "Graduation ceremonies",
+        "2024-05-31": "Lectures cease before semester 1 examinations",
+        "2024-06-03": "King's Birthday",
+        "2024-06-05": "Semester 1 examinations begin",
+        "2024-06-19": "Semester 1 examinations end",
+        "2024-06-25": "Due date for submission of papers for course approval by students taking only semester 2 papers",
+        "2024-06-28": "Matariki",
+        "2024-07-10": "Due date for payment of all fees enrolled for students registering for study commencing in semester 2 only",
+        "2024-07-15": "Due date for completion of course enrolment declaration by students taking only semester 2 papers (late fee may apply)",
+        "2024-07-19": "Last day to add semester 2 papers (11:59pm deadline)",
+        "2024-07-24": "2024 Sem 1 Special Exams (centrally managed) end",
+        "2024-08-02": "Last day to delete semester 2 papers with refund of fees (11:59pm deadline)",
+        "2024-08-17": "Graduation ceremonies",
+        "2024-08-31": "Mid-semester break begins",
+        "2024-09-09": "Semester 2 resumes",
+        "2024-09-20": "Last day to withdraw from semester 2 and full-year papers (11:59pm deadline)",
+        "2024-10-18": "Lectures end before semester 2 examinations",
+        "2024-10-21": "Semester 2 examinations begin",
+        "2024-10-28": "Labour Day",
+        "2024-11-09": "Semester 2 examinations end",
+        "2024-11-11": "Due date for completion of course enrolment declaration concerning Pre-Christmas Summer School papers (late fee may apply)",
+        "2024-11-13": "Last day to add Pre-Christmas Summer School papers (11:59 deadline)",
+        "2024-11-17": "Last day to delete Pre-Christmas Summer School papers with refund of fees (11:59pm deadline)",
+        "2024-12-06": "Last day to withdraw from Pre-Christmas Summer School papers (11:59pm deadline)",
+        "2024-12-07": "Graduation ceremonies",
+        "2024-12-11": "Graduation ceremonies",
+        "2024-12-13": "Pre-Christmas Summer School classes end",
+        "2024-12-14": "Graduation ceremonies",
+        "2024-12-15": "Due date for submission of 2025 Summer School papers for course approval",
+        "2025-01-03": "University reopens",
+        "2025-01-06": "Due date for completion of course enrolment declaration concerning Summer School papers (late fee may apply)",
+        "2025-01-09": " Last day to add Summer School Papers",
+        "2025-01-15": "Last day to delete Summer School papers",
+        "2025-02-06": "Waitangi Day",
+        "2025-02-07": "Last day to withdraw from Summer School papers",
+        "2025-02-14": "Summer School classes end",
+        "2025-02-15": "Summer School examinations begin",
+        "2025-02-20": "Summer School examinations end",
+        "2025-02-21": "Due date for completion of course enrolment declaration by students taking semester 1 and full-year papers (a late fee may apply)",
+        "2025-02-24": "Formal lectures begin",
+        "2025-03-02": "Last day to add full-year papers",
+        "2025-03-16": "Last day to delete semester 1 papers with refund of fees",
+        "2025-03-23": "Last day to delete full-year papers with refund of fees",
+        "2025-04-18": "Good Friday \u2013 Mid-semester break begins",
+        "2025-04-21": "Easter Monday",
+        "2025-04-22": "Otago Anniversary Day observance (Dunedin)",
+        "2025-04-25": "ANZAC Day",
+        "2025-04-28": "Semester 1 resumes",
+        "2025-05-04": "Last day to withdraw from semester 1 papers",
+        "2025-05-10": "Graduation Ceremonies",
+        "2025-05-17": "Graduation Ceremonies",
+        "2025-05-30": "Lectures cease before semester 1 examinations",
+        "2025-06-02": "King's Birthday",
+        "2025-06-04": "Semester 1 examinations begin",
+        "2025-06-18": "Semester 1 examinations end",
+        "2025-06-20": "Matariki",
+        "2025-06-25": "Due date for submission of papers for course approval by students taking only semester 2 papers",
+        "2025-07-14": "Due date for completion of course enrolment declaration by students taking only semester 2 papers (late fee may apply)",
+        "2025-07-20": "Last day to add semester 2 papers",
+        "2025-08-03": "Last day to delete semester 2 papers with refund of fees",
+        "2025-08-23": "Graduation Ceremony",
+        "2025-08-30": "Mid-semester break begins",
+        "2025-09-08": "Semester 2 resumes",
+        "2025-09-21": "Last day to withdraw from semester 2 papers",
+        "2025-10-17": "Lectures end before semester 2 examinations",
+        "2025-10-20": "Semester 2 examinations begin",
+        "2025-10-27": "Labour Day",
+        "2025-11-08": "Semester 2 examinations end",
+        "2025-11-10": "Due date for completion of course enrolment declaration concerning Pre-Christmas Summer School papers (late fee may apply)",
+        "2025-11-12": "Last day to add Pre-Christmas Summer School papers",
+        "2025-11-17": "Last day to delete Pre-Christmas Summer School papers",
+        "2025-12-05": "Last day to withdraw from Pre-Christmas Summer School papers",
+        "2025-12-06": "Graduation Ceremonies",
+        "2025-12-10": "Graduation Ceremonies",
+        "2025-12-12": "Pre-Christmas Summer School classes end",
+        "2025-12-13": "Graduation Ceremonies"
+    }
+}
