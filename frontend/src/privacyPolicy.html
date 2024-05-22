@@ -29,130 +29,47 @@
 
 </head>
 
-<body class="w-screen overflow-x-hidden">
+<body class="bg-gray-100 text-gray-900 w-screen overflow-x-hidden">
+
+    <!-- Navigation bar -->
     <header>
-        <nav class="bg-gray-800">
+        <nav class="bg-gray-800 max-h-7xxl">
             <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                 <div class="relative flex h-16 items-center justify-between">
+                    <!-- Mobile menu button -->
                     <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                        <!-- Mobile menu button-->
-                        <button type="button" id="mobile-menu-button"
-                            class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-                            aria-controls="mobile-menu" aria-expanded="false">
+                        <button type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
                             <span class="sr-only">Open main menu</span>
-                            <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                            </svg>
-                            <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                             </svg>
                         </button>
                     </div>
                     <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                        <a href="index.html" class="flex items-center" style="z-index:100;">
-                            <img class="mr-3 h-6 sm:h-9" src="../public/images/logo.png" alt="">
+                        <a href="index.html" class="flex items-center">
+                            <img class="mr-3 h-6 sm:h-9" src="../public/images/logo.png" alt="StuCal Logo">
                         </a>
-                        <!-- other header buttons -->
                         <div class="hidden sm:ml-6 sm:block">
                             <div class="flex space-x-4">
-                                <a href="faq.html" id="nav__faq"
-                                    class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">FAQ</a>
-                                <a href="printout.html" id="nav__calendar"
-                                    class="hidden text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Calendar</a>
-                                <a href="dashboard.html" id="nav__dashboard"
-                                    class="hidden text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Dashboard</a>
+                                <a href="faq.html" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">FAQ</a>
+                                <a href="printout.html" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Calendar</a>
+                                <a href="dashboard.html" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Dashboard</a>
                             </div>
                         </div>
                     </div>
-                    <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                        <div class="z-10">
-                            <a href="login.html" id="nav__login"
-                               class="text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
-                               aria-current="page">Log In</a>
-                            <a href="signup.html" id="nav__signup"
-                               class="text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
-                               aria-current="page">Sign Up</a>
-                            <a onclick="logOut()" id="nav__logout"
-                               class="hidden cursor-pointer text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
-                               aria-current="page">Logout</a>
-                        </div>
-                    </div>
                 </div>
             </div>
 
-            <!-- Mobile menu, show/hide based on menu state. -->
-            <div class="sm:hidden" id="mobile-menu" style="display: none;">
+            <!-- Mobile menu -->
+            <div class="sm:hidden" id="mobile-menu">
                 <div class="space-y-1 px-2 pb-3 pt-2">
-                    <a href="login.html" id="mobile_nav__login"
-                       class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium">Log In</a>
-                    <a href="signup.html" id="mobile_nav__signup"
-                       class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium">Sign Up</a>
-                    <a onclick="logOut()" id="mobile_nav__logout"
-                       class="hidden cursor-pointer bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium">Logout</a>
-                    <a href="faq.html"
-                       class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">FAQ</a>
-                    <a href="printout.html" id="mobile_nav__calendar"
-                       class="hidden text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Calendar</a>
-                    <a href="dashboard.html" id="mobile_nav__dashboard"
-                       class="hidden text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Dashboard</a>
+                    <a href="login.html" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">Log In</a>
+                    <a href="signup.html" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">Sign Up</a>
+                    <a href="faq.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">FAQ</a>
+                    <a href="printout.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Calendar</a>
                 </div>
             </div>
         </nav>
-
-        <script defer>
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const displayNavBar = async () => {
-                const { data: { user } } = await supabase.auth.getUser();
-                console.log("user", user);
-
-                if (user) {
-                    document.getElementById("nav__logout").classList.remove("hidden");
-                    document.getElementById("nav__login").classList.add("hidden");
-                    document.getElementById("nav__signup").classList.add("hidden");
-                    document.getElementById("nav__dashboard").classList.remove("hidden");
-                    document.getElementById("nav__calendar").classList.remove("hidden");
-
-                    document.getElementById("mobile_nav__logout").classList.remove("hidden");
-                    document.getElementById("mobile_nav__login").classList.add("hidden");
-                    document.getElementById("mobile_nav__signup").classList.add("hidden");
-                    document.getElementById("mobile_nav__dashboard").classList.remove("hidden");
-                    document.getElementById("mobile_nav__calendar").classList.remove("hidden");
-                } else {
-                    document.getElementById("nav__logout").classList.add("hidden");
-                    document.getElementById("nav__login").classList.remove("hidden");
-                    document.getElementById("nav__signup").classList.remove("hidden");
-                    document.getElementById("nav__dashboard").classList.add("hidden");
-                    document.getElementById("nav__calendar").classList.add("hidden");
-
-                    document.getElementById("mobile_nav__logout").classList.add("hidden");
-                    document.getElementById("mobile_nav__login").classList.remove("hidden");
-                    document.getElementById("mobile_nav__signup").classList.remove("hidden");
-                    document.getElementById("mobile_nav__dashboard").classList.add("hidden");
-                    document.getElementById("mobile_nav__calendar").classList.add("hidden");
-                }
-            }
-
-            const logOut = async () => {
-                const { error } = await supabase.auth.signOut();
-                if (error) {
-                    console.log("Error logging out", error);
-                } else {
-                    window.location.href = "index.html";
-                }
-            }
-
-            mobileMenuButton.addEventListener('click', () => {
-                const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
-                mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
-                mobileMenu.style.display = isExpanded ? 'none' : 'block';
-            });
-
-            displayNavBar();
-        </script>
     </header>
 
     <!-- Main content -->
@@ -231,27 +148,28 @@
 
 
 
-        <!-- footer -->
-        <footer class="flex bottom-0 left-0 z-20 w-full p-4 bg-white border-t border-gray-200 shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800 dark:border-gray-600">
-            <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="https://flowbite.com/" class="hover:underline">StuCal™</a>. All Rights Reserved.
-            </span>
-            <!-- <div class="justify-center items-center pt-12">
+    <footer
+        class="left-0 z-20 w-full p-4 bg-white border-t border-gray-200 shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800 dark:border-gray-600">
+        <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="https://flowbite.com/"
+                class="hover:underline">StuCal™</a>. All Rights Reserved.
+        </span>
+        <!-- <div class="justify-center items-center pt-12">
               <img src="../public/images/logo.png" class="h-14" alt="StuCal Logo" />
             </div> -->
-            <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
-                <!-- <li>
-                    <a href="#" class="hover:underline me-4 md:me-6">About</a>
-                </li> -->
-                <li>
-                    <a href="privacyPolicy.html" class="hover:underline me-4 md:me-6">Privacy Policy</a>
-                </li>
-                <!-- <li>
-                    <a href="#" class="hover:underline me-4 md:me-6">Licensing</a>
-                </li>
-                <li> -->
-                    <a href="contact.html" class="hover:underline">Contact</a>
-                </li>
-            </ul>
-        </footer>
+        <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+            <li>
+                <a href="about.html" class="hover:underline me-4 md:me-6">About</a>
+            </li>
+            <li>
+                <a href="privacyPolicy.html" class="hover:underline me-4 md:me-6">Privacy Policy</a>
+            </li>
+            <li>
+                <a href="#" class="hover:underline me-4 md:me-6">Licensing</a>
+            </li>
+            <li>
+                <a href="#" class="hover:underline">Contact</a>
+            </li>
+        </ul>
+    </footer>
 
 </body>

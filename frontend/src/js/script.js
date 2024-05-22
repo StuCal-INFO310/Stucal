@@ -137,8 +137,6 @@ async function delay(ms) {
   });
 }
 
-
-
 async function upload() {
   // get text from #input-texxt
   const data = document.getElementById("input-text").value;
