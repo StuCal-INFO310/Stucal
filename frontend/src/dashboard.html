@@ -518,11 +518,11 @@
 
     <br>
 
-    <!-- Search Bar -->
+    <!-- Search Bar - be able to search for the event -->
     <div class="flex justify-center items-center space-x-4 mb-6">
-        <p class="text-lg font-medium text-gray-700">Search</p>
-        <input id="search-input" class="search-search px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500" placeholder="Search for events...">
-        <button id="search-button" class="bg-sky-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2">Search</button>
+        <!-- name text --> <p class="text-lg font-medium text-gray-700">Search</p>
+        <!-- search box --><input id="search-input" class="search-search px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500" placeholder="Search for events...">
+        <!-- search button --><button id="search-button" class="bg-sky-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2">Search</button>
     </div>
 
 
@@ -1409,9 +1409,13 @@ function getDay(date) {
         }
 
 // Function to search events
+//takes in all the events from scraping and the search term that the user searches
 function searchEvents(events, searchTerm) {
+    //changes the search term to all lowercase 
     searchTerm = searchTerm.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    //this function should return the matching events
     return events.filter(event => 
+    //each event has a title, type, date or location, these search terms will look and compare against each of these fields to find the correct one
         event.title.toLowerCase().includes(searchTerm) ||
         event.type.toLowerCase().includes(searchTerm) ||
         event.date.includes(searchTerm) ||
