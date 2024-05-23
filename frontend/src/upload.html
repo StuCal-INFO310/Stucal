@@ -1,32 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Character encoding declaration -->
     <meta charset="UTF-8">
+    <!-- Viewport settings for responsive design -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title of the document -->
     <title>Upload from eVision</title>
-    <link rel = "icon" type ="image/x-icon" href="/favicon.ico">
+    <!-- Favicon for the website -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <!-- Link to custom CSS styles -->
     <link rel="stylesheet" href="./css/styles.css">
+    <!-- Google Fonts: Material Symbols Rounded -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
-    <!-- jsdeliver supabase -->
+    <!-- Supabase JS library from jsDelivr CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- SweetAlert2 library for alerts -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Custom global JS file -->
     <script src="../src/js/global.js"></script>
+    <!-- Custom script JS file -->
     <script src="../src/js/script.js"></script>
 </head>
 <body>
+    <!-- Loading message -->
     <div class="loading">Scanning...</div>
     <header>
+        <!-- Main title of the page -->
         <h1 class="title">Upload from eVision</h1>
     </header>
     <div class="content">
         <div class="centered">
-            <img class="h-5 w-auto" src="\frontend\public\images\tutorialupload.gif" loop = infinite width="1000" height="600"alt="Tutorial GIF">
-            <a href="https://evision.otago.ac.nz/sitsvision/wrd/siw_lgn"> Evision Login Page</a>
+            <!-- Tutorial GIF for guidance -->
+            <img class="h-5 w-auto" src="\frontend\public\images\tutorialupload.gif" loop="infinite" width="1000" height="600" alt="Tutorial GIF">
+            <!-- Link to eVision Login Page -->
+            <a href="https://evision.otago.ac.nz/sitsvision/wrd/siw_lgn">Evision Login Page</a>
+            <!-- Textarea for input content -->
             <textarea style="height: 300px; width: 60%;" id="input-text" class="textbox" placeholder="Paste content here..."></textarea>
+            <!-- Submit button with icon -->
             <button class="submit-btn" style="width: 60%;" onclick="upload()">Submit <span class="material-symbols-rounded">
                 chevron_right
                 </span></button>
-                <button id="show-table" onclick="document.querySelector('.table').classList.toggle('show')">Show Table</button>
+            <!-- Button to toggle table visibility -->
+            <button id="show-table" onclick="document.querySelector('.table').classList.toggle('show')">Show Table</button>
+            <!-- Placeholder for dynamic table content -->
             <div class="table"></div>
         </div>
     </div>

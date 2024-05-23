@@ -19,6 +19,21 @@ Our motivation behind StuCal stemmed from the inconvenience of regularly checkin
 
 Recognising this tedious process, we came up with the idea of integrating our class schedules into our everyday calendar apps and providing extra features dedicated to students. 
 
+## Key Functionalities
+* **Dashboard** 
+  * Viewing your class schedule for the week via uploading Evision timetable.
+* **Calendar Printout**
+  * Printing out a physical weekly calendar.
+* **Share Events**
+  * Sharing events with peers.
+* **Free Time Finder**
+  * Finding free time to study with peers.
+* **View Key Dates**
+  * Lists public events for the year, which can be added to dashboard.
+* **Add Events**
+  * Adding individual events to dashboard.
+* **Search Events**
+  * Able to search events by key words.
 
 ## Built With
 

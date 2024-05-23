@@ -1,7 +1,9 @@
+<!-- Yuki Yoshiyasu -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+    <!-- Favicon and meta tags -->
     <link rel = "icon" type ="image/x-icon" href="/favicon.ico">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,6 +11,7 @@
     <!-- TailwindCSS script -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
+        //Tailwinds custom configuration 
         tailwind.config = {
             theme: {
                 extend: {
@@ -178,7 +181,7 @@
                         <a href="index.html" class="flex items-center" style="z-index:100;">
                             <img class="mr-3 h-6 sm:h-9" src="../public/images/logo.png" alt="">
                         </a>
-                        <!-- other header buttons -->
+                        <!-- Navigation links -->
                         <div class="hidden sm:ml-6 sm:block">
                             <div class="flex space-x-4">
                                 <a href="faq.html" id="nav__faq"
@@ -192,6 +195,7 @@
                     </div>
                     <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                         <div class="z-10">
+                            <!-- Login/Signup/Logout buttons -->
                             <a href="login.html" id="nav__login"
                                class="text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
                                aria-current="page">Log In</a>
@@ -228,6 +232,7 @@
         <script defer>
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
+// Function to display navigation bar based on user's authentication status
             const displayNavBar = async () => {
                 const { data: { user } } = await supabase.auth.getUser();
                 console.log("user", user);
@@ -258,7 +263,7 @@
                     document.getElementById("mobile_nav__calendar").classList.add("hidden");
                 }
             }
-
+// Function to log out user
             const logOut = async () => {
                 const { error } = await supabase.auth.signOut();
                 if (error) {
@@ -267,13 +272,13 @@
                     window.location.href = "index.html";
                 }
             }
-
+// Toggle mobile menu visibility
             mobileMenuButton.addEventListener('click', () => {
                 const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
                 mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
                 mobileMenu.style.display = isExpanded ? 'none' : 'block';
             });
-
+// Display navigation bar on page load
             displayNavBar();
         </script>
     </header>
@@ -283,6 +288,7 @@
         <h1 class="text-4xl font-bold mb-6">StuCal Physical Calendar</h1>
         <h2 class="text font-bold mb-6">*Results are best when printed with A3 format</h1>
         <!-- Color Picker -->
+        <!-- Unused anymore, to stream line to the stucal logos colour -->
         <div class="color-picker mb-6">
             <button class="color" style="background-color: #3b82f6;" onclick="changeEventColor('.day', this)"></button>
             <button class="color" style="background-color: #354ee0;" onclick="changeEventColor('.day', this)"></button>
@@ -325,6 +331,7 @@
 
     <!-- JavaScript to fetch events and handle color change -->
     <script>
+        // To store events in an array
         let myEvents = [];
     
         getEvents();
@@ -341,7 +348,7 @@
                 highlightToday();
             }
         }
-    
+    // Generates calendar events dynamically
         async function generateEvents() {
             let calendar = document.querySelector('.calendar');
             let html = '';
@@ -366,7 +373,7 @@
     
             calendar.innerHTML = html;
         }
-    
+    // Get the day of the week from a date
         function getDay(date) {
             let parts = date.split('/');
             let day = parseInt(parts[0]);
@@ -376,7 +383,7 @@
             return dateObj.getDay();
         }
 
-    
+    // The function to change colour from the button clicked, however is unused
         function changeEventColor(type, button) {
             let events = document.querySelectorAll(type);
             let selectedColor = button.style.backgroundColor;
