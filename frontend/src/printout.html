@@ -95,6 +95,10 @@
             background-color: rgb(240, 240, 157);
         }
 
+        .selected {
+            border: 2px solid black;
+        }
+
         /* Print styles */
         @media print {
            
@@ -280,11 +284,11 @@
         <h2 class="text font-bold mb-6">*Results are best when printed with A3 format</h1>
         <!-- Color Picker -->
         <div class="color-picker mb-6">
-            <button class="color" style="background-color: #3b82f6;" onclick="changeEventColor('.day h3', this)"></button>
-            <button class="color" style="background-color: #354ee0;" onclick="changeEventColor('.day h3', this)"></button>
-            <button class="color" style="background-color: #808080;" onclick="changeEventColor('.day h3', this)"></button>
-            <button class="color" style="background-color: #de5b5b;" onclick="changeEventColor('.day h3', this)"></button>
-            <button class="color" style="background-color: #cb8ae5;" onclick="changeEventColor('.day h3', this)"></button>
+            <button class="color" style="background-color: #3b82f6;" onclick="changeEventColor('.day', this)"></button>
+            <button class="color" style="background-color: #354ee0;" onclick="changeEventColor('.day', this)"></button>
+            <button class="color" style="background-color: #808080;" onclick="changeEventColor('.day', this)"></button>
+            <button class="color" style="background-color: #de5b5b;" onclick="changeEventColor('.day', this)"></button>
+            <button class="color" style="background-color: #cb8ae5;" onclick="changeEventColor('.day', this)"></button>
         </div>
 
         <button class="print-button bg-blue-500 text-white py-2 px-4 rounded shadow-md" onclick="window.print()">Print Calendar</button>
@@ -322,8 +326,9 @@
     <!-- JavaScript to fetch events and handle color change -->
     <script>
         let myEvents = [];
+    
         getEvents();
-
+    
         async function getEvents() {
             const user = await supabase.auth.getUser();
             const user_id = user.data.user.id;
@@ -331,57 +336,37 @@
             if (error) {
                 console.log(error);
             } else {
-                // filter events just for this week. (the database stores dd/mm/yyyy format)
-                const today = new Date();
-                const week = [];
-                for (let i = 0; i < 7; i++) {
-                    const day = new Date(today);
-                    day.setDate(today.getDate() + i);
-                    const dayStr = `${day.getDate().toString().padStart(2, '0')}/${(day.getMonth() + 1).toString().padStart(2, '0')}/${day.getFullYear()}`;
-                    week.push(dayStr);
-                }
-                myEvents = data.filter(event => week.includes(event.date));
+                myEvents = data;
                 generateEvents();
-                //highlight today's day of week
-                const todayDay = today.getDay();
-                document.querySelectorAll('.day')[todayDay].classList.add('today');
-                //scroll to today in the middle of sreen div smoothly
-
-
+                highlightToday();
             }
         }
-
+    
         async function generateEvents() {
-            // generate events in calendar from myEvents
             let calendar = document.querySelector('.calendar');
             let html = '';
-
             let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
+    
             for (let i = 0; i < days.length; i++) {
                 html += `<div class="day">`;
                 html += `<h3>${days[i]}</h3>`;
-
+    
                 let events = myEvents.filter(event => getDay(event.date) === i);
-
-                if (events.length === 0) {
-                    html += `<p></p>`;
-                } else {
+    
+                if (events.length > 0) {
                     html += `<ul>`;
                     for (let j = 0; j < events.length; j++) {
-                        let height = Math.min(180); // 20px for each line of text, plus 10px for padding
-
-                        html += `<li class=${events[j].type} style="height: ${height}px;">${events[j].title} - ${events[j].start_time} to ${events[j].end_time} at ${events[j].location} (${events[j].type})</li>`;
+                        html += `<li class=${events[j].type}>${events[j].title} - ${events[j].start_time} to ${events[j].end_time} at ${events[j].location} (${events[j].type})</li>`;
                     }
                     html += `</ul>`;
                 }
-
+    
                 html += `</div>`;
             }
-
+    
             calendar.innerHTML = html;
         }
-
+    
         function getDay(date) {
             let parts = date.split('/');
             let day = parseInt(parts[0]);
@@ -391,6 +376,7 @@
             return dateObj.getDay();
         }
 
+    
         function changeEventColor(type, button) {
             let events = document.querySelectorAll(type);
             let selectedColor = button.style.backgroundColor;
@@ -405,7 +391,7 @@
                 event.style.backgroundColor = selectedColor;
             });
         }
-    </script>
+        </script>
 </body>
 
 </html>
