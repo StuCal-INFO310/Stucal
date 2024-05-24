@@ -4,7 +4,7 @@
 
 <head>
     <!-- Favicon and meta tags -->
-    <link rel = "icon" type ="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,9 +22,10 @@
             }
         }
     </script>
-    
+
     <!-- Include necessary CSS and JS files -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="./js/global.js"></script>
     <script src="./js/script.js"></script>
@@ -56,7 +57,8 @@
             width: 100%;
         }
 
-        .calendar th, .calendar td {
+        .calendar th,
+        .calendar td {
             border: 1px solid #000;
             padding: 10px;
             text-align: center;
@@ -98,17 +100,25 @@
             background-color: rgb(240, 240, 157);
         }
 
+        .custom {
+            background-color: #c190de;
+        }
+
+        .public {
+            background-color: #f5f5f5;
+        }
+
         .selected {
             border: 2px solid black;
         }
 
         /* Print styles */
         @media print {
-           
-            nav{
-               display: none; 
+
+            nav {
+                display: none;
             }
-            
+
             h1 {
                 display: none;
             }
@@ -141,7 +151,8 @@
             /* Keep the background color and text color consistent for print */
             body {
                 background-color: #f5f5f5;
-                color: #333; /* Dark text color */
+                color: #333;
+                /* Dark text color */
             }
 
             .day h3 {
@@ -166,13 +177,13 @@
                             class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
                             aria-controls="mobile-menu" aria-expanded="false">
                             <span class="sr-only">Open main menu</span>
-                            <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                aria-hidden="true">
+                            <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                             </svg>
-                            <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                aria-hidden="true">
+                            <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
@@ -191,21 +202,23 @@
                                 <a href="dashboard.html" id="nav__dashboard"
                                     class="hidden text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Dashboard</a>
                                 <a href="public_events.html" id="nav__publicevents"
-                                    class="hidden text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Public Events</a>
+                                    class="hidden text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Public
+                                    Events</a>
                             </div>
                         </div>
                     </div>
-                    <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                    <div
+                        class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                         <div class="z-10">
                             <a href="login.html" id="nav__login"
-                               class="text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
-                               aria-current="page">Log In</a>
+                                class="text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
+                                aria-current="page">Log In</a>
                             <a href="signup.html" id="nav__signup"
-                               class="text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
-                               aria-current="page">Sign Up</a>
+                                class="text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
+                                aria-current="page">Sign Up</a>
                             <a onclick="logOut()" id="nav__logout"
-                               class="hidden cursor-pointer text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
-                               aria-current="page">Logout</a>
+                                class="hidden cursor-pointer text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
+                                aria-current="page">Logout</a>
                         </div>
                     </div>
                 </div>
@@ -215,17 +228,17 @@
             <div class="sm:hidden" id="mobile-menu" style="display: none;">
                 <div class="space-y-1 px-2 pb-3 pt-2">
                     <a href="login.html" id="mobile_nav__login"
-                       class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium">Log In</a>
+                        class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium">Log In</a>
                     <a href="signup.html" id="mobile_nav__signup"
-                       class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium">Sign Up</a>
+                        class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium">Sign Up</a>
                     <a onclick="logOut()" id="mobile_nav__logout"
-                       class="hidden cursor-pointer bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium">Logout</a>
+                        class="hidden cursor-pointer bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium">Logout</a>
                     <a href="faq.html"
-                       class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">FAQ</a>
+                        class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">FAQ</a>
                     <a href="printout.html" id="mobile_nav__calendar"
-                       class="hidden text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Calendar</a>
+                        class="hidden text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Calendar</a>
                     <a href="dashboard.html" id="mobile_nav__dashboard"
-                       class="hidden text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Dashboard</a>
+                        class="hidden text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Dashboard</a>
                 </div>
             </div>
         </nav>
@@ -290,56 +303,66 @@
     <!-- Main content -->
     <div class="container mx-auto px-4 py-8">
         <h1 class="text-4xl font-bold mb-6">StuCal Physical Calendar</h1>
-        <h2 class="text font-bold mb-6">*Results are best when printed with A3 format</h1>
-        <!-- Color Picker -->
-        <!-- Unused anymore, to stream line to the stucal logos colour -->
-        <div class="color-picker mb-6">
-            <button class="color" style="background-color: #3b82f6;" onclick="changeEventColor('.day', this)"></button>
-            <button class="color" style="background-color: #354ee0;" onclick="changeEventColor('.day', this)"></button>
-            <button class="color" style="background-color: #808080;" onclick="changeEventColor('.day', this)"></button>
-            <button class="color" style="background-color: #de5b5b;" onclick="changeEventColor('.day', this)"></button>
-            <button class="color" style="background-color: #cb8ae5;" onclick="changeEventColor('.day', this)"></button>
-        </div>
+        <h2 class="text font-bold mb-6">- Results are best when printed with A3 format</h1>
+            <h2 class="text font-bold mb-6">- Tick "Show Background Graphics" when printing</h1>
 
-        <button class="print-button bg-blue-500 text-white py-2 px-4 rounded shadow-md" onclick="window.print()">Print Calendar</button>
+                <!-- Color Picker -->
+                <!-- Unused anymore, to stream line to the stucal logos colour -->
+                <div class="color-picker mb-6">
+                    <button class="color" style="background-color: #3b82f6;"
+                        onclick="changeEventColor('.day', this)"></button>
+                    <button class="color" style="background-color: #354ee0;"
+                        onclick="changeEventColor('.day', this)"></button>
+                    <button class="color" style="background-color: #808080;"
+                        onclick="changeEventColor('.day', this)"></button>
+                    <button class="color" style="background-color: #de5b5b;"
+                        onclick="changeEventColor('.day', this)"></button>
+                    <button class="color" style="background-color: #cb8ae5;"
+                        onclick="changeEventColor('.day', this)"></button>
+                </div>
 
-        <div class="calendar-container mt-6">
-            <div class="calendar">
-                <!-- Calendar content will be inserted here -->
-            </div>
-        </div>
+                <button class="print-button bg-blue-500 text-white py-2 px-4 rounded shadow-md"
+                    onclick="window.print()">Print Calendar</button>
+
+                <div class="calendar-container mt-6">
+                    <div class="calendar">
+                        <!-- Calendar content will be inserted here -->
+                    </div>
+                </div>
     </div>
 
-        <!-- footer -->
-        <footer class="flex bottom-0 left-0 z-20 w-full p-4 bg-white border-t border-gray-200 shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800 dark:border-gray-600">
-            <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="https://flowbite.com/" class="hover:underline">StuCal™</a>. All Rights Reserved.
-            </span>
-            <!-- <div class="justify-center items-center pt-12">
+    <!-- footer -->
+    <footer
+        class="flex bottom-0 left-0 z-20 w-full p-4 bg-white border-t border-gray-200 shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800 dark:border-gray-600">
+        <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="https://flowbite.com/"
+                class="hover:underline">StuCal™</a>. All Rights Reserved.
+        </span>
+        <!-- <div class="justify-center items-center pt-12">
               <img src="../public/images/logo.png" class="h-14" alt="StuCal Logo" />
             </div> -->
-            <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
-                <!-- <li>
+        <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+            <!-- <li>
                     <a href="#" class="hover:underline me-4 md:me-6">About</a>
                 </li> -->
-                <li>
-                    <a href="privacyPolicy.html" class="hover:underline me-4 md:me-6">Privacy Policy</a>
-                </li>
-                <!-- <li>
+            <li>
+                <a href="privacyPolicy.html" class="hover:underline me-4 md:me-6">Privacy Policy</a>
+            </li>
+            <!-- <li>
                     <a href="#" class="hover:underline me-4 md:me-6">Licensing</a>
                 </li>
                 <li> -->
-                    <a href="contact.html" class="hover:underline">Contact</a>
-                </li>
-            </ul>
-        </footer>
+            <a href="contact.html" class="hover:underline">Contact</a>
+            </li>
+        </ul>
+    </footer>
 
     <!-- JavaScript to fetch events and handle color change -->
     <script>
         // To store events in an array
         let myEvents = [];
-    
+
         getEvents();
-    
+
         async function getEvents() {
             const user = await supabase.auth.getUser();
             const user_id = user.data.user.id;
@@ -352,18 +375,18 @@
                 highlightToday();
             }
         }
-    // Generates calendar events dynamically
+        // Generates calendar events dynamically
         async function generateEvents() {
             let calendar = document.querySelector('.calendar');
             let html = '';
             let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    
+
             for (let i = 0; i < days.length; i++) {
                 html += `<div class="day">`;
                 html += `<h3>${days[i]}</h3>`;
-    
+
                 let events = myEvents.filter(event => getDay(event.date) === i);
-    
+
                 if (events.length > 0) {
                     html += `<ul>`;
                     for (let j = 0; j < events.length; j++) {
@@ -371,13 +394,13 @@
                     }
                     html += `</ul>`;
                 }
-    
+
                 html += `</div>`;
             }
-    
+
             calendar.innerHTML = html;
         }
-    // Get the day of the week from a date
+        // Get the day of the week from a date
         function getDay(date) {
             let parts = date.split('/');
             let day = parseInt(parts[0]);
@@ -387,7 +410,7 @@
             return dateObj.getDay();
         }
 
-    // The function to change colour from the button clicked, however is unused
+        // The function to change colour from the button clicked, however is unused
         function changeEventColor(type, button) {
             let events = document.querySelectorAll(type);
             let selectedColor = button.style.backgroundColor;
@@ -402,7 +425,7 @@
                 event.style.backgroundColor = selectedColor;
             });
         }
-        </script>
+    </script>
 </body>
 
 </html>

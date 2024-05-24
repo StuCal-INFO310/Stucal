@@ -71,14 +71,14 @@ function createCustomId(){
   return `${randomAdjective}${randomNoun}${rand3Digit}`;
 }
 
-// Export the variables and functions
-module.exports = {
-  supabaseUrl,
-  supabaseKey,
-  supabase,
-  login,
-  signup,
-};
+// // Export the variables and functions
+// module.exports = {
+//   supabaseUrl,
+//   supabaseKey,
+//   supabase,
+//   login,
+//   signup,
+// };
 
 
 

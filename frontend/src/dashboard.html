@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Dashboard</title>
-    <link rel = "icon" type ="image/x-icon" href="./favicon.ico">
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
@@ -271,6 +271,17 @@
                 background-color: rgb(0 0 0 / 0%);
             }
         }
+
+        .shadow-sm {
+            cursor: pointer;
+        }
+
+        .edit-button {
+            position: absolute;
+            right: 80px;
+            font-size: small;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -285,13 +296,13 @@
                             class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
                             aria-controls="mobile-menu" aria-expanded="false">
                             <span class="sr-only">Open main menu</span>
-                            <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                aria-hidden="true">
+                            <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                             </svg>
-                            <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                aria-hidden="true">
+                            <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
@@ -310,21 +321,23 @@
                                 <a href="dashboard.html" id="nav__dashboard"
                                     class="hidden text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Dashboard</a>
                                 <a href="public_events.html" id="nav__publicevents"
-                                    class="hidden text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Public Events</a>
+                                    class="hidden text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Public
+                                    Events</a>
                             </div>
                         </div>
                     </div>
-                    <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                    <div
+                        class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                         <div class="z-10">
                             <a href="login.html" id="nav__login"
-                               class="text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
-                               aria-current="page">Log In</a>
+                                class="text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
+                                aria-current="page">Log In</a>
                             <a href="signup.html" id="nav__signup"
-                               class="text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
-                               aria-current="page">Sign Up</a>
+                                class="text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
+                                aria-current="page">Sign Up</a>
                             <a onclick="logOut()" id="nav__logout"
-                               class="hidden cursor-pointer text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
-                               aria-current="page">Logout</a>
+                                class="hidden cursor-pointer text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
+                                aria-current="page">Logout</a>
                         </div>
                     </div>
                 </div>
@@ -334,17 +347,17 @@
             <div class="sm:hidden" id="mobile-menu" style="display: none;">
                 <div class="space-y-1 px-2 pb-3 pt-2">
                     <a href="login.html" id="mobile_nav__login"
-                       class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium">Log In</a>
+                        class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium">Log In</a>
                     <a href="signup.html" id="mobile_nav__signup"
-                       class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium">Sign Up</a>
+                        class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium">Sign Up</a>
                     <a onclick="logOut()" id="mobile_nav__logout"
-                       class="hidden cursor-pointer bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium">Logout</a>
+                        class="hidden cursor-pointer bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium">Logout</a>
                     <a href="faq.html"
-                       class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">FAQ</a>
+                        class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">FAQ</a>
                     <a href="printout.html" id="mobile_nav__calendar"
-                       class="hidden text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Calendar</a>
+                        class="hidden text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Calendar</a>
                     <a href="dashboard.html" id="mobile_nav__dashboard"
-                       class="hidden text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Dashboard</a>
+                        class="hidden text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Dashboard</a>
                 </div>
             </div>
         </nav>
@@ -369,7 +382,6 @@
                     document.getElementById("mobile_nav__signup").classList.add("hidden");
                     document.getElementById("mobile_nav__dashboard").classList.remove("hidden");
                     document.getElementById("mobile_nav__calendar").classList.remove("hidden");
-                    document.getElementById("mobile_nav__publicevents").classList.remove("hidden");
                 } else {
                     document.getElementById("nav__logout").classList.add("hidden");
                     document.getElementById("nav__login").classList.remove("hidden");
@@ -530,10 +542,18 @@
 
     <!-- Search Bar - be able to search for the event -->
     <div class="flex justify-center items-center space-x-4 mb-6">
-        <!-- name text --> <p class="text-lg font-medium text-gray-700">Search</p>
-        <!-- search box --><input id="search-input" class="search-search px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500" placeholder="Search for events...">
-        <!-- search button --><button id="search-button" class="bg-sky-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2">Search</button>
-    </div>
+        <!-- name text -->
+        <p class="text-lg font-medium text-gray-700">Search</p>
+        <!-- search box --><input id="search-input"
+            class="search-search px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
+            placeholder="Search for events...">
+        <!-- search button --><button id="search-button"
+            class="bg-sky-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2">Search</button>
+        <!-- clear button -->
+        <button id="clear-button" onclick="clearSearch()"
+            class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md shadow-sm hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">Clear</button>
+
+        </div>
 
 
     <div class="calendar mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 lg:pb-5">
@@ -689,7 +709,7 @@
             </div>
 
             <div class="mt-6 flex items-center justify-end gap-x-6 mx-auto max-w-7xl px-2 py-5 sm:px-6 lg:px-8">
-                <button type="button" onclick="document.querySelector('#addEventDialog').close()"
+                <button type="button" onclick="document.querySelector('#shareEventDialog').close()"
                     class="text-sm font-semibold leading-6 text-gray-900">
                     Cancel
                 </button>
@@ -870,6 +890,81 @@
                 class="text-sm font-semibold leading-6 text-gray-900">Close</button>
         </div>
     </dialog>
+
+    <!-- Edit Event dialog -->
+    <dialog id="editEventDialog">
+        <form id="editEventForm">
+            <div class="close" onclick="document.querySelector('#editEventDialog').close()">&times;</div>
+            <div class="space-y-12 mx-auto max-w-7xl px-2 py-5 sm:px-6 lg:px-8">
+                <div class="border-b border-gray-900/10 pb-5">
+                    <h2 class="text-base font-semibold leading-7 text-gray-900">Edit Event</h2>
+                    <p class="mt-1 text-sm leading-6 text-gray-600">This information will be used to edit an event in
+                        your personal calendar.</p>
+                </div>
+
+                <div class="border-b border-gray-900/10 pb-8">
+                    <div class="mt-1 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+
+                        <div class="sm:col-span-full">
+                            <label for="title" class="block text-sm font-medium leading-6 text-gray-900">Event
+                                Title</label>
+                            <div class="mt-2">
+                                <input type="text" id="edit_title" name="title" required
+                                    class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6">
+                            </div>
+                        </div>
+
+                        <div class="sm:col-span-full">
+                            <label for="location"
+                                class="block text-sm font-medium leading-6 text-gray-900">Location</label>
+                            <div class="mt-2">
+                                <input type="text" id="edit_location" name="location" required
+                                    class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6">
+                            </div>
+                        </div>
+
+                        <div class="sm:col-span-full">
+                            <label for="date" class="block text-sm font-medium leading-6 text-gray-900">Date</label>
+                            <div class="mt-2">
+                                <input type="date" id="edit_date" name="date" required
+                                    class="px-2 block w-full rounded-md border-0 pt-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6">
+                            </div>
+                        </div>
+
+
+                        <div class="sm:col-span-3">
+                            <label for="start_time" class="block text-sm font-medium leading-6 text-gray-900">Start
+                                Time</label>
+                            <div class="mt-2">
+                                <input type="time" id="edit_start_time" name="start_time" required
+                                    class="px-2 block w-full rounded-md border-0 pt-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6">
+                            </div>
+                        </div>
+
+                        <div class="sm:col-span-3">
+                            <label for="end_time" class="block text-sm font-medium leading-6 text-gray-900">End
+                                Time</label>
+                            <div class="mt-2">
+                                <input type="time" name="end_time" id="edit_end_time"
+                                    class="px-2 block w-full rounded-md border-0 pt-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="mt-6 flex items-center justify-end gap-x-6 mx-auto max-w-7xl px-2 py-5 sm:px-6 lg:px-8">
+                <button type="button" onclick="document.querySelector('#editEventDialog').close()"
+                    class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
+                <button type="button" onclick="submitEditEvent()"
+                    class="rounded-md bg-sky-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">Edit
+                    Event</button>
+            </div>
+        </form>
+    </dialog>
+
+
 
     <script>
         let usernames = [];
@@ -1175,71 +1270,135 @@
             }
         }
 
-// Function to get events from the database
-async function getEvents() {
-    const user = await supabase.auth.getUser();
-    const user_id = user.data.user.id;
-    const { data, error } = await supabase.from('events').select('*').eq('user_id', user_id);
-    if (error) {
-        console.log(error);
-    } else {
-        // Filter events for this week
-        const today = new Date();
-        const week = [];
-        for (let i = 0; i < 7; i++) {
-            const day = new Date(today);
-            day.setDate(today.getDate() + i);
-            const dayStr = `${day.getDate().toString().padStart(2, '0')}/${(day.getMonth() + 1).toString().padStart(2, '0')}/${day.getFullYear()}`;
-            week.push(dayStr);
-        }
-        myEvents = data.filter(event => week.includes(event.date));
-        generateEvents();
-        // Highlight today's day of week
-        const todayDay = today.getDay();
-        const todayElements = document.querySelectorAll('.day')[todayDay];
-        if (todayElements) {
-            todayElements.classList.add('today');
-        }
-    }
-}
+        // Function to get events from the database
+        async function getEvents() {
+            const user = await supabase.auth.getUser();
+            const user_id = user.data.user.id;
+            const { data, error } = await supabase.from('events').select('*').eq('user_id', user_id);
+            if (error) {
+                console.log(error);
+            } else {
+                // Filter events for this week
+                const today = new Date();
+                const week = [];
+                for (let i = 0; i < 7; i++) {
+                    const day = new Date(today);
+                    day.setDate(today.getDate() + i);
+                    const dayStr = `${day.getDate().toString().padStart(2, '0')}/${(day.getMonth() + 1).toString().padStart(2, '0')}/${day.getFullYear()}`;
+                    week.push(dayStr);
+                }
+                myEvents = data
 
-// Function to generate events in the calendar
-async function generateEvents(events = myEvents) {
-    let calendar = document.querySelector('.calendar');
-    let html = '';
-    let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                //.filter(event => week.includes(event.date));
+                generateEvents();
+                // Highlight today's day of week
 
-    for (let i = 0; i < days.length; i++) {
-        html += `<div class="day">`;
-        html += `<h3>${days[i]}</h3>`;
-
-        let dayEvents = events.filter(event => getDay(event.date) === i);
-
-        if (dayEvents.length === 0) {
-            html += `<p>No events</p>`;
-        } else {
-            html += `<ul>`;
-            for (let j = 0; j < dayEvents.length; j++) {
-                html += `<li class=${dayEvents[j].type}>${dayEvents[j].title} - ${dayEvents[j].start_time} to ${dayEvents[j].end_time} at ${dayEvents[j].location} (${dayEvents[j].type}) <span class="share-button" onclick="startShareEvent(${dayEvents[j].id})">Share</span> <span class="delete-event" onclick="currDeleteEventId = ${dayEvents[j].id}, document.querySelector('#confirmDeleteDialog').showModal()">&times;</span></li>`;
+                // searchButtonClicked();
             }
-            html += `</ul>`;
         }
 
-        html += `</div>`;
-    }
+        // Function to generate events in the calendar
+        async function generateEvents(events = myEvents) {
+            let calendar = document.querySelector('.calendar');
+            let html = '';
+            let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-    calendar.innerHTML = html;
-}
+            for (let i = 0; i < days.length; i++) {
+                html += `<div class="day">`;
+                html += `<h3>${days[i]}</h3>`;
 
-// Function to get the day of the week from a date
-function getDay(date) {
-    let parts = date.split('/');
-    let day = parseInt(parts[0]);
-    let month = parseInt(parts[1]);
-    let year = parseInt(parts[2]);
-    let dateObj = new Date(year, month - 1, day);
-    return dateObj.getDay();
-}
+                let dayEvents = events.filter(event => getDay(event.date) === i);
+
+                if (dayEvents.length === 0) {
+                    html += `<p>No events</p>`;
+                } else {
+                    html += `<ul>`;
+                    for (let j = 0; j < dayEvents.length; j++) {
+                        if (dayEvents[j].start_time === '00:00' && dayEvents[j].end_time === '11:59') {
+                            html += `<li class=${dayEvents[j].type}>${dayEvents[j].title} - All Day Event at ${dayEvents[j].location} (${dayEvents[j].type}) <span class="edit-button" onclick="editEvent(${dayEvents[j].id})">Edit</span> <span class="share-button" onclick="startShareEvent(${dayEvents[j].id})">Share</span> <span class="delete-event" onclick="currDeleteEventId = ${dayEvents[j].id}, document.querySelector('#confirmDeleteDialog').showModal()">&times;</span></li>`;
+                        } else {
+                            html += `<li class=${dayEvents[j].type}>${dayEvents[j].title} - ${dayEvents[j].start_time} to ${dayEvents[j].end_time} at ${dayEvents[j].location} (${dayEvents[j].type}) <span class="edit-button" onclick="editEvent(${dayEvents[j].id})">Edit</span> <span class="share-button" onclick="startShareEvent(${dayEvents[j].id})">Share</span> <span class="delete-event" onclick="currDeleteEventId = ${dayEvents[j].id}, document.querySelector('#confirmDeleteDialog').showModal()">&times;</span></li>`;
+                        }
+                    }
+                    html += `</ul>`;
+                }
+
+                html += `</div>`;
+            }
+
+            calendar.innerHTML = html;
+            const today = new Date();
+            const todayDay = today.getDay();
+            const todayElements = document.querySelectorAll('.day')[todayDay];
+            if (todayElements) {
+                todayElements.classList.add('today');
+            }
+        }
+
+        let currEditEventId = null;
+
+        function editEvent(id) {
+            const event = myEvents.find(event => event.id === id);
+            document.querySelector('#edit_title').value = event.title;
+            document.querySelector('#edit_location').value = event.location;
+            const date = event.date.split('/').reverse().join('-');
+            document.querySelector('#edit_date').value = date;
+            document.querySelector('#edit_start_time').value = event.start_time;
+            document.querySelector('#edit_end_time').value = event.end_time;
+            document.querySelector('#editEventDialog').showModal();
+            currEditEventId = id;
+        }
+
+        async function submitEditEvent() {
+            const title = document.querySelector('#edit_title').value;
+            const location = document.querySelector('#edit_location').value;
+            let date = document.querySelector('#edit_date').value;
+            //convert date to dd/mm/yyyy
+            const parts = date.split('-');
+            date = `${parts[2]}/${parts[1]}/${parts[0]}`;
+
+            const start_time = document.querySelector('#edit_start_time').value;
+            const end_time = document.querySelector('#edit_end_time').value;
+            const type = 'custom';
+
+            const user = await supabase.auth.getUser();
+            const user_id = user.data.user.id;
+
+            const username = document.querySelector('#user_name_here').textContent;
+
+            const { data, error } = await supabase.from('events').update([
+                { title, location, date, start_time, end_time, user_id, username }
+            ]).eq('id', currEditEventId);
+
+            if (error) {
+                console.log(error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                });
+            } else {
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Event edited successfully',
+                })
+
+                getEvents();
+                document.querySelector('#editEventDialog').close();
+                // location.reload();
+            }
+        }
+
+
+        // Function to get the day of the week from a date
+        function getDay(date) {
+            let parts = date.split('/');
+            let day = parseInt(parts[0]);
+            let month = parseInt(parts[1]);
+            let year = parseInt(parts[2]);
+            let dateObj = new Date(year, month - 1, day);
+            return dateObj.getDay();
+        }
 
 
         async function fetchWeather() {
@@ -1418,60 +1577,73 @@ function getDay(date) {
             }
         }
 
-// Function to search events
-//takes in all the events from scraping and the search term that the user searches
-function searchEvents(events, searchTerm) {
-    //changes the search term to all lowercase 
-    searchTerm = searchTerm.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    //this function should return the matching events
-    return events.filter(event => 
-    //each event has a title, type, date or location, these search terms will look and compare against each of these fields to find the correct one
-        event.title.toLowerCase().includes(searchTerm) ||
-        event.type.toLowerCase().includes(searchTerm) ||
-        event.date.includes(searchTerm) ||
-        event.location.toLowerCase().includes(searchTerm)
-    );
-}
+        function clearSearch() {
+            document.getElementById('search-input').value = '';
+            searchButtonClicked();
+        }
 
-// Function to fetch all events
-async function fetchEventData() {
-    const user = await supabase.auth.getUser();
-    const user_id = user.data.user.id;
-    const { data, error } = await supabase.from('events').select('*').eq('user_id', user_id);
-    if (error) {
-        console.error('Error fetching events:', error);
-        return [];
-    }
-    return data;
-}
+        // Function to search events
+        //takes in all the events from scraping and the search term that the user searches
+        function searchEvents(events, searchTerm) {
+            //changes the search term to all lowercase 
+            searchTerm = searchTerm.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            //this function should return the matching events
+            return events.filter(event =>
+                //each event has a title, type, date or location, these search terms will look and compare against each of these fields to find the correct one
+                event.title.toLowerCase().includes(searchTerm) ||
+                event.type.toLowerCase().includes(searchTerm) ||
+                event.date.includes(searchTerm) ||
+                event.location.toLowerCase().includes(searchTerm)
+            );
+        }
 
-// Function to display events
-function displayEvents(events) {
-    generateEvents(events);
-}
+        // Function to fetch all events
+        async function fetchEventData() {
+            const user = await supabase.auth.getUser();
+            const user_id = user.data.user.id;
+            const { data, error } = await supabase.from('events').select('*').eq('user_id', user_id);
+            if (error) {
+                console.error('Error fetching events:', error);
+                return [];
+            }
+            return data;
+        }
+
+        // Function to display events
+        function displayEvents(events) {
+            generateEvents(events);
+        }
 
 
-// Event listener for the search button
-document.getElementById('search-button').addEventListener('click', async () => {
-    try {
-        const allEvents = await fetchEventData();
-        const searchTerm = document.getElementById('search-input').value;
-        const foundEvents = searchEvents(allEvents, searchTerm);
-        displayEvents(foundEvents);
-    } catch (error) {
-        console.error('Error fetching or displaying events:', error);
-    }
-});
+        // Event listener for the search button
+        document.getElementById('search-button').addEventListener('click', async () => {
+            await searchButtonClicked()
 
-// Fetch and display events on page load
-getEvents();
+        });
+
+        // Function to handle the search button being clicked
+        async function searchButtonClicked() {
+            try {
+                const allEvents = await fetchEventData();
+                const searchTerm = document.getElementById('search-input').value;
+                const foundEvents = searchEvents(allEvents, searchTerm);
+                displayEvents(foundEvents);
+            } catch (error) {
+                console.error('Error fetching or displaying events:', error);
+            }
+        }
+
+        // Fetch and display events on page load
+
 
 
     </script>
 
     <!-- footer -->
-    <footer class="flex bottom-0 left-0 z-20 w-full p-4 bg-white border-t border-gray-200 shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800 dark:border-gray-600">
-        <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="https://flowbite.com/" class="hover:underline">StuCal™</a>. All Rights Reserved.
+    <footer
+        class="flex bottom-0 left-0 z-20 w-full p-4 bg-white border-t border-gray-200 shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800 dark:border-gray-600">
+        <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="https://flowbite.com/"
+                class="hover:underline">StuCal™</a>. All Rights Reserved.
         </span>
         <!-- <div class="justify-center items-center pt-12">
           <img src="../public/images/logo.png" class="h-14" alt="StuCal Logo" />
@@ -1487,7 +1659,7 @@ getEvents();
                 <a href="#" class="hover:underline me-4 md:me-6">Licensing</a>
             </li>
             <li> -->
-                <a href="contact.html" class="hover:underline">Contact</a>
+            <a href="contact.html" class="hover:underline">Contact</a>
             </li>
         </ul>
     </footer>
