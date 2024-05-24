@@ -155,7 +155,7 @@
 
         .public {
             background-color: #cdaffa;
-        }q
+        }
 
         .submit-button {
             padding: 8px 16px;
@@ -1181,10 +1181,25 @@ async function getEvents() {
     const user_id = user.data.user.id;
     const { data, error } = await supabase.from('events').select('*').eq('user_id', user_id);
     if (error) {
-        console.error('Error fetching events:', error);
-        return [];
+        console.log(error);
     } else {
-        return data;
+        // Filter events for this week
+        const today = new Date();
+        const week = [];
+        for (let i = 0; i < 7; i++) {
+            const day = new Date(today);
+            day.setDate(today.getDate() + i);
+            const dayStr = `${day.getDate().toString().padStart(2, '0')}/${(day.getMonth() + 1).toString().padStart(2, '0')}/${day.getFullYear()}`;
+            week.push(dayStr);
+        }
+        myEvents = data.filter(event => week.includes(event.date));
+        generateEvents();
+        // Highlight today's day of week
+        const todayDay = today.getDay();
+        const todayElements = document.querySelectorAll('.day')[todayDay];
+        if (todayElements) {
+            todayElements.classList.add('today');
+        }
     }
 }
 
@@ -1404,9 +1419,13 @@ function getDay(date) {
         }
 
 // Function to search events
+//takes in all the events from scraping and the search term that the user searches
 function searchEvents(events, searchTerm) {
+    //changes the search term to all lowercase 
     searchTerm = searchTerm.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    //this function should return the matching events
     return events.filter(event => 
+    //each event has a title, type, date or location, these search terms will look and compare against each of these fields to find the correct one
         event.title.toLowerCase().includes(searchTerm) ||
         event.type.toLowerCase().includes(searchTerm) ||
         event.date.includes(searchTerm) ||
@@ -1445,10 +1464,7 @@ document.getElementById('search-button').addEventListener('click', async () => {
 });
 
 // Fetch and display events on page load
-window.addEventListener('DOMContentLoaded', async () => {
-    const allEvents = await fetchEventData();
-    displayEvents(allEvents);
-});
+getEvents();
 
 
     </script>
