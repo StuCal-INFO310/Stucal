@@ -65,6 +65,8 @@
                                     class="hidden text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Calendar</a>
                                 <a href="dashboard.html" id="nav__dashboard"
                                     class="hidden text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Dashboard</a>
+                                <a href="public_events.html" id="nav__publicevents"
+                                    class="hidden text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Public Events</a>
                             </div>
                         </div>
                     </div>
@@ -116,24 +118,28 @@
                     document.getElementById("nav__signup").classList.add("hidden");
                     document.getElementById("nav__dashboard").classList.remove("hidden");
                     document.getElementById("nav__calendar").classList.remove("hidden");
+                    document.getElementById("nav__publicevents").classList.remove("hidden");
 
                     document.getElementById("mobile_nav__logout").classList.remove("hidden");
                     document.getElementById("mobile_nav__login").classList.add("hidden");
                     document.getElementById("mobile_nav__signup").classList.add("hidden");
                     document.getElementById("mobile_nav__dashboard").classList.remove("hidden");
                     document.getElementById("mobile_nav__calendar").classList.remove("hidden");
+                    document.getElementById("mobile_nav__publicevents").classList.remove("hidden");
                 } else {
                     document.getElementById("nav__logout").classList.add("hidden");
                     document.getElementById("nav__login").classList.remove("hidden");
                     document.getElementById("nav__signup").classList.remove("hidden");
                     document.getElementById("nav__dashboard").classList.add("hidden");
                     document.getElementById("nav__calendar").classList.add("hidden");
+                    // document.getElementById("nav__publicevents").classList.add("hidden");
 
                     document.getElementById("mobile_nav__logout").classList.add("hidden");
                     document.getElementById("mobile_nav__login").classList.remove("hidden");
                     document.getElementById("mobile_nav__signup").classList.remove("hidden");
                     document.getElementById("mobile_nav__dashboard").classList.add("hidden");
                     document.getElementById("mobile_nav__calendar").classList.add("hidden");
+                    // document.getElementById("mobile_nav__publicevents").classList.add("hidden");
                 }
             }
 

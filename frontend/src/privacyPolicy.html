@@ -44,7 +44,6 @@
                             class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
                             aria-controls="mobile-menu" aria-expanded="false">
                             <span class="sr-only">Open main menu</span>
-                            <!-- Hamburger icon  -->
                             <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                 aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -57,7 +56,6 @@
                         </button>
                     </div>
                     <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                        <!-- Logo linking to the homepage -->
                         <a href="index.html" class="flex items-center" style="z-index:100;">
                             <img class="mr-3 h-6 sm:h-9" src="../public/images/logo.png" alt="">
                         </a>
@@ -70,12 +68,13 @@
                                     class="hidden text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Calendar</a>
                                 <a href="dashboard.html" id="nav__dashboard"
                                     class="hidden text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Dashboard</a>
+                                <a href="public_events.html" id="nav__publicevents"
+                                    class="hidden text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Public Events</a>
                             </div>
                         </div>
                     </div>
                     <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                         <div class="z-10">
-                            <!-- Navigation buttons for login, signup and log out  -->
                             <a href="login.html" id="nav__login"
                                class="text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
                                aria-current="page">Log In</a>
@@ -110,10 +109,8 @@
         </nav>
 
         <script defer>
-            // Event listener for mobile menu buttons
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
-            // function to display the nav bar upon authentication
             const displayNavBar = async () => {
                 const { data: { user } } = await supabase.auth.getUser();
                 console.log("user", user);
@@ -124,27 +121,31 @@
                     document.getElementById("nav__signup").classList.add("hidden");
                     document.getElementById("nav__dashboard").classList.remove("hidden");
                     document.getElementById("nav__calendar").classList.remove("hidden");
+                    document.getElementById("nav__publicevents").classList.remove("hidden");
 
                     document.getElementById("mobile_nav__logout").classList.remove("hidden");
                     document.getElementById("mobile_nav__login").classList.add("hidden");
                     document.getElementById("mobile_nav__signup").classList.add("hidden");
                     document.getElementById("mobile_nav__dashboard").classList.remove("hidden");
                     document.getElementById("mobile_nav__calendar").classList.remove("hidden");
+                    document.getElementById("mobile_nav__publicevents").classList.remove("hidden");
                 } else {
                     document.getElementById("nav__logout").classList.add("hidden");
                     document.getElementById("nav__login").classList.remove("hidden");
                     document.getElementById("nav__signup").classList.remove("hidden");
                     document.getElementById("nav__dashboard").classList.add("hidden");
                     document.getElementById("nav__calendar").classList.add("hidden");
+                    // document.getElementById("nav__publicevents").classList.add("hidden");
 
                     document.getElementById("mobile_nav__logout").classList.add("hidden");
                     document.getElementById("mobile_nav__login").classList.remove("hidden");
                     document.getElementById("mobile_nav__signup").classList.remove("hidden");
                     document.getElementById("mobile_nav__dashboard").classList.add("hidden");
                     document.getElementById("mobile_nav__calendar").classList.add("hidden");
+                    // document.getElementById("mobile_nav__publicevents").classList.add("hidden");
                 }
             }
-// function to log out user
+
             const logOut = async () => {
                 const { error } = await supabase.auth.signOut();
                 if (error) {

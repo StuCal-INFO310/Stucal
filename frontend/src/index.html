@@ -55,129 +55,135 @@
     <!-- new header -->
     <body class="w-screen overflow-x-hidden">
       <header>
-          <nav class="bg-gray-800">
-              <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-                  <div class="relative flex h-16 items-center justify-between">
-                      <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                          <!-- Mobile menu button-->
-                          <button type="button" id="mobile-menu-button"
-                              class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-                              aria-controls="mobile-menu" aria-expanded="false">
-                              <span class="sr-only">Open main menu</span>
-                              <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                  aria-hidden="true">
-                                  <path stroke-linecap="round" stroke-linejoin="round"
-                                      d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                              </svg>
-                              <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                  aria-hidden="true">
-                                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                              </svg>
-                          </button>
-                      </div>
-                      <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                          <a href="index.html" class="flex items-center" style="z-index:100;">
-                              <img class="mr-3 h-6 sm:h-9" src="../public/images/logo.png" alt="">
-                          </a>
-                          <!-- other header buttons -->
-                          <div class="hidden sm:ml-6 sm:block">
-                              <div class="flex space-x-4">
-                                  <a href="faq.html" id="nav__faq"
-                                      class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">FAQ</a>
-                                  <a href="printout.html" id="nav__calendar"
-                                      class="hidden text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Calendar</a>
-                                  <a href="dashboard.html" id="nav__dashboard"
-                                      class="hidden text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Dashboard</a>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                          <div class="z-10">
-                              <a href="login.html" id="nav__login"
-                                 class="text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
-                                 aria-current="page">Log In</a>
-                              <a href="signup.html" id="nav__signup"
-                                 class="text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
-                                 aria-current="page">Sign Up</a>
-                              <a onclick="logOut()" id="nav__logout"
-                                 class="hidden cursor-pointer text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
-                                 aria-current="page">Logout</a>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-  
-              <!-- Mobile menu, show/hide based on menu state. -->
-              <div class="sm:hidden" id="mobile-menu" style="display: none;">
-                  <div class="space-y-1 px-2 pb-3 pt-2">
-                      <a href="login.html" id="mobile_nav__login"
-                         class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium">Log In</a>
-                      <a href="signup.html" id="mobile_nav__signup"
-                         class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium">Sign Up</a>
-                      <a onclick="logOut()" id="mobile_nav__logout"
-                         class="hidden cursor-pointer bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium">Logout</a>
-                      <a href="faq.html"
-                         class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">FAQ</a>
-                      <a href="printout.html" id="mobile_nav__calendar"
-                         class="hidden text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Calendar</a>
-                      <a href="dashboard.html" id="mobile_nav__dashboard"
-                         class="hidden text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Dashboard</a>
-                  </div>
-              </div>
-          </nav>
-      <!-- For this new menu, when the user is logged in - the calendar, logout and dashboard tabs is visible, whilst the log in and sign up tabs are hidden -->
-          <script defer>
-              const mobileMenuButton = document.getElementById('mobile-menu-button');
-              const mobileMenu = document.getElementById('mobile-menu');
-              const displayNavBar = async () => {
-                  const { data: { user } } = await supabase.auth.getUser();
-                  console.log("user", user);
-  
-                  if (user) {
-                      document.getElementById("nav__logout").classList.remove("hidden");
-                      document.getElementById("nav__login").classList.add("hidden");
-                      document.getElementById("nav__signup").classList.add("hidden");
-                      document.getElementById("nav__dashboard").classList.remove("hidden");
-                      document.getElementById("nav__calendar").classList.remove("hidden");
-  
-                      document.getElementById("mobile_nav__logout").classList.remove("hidden");
-                      document.getElementById("mobile_nav__login").classList.add("hidden");
-                      document.getElementById("mobile_nav__signup").classList.add("hidden");
-                      document.getElementById("mobile_nav__dashboard").classList.remove("hidden");
-                      document.getElementById("mobile_nav__calendar").classList.remove("hidden");
-                  } else {
-                      document.getElementById("nav__logout").classList.add("hidden");
-                      document.getElementById("nav__login").classList.remove("hidden");
-                      document.getElementById("nav__signup").classList.remove("hidden");
-                      document.getElementById("nav__dashboard").classList.add("hidden");
-                      document.getElementById("nav__calendar").classList.add("hidden");
-  
-                      document.getElementById("mobile_nav__logout").classList.add("hidden");
-                      document.getElementById("mobile_nav__login").classList.remove("hidden");
-                      document.getElementById("mobile_nav__signup").classList.remove("hidden");
-                      document.getElementById("mobile_nav__dashboard").classList.add("hidden");
-                      document.getElementById("mobile_nav__calendar").classList.add("hidden");
-                  }
-              }
-  
-              const logOut = async () => {
-                  const { error } = await supabase.auth.signOut();
-                  if (error) {
-                      console.log("Error logging out", error);
-                  } else {
-                      window.location.href = "index.html";
-                  }
-              }
-  
-              mobileMenuButton.addEventListener('click', () => {
-                  const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
-                  mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
-                  mobileMenu.style.display = isExpanded ? 'none' : 'block';
-              });
-  
-              displayNavBar();
-          </script>
-      </header>
+        <nav class="bg-gray-800">
+            <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+                <div class="relative flex h-16 items-center justify-between">
+                    <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                        <!-- Mobile menu button-->
+                        <button type="button" id="mobile-menu-button"
+                            class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                            aria-controls="mobile-menu" aria-expanded="false">
+                            <span class="sr-only">Open main menu</span>
+                            <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                            </svg>
+                            <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                        <a href="index.html" class="flex items-center" style="z-index:100;">
+                            <img class="mr-3 h-6 sm:h-9" src="../public/images/logo.png" alt="">
+                        </a>
+                        <!-- other header buttons -->
+                        <div class="hidden sm:ml-6 sm:block">
+                            <div class="flex space-x-4">
+                                <a href="faq.html" id="nav__faq"
+                                    class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">FAQ</a>
+                                <a href="printout.html" id="nav__calendar"
+                                    class="hidden text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Calendar</a>
+                                <a href="dashboard.html" id="nav__dashboard"
+                                    class="hidden text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Dashboard</a>
+                                <a href="public_events.html" id="nav__publicevents"
+                                    class="hidden text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Public Events</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                        <div class="z-10">
+                            <a href="login.html" id="nav__login"
+                               class="text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
+                               aria-current="page">Log In</a>
+                            <a href="signup.html" id="nav__signup"
+                               class="text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
+                               aria-current="page">Sign Up</a>
+                            <a onclick="logOut()" id="nav__logout"
+                               class="hidden cursor-pointer text-gray-300 bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
+                               aria-current="page">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile menu, show/hide based on menu state. -->
+            <div class="sm:hidden" id="mobile-menu" style="display: none;">
+                <div class="space-y-1 px-2 pb-3 pt-2">
+                    <a href="login.html" id="mobile_nav__login"
+                       class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium">Log In</a>
+                    <a href="signup.html" id="mobile_nav__signup"
+                       class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium">Sign Up</a>
+                    <a onclick="logOut()" id="mobile_nav__logout"
+                       class="hidden cursor-pointer bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium">Logout</a>
+                    <a href="faq.html"
+                       class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">FAQ</a>
+                    <a href="printout.html" id="mobile_nav__calendar"
+                       class="hidden text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Calendar</a>
+                    <a href="dashboard.html" id="mobile_nav__dashboard"
+                       class="hidden text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Dashboard</a>
+                </div>
+            </div>
+        </nav>
+
+        <script defer>
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const displayNavBar = async () => {
+                const { data: { user } } = await supabase.auth.getUser();
+                console.log("user", user);
+
+                if (user) {
+                    document.getElementById("nav__logout").classList.remove("hidden");
+                    document.getElementById("nav__login").classList.add("hidden");
+                    document.getElementById("nav__signup").classList.add("hidden");
+                    document.getElementById("nav__dashboard").classList.remove("hidden");
+                    document.getElementById("nav__calendar").classList.remove("hidden");
+                    document.getElementById("nav__publicevents").classList.remove("hidden");
+
+                    document.getElementById("mobile_nav__logout").classList.remove("hidden");
+                    document.getElementById("mobile_nav__login").classList.add("hidden");
+                    document.getElementById("mobile_nav__signup").classList.add("hidden");
+                    document.getElementById("mobile_nav__dashboard").classList.remove("hidden");
+                    document.getElementById("mobile_nav__calendar").classList.remove("hidden");
+                    document.getElementById("mobile_nav__publicevents").classList.remove("hidden");
+                } else {
+                    document.getElementById("nav__logout").classList.add("hidden");
+                    document.getElementById("nav__login").classList.remove("hidden");
+                    document.getElementById("nav__signup").classList.remove("hidden");
+                    document.getElementById("nav__dashboard").classList.add("hidden");
+                    document.getElementById("nav__calendar").classList.add("hidden");
+                    // document.getElementById("nav__publicevents").classList.add("hidden");
+
+                    document.getElementById("mobile_nav__logout").classList.add("hidden");
+                    document.getElementById("mobile_nav__login").classList.remove("hidden");
+                    document.getElementById("mobile_nav__signup").classList.remove("hidden");
+                    document.getElementById("mobile_nav__dashboard").classList.add("hidden");
+                    document.getElementById("mobile_nav__calendar").classList.add("hidden");
+                    // document.getElementById("mobile_nav__publicevents").classList.add("hidden");
+                }
+            }
+
+            const logOut = async () => {
+                const { error } = await supabase.auth.signOut();
+                if (error) {
+                    console.log("Error logging out", error);
+                } else {
+                    window.location.href = "index.html";
+                }
+            }
+
+            mobileMenuButton.addEventListener('click', () => {
+                const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+                mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+                mobileMenu.style.display = isExpanded ? 'none' : 'block';
+            });
+
+            displayNavBar();
+        </script>
+    </header>
   
 
     <div class="bg-gray-900">
