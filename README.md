@@ -2,7 +2,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-    <img src="_docs/readme_imgs/stucal blue.png" alt="Logo">
+    <img src="frontend/public/images/Stucal Blue.png" alt="Logo">
     <!-- <h1 align="center"> StuCal</h1> -->
     <h6 align="center">March 2024 - June 2024</h6>
 
