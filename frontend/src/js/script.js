@@ -129,7 +129,7 @@ function extractlocationsFromTextBlocks(inputText, index) {
   return locations;
 }
 
-function trimTimetableText(text) {}
+function trimTimetableText(text) { }
 
 async function delay(ms) {
   return new Promise((resolve) => {
@@ -152,6 +152,7 @@ async function upload() {
   const result = extractData(data);
   userCalendar = result;
   console.log(result);
+  downloadICS(result);
   // make a table of result
   // const table = document.querySelector(".table");
   // table.innerHTML = "";
@@ -196,7 +197,7 @@ async function upload() {
   // // remove the download button
   // downloadButton.remove();
 
-  // // show show table button
+  // show show table button
   // document.getElementById("show-table").style.display = "block";
 
   // upload events to supabase
@@ -215,6 +216,52 @@ async function upload() {
   location.reload();
 
 }
+
+function downloadICS(events) {
+  // Helper function to format date and time for iCal
+  function formatDateTime(date, time) {
+    date = formatDate(date)
+    const dt = new Date(`${date}T${time}`);
+    return dt.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+  }
+
+  // Helper function to format date for iCal
+  function formatDate(date) {
+    // take dd/mm/yyyy 
+    const [day, month, year] = date.split("/");
+    return `${year}-${month}-${day}`;
+  }
+
+  // Create the iCal header
+  let ical = "BEGIN:VCALENDAR\nVERSION:2.0\nCALSCALE:GREGORIAN\n";
+
+  // Iterate over events and create iCal entries
+  events.forEach(event => {
+    ical += "BEGIN:VEVENT\n";
+    ical += `SUMMARY:${event.title}\n`;
+    ical += `LOCATION:${event.location}\n`;
+    ical += `DTSTART:${formatDateTime(event.date, event.start_time)}\n`;
+    ical += `DTEND:${formatDateTime(event.date, event.end_time)}\n`;
+    ical += "END:VEVENT\n";
+  });
+
+  // Create the iCal footer
+  ical += "END:VCALENDAR";
+
+  // Create a blob from the iCal string
+  const blob = new Blob([ical], { type: 'text/calendar' });
+  const url = URL.createObjectURL(blob);
+
+  // Create a link element and trigger the download
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'events.ics';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
 
 const text = `Tuesday
 12 March 2024	09:00-10:00 Tutorial - Financial Decision Making
